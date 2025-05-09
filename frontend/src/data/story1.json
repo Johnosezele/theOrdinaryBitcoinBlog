@@ -1,0 +1,183 @@
+{
+    "scenes": [
+      {
+        "id": "0.1",
+        "storyNumber": 1,
+        "sceneNumber": "0.1",
+        "type": "intro",
+        "background": "cafe",
+        "title": "Understanding Bitcoin Basics",
+        "subtitle": "Join Carol and Bob as they walk you through the fundamentals of Bitcoin.",
+        "ctaButton": "Start Learning",
+        "visualAid": null
+      },
+      {
+        "id": "1.1",
+        "storyNumber": 1,
+        "sceneNumber": "1.1",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "character1-neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": false,
+          "dialogue": ""
+        },
+        "rightCharacter": {
+          "image": "character2-neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": false,
+          "dialogue": ""
+        },
+        "centralDialogue": {
+          "active": true,
+          "content": "Welcome to the deep dive. Where we take complex topics and make 'em make sense."
+        },
+        "visualAid": null
+      },
+      {
+        "id": "2.1",
+        "storyNumber": 1,
+        "sceneNumber": "2.1",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "character1-neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "So Bob. Bitcoin. What's the deal?"
+        },
+        "rightCharacter": {
+          "image": "character2-neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": false,
+          "dialogue": ""
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": null
+      },
+      {
+        "id": "2.2",
+        "storyNumber": 1,
+        "sceneNumber": "2.2",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "character1-thinking.png",
+          "emotion": "thinking",
+          "dialogueActive": false,
+          "dialogue": ""
+        },
+        "rightCharacter": {
+          "image": "character2-explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "Ah Bitcoin. It's like digital cash."
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": null
+      },
+      {
+        "id": "2.3",
+        "storyNumber": 1,
+        "sceneNumber": "2.3",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "character1-curious.png",
+          "emotion": "curious",
+          "dialogueActive": true,
+          "dialogue": "No banks, no middlemen --just payments from person to person"
+        },
+        "rightCharacter": {
+          "image": "character2-neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": false,
+          "dialogue": ""
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": null
+      },
+      {
+        "id": "3.1",
+        "storyNumber": 1,
+        "sceneNumber": "3.1",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "character1-confused.png",
+          "emotion": "confused",
+          "dialogueActive": true,
+          "dialogue": "Okay, but how does it stay safe? Can't someone just copy the cash?"
+        },
+        "rightCharacter": {
+          "image": "character2-neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": false,
+          "dialogue": ""
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": null
+      },
+      {
+        "id": "3.2",
+        "storyNumber": 1,
+        "sceneNumber": "3.2",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "character1-neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": false,
+          "dialogue": ""
+        },
+        "rightCharacter": {
+          "image": "character2-teaching.png",
+          "emotion": "teaching",
+          "dialogueActive": true,
+          "dialogue": "Good question! Here's the magic: blockchain."
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "blockchain-diagram"
+      },
+      {
+        "id": "3.3",
+        "storyNumber": 1,
+        "sceneNumber": "3.3",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "character1-neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": false,
+          "dialogue": ""
+        },
+        "rightCharacter": {
+          "image": "character2-explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "Think of it as a public digital diary of all Bitcoin transactions."
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "bitcoin-ledger"
+      }
+    ]
+}
