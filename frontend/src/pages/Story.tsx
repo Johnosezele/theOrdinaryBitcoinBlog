@@ -96,27 +96,19 @@ const processDialogueData = (data: RawDialogueData): DialogueData => {
 // Process the dialogue data
 const dialogueData = processDialogueData(rawDialogueData as RawDialogueData);
 
-// Character images based on emotion *Placeholder - need to add real images*
-const characterImages = {
-  character1: {
-    neutral: "/api/placeholder/120/120",
-    thinking: "/api/placeholder/120/120",
-    confused: "/api/placeholder/120/120",
-    curious: "/api/placeholder/120/120"
-  },
-  character2: {
-    neutral: "/api/placeholder/120/120",
-    explaining: "/api/placeholder/120/120",
-    teaching: "/api/placeholder/120/120"
-  }
-};
-
 const Story = () => {
   // Track the current scene index
   const [currentSceneIndex, setCurrentSceneIndex] = useState(0);
   
   // Get the current scene data
   const currentScene = dialogueData.scenes[currentSceneIndex];
+
+  // Compute first and last dialogue scene indices for navigation arrows
+  const firstDialogueSceneIndex = dialogueData.scenes.findIndex(scene => scene.type === 'dialogue');
+  const lastDialogueSceneIndex = (() => {
+    const reversedIndex = [...dialogueData.scenes].reverse().findIndex(scene => scene.type === 'dialogue');
+    return reversedIndex === -1 ? -1 : dialogueData.scenes.length - 1 - reversedIndex;
+  })();
   
   const goToNextScene = () => {
     if (currentSceneIndex < dialogueData.scenes.length - 1) {
@@ -196,22 +188,22 @@ const Story = () => {
   const renderCharacter = (character: Character | undefined, position: string, characterType: 'left' | 'right') => {
     if (!character) return null;
     
-    // Get the image based on character type and emotion
-    const imageSrc = characterType === 'left' 
-      ? characterImages.character1[character.emotion as keyof typeof characterImages.character1] 
-      : characterImages.character2[character.emotion as keyof typeof characterImages.character2];
+    // Construct the image source directly from the character's image property in the JSON
+    // Ensure your character image files are in public/images/characters/
+    // and their names match what's in story1.json (e.g., character1-neutral.png)
+    const imageSrc = `/images/characters/${character.image}`;
     
     return (
       <div className={`flex flex-col items-center ${position}`}>
         {/* Character image */}
-        <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-amber-400 bg-white">
+        <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-[#F8AB28] bg-white shadow-md">
           <img src={imageSrc} alt={`Character ${characterType}`} className="w-full h-full object-cover" />
         </div>
         
         {/* Dialogue bubble - only show if active */}
         {character.dialogueActive && character.dialogue && (
-          <div className="mt-2 p-3 bg-white rounded-lg border border-gray-300 max-w-xs">
-            <p className="text-sm">{character.dialogue}</p>
+          <div className="mt-4 p-3 bg-white rounded-lg border border-gray-300 shadow-lg max-w-xs">
+            <p className="text-sm font-quicksand">{character.dialogue}</p>
           </div>
         )}
       </div>
@@ -226,7 +218,7 @@ const Story = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center" 
           style={{ 
-            backgroundImage:`url(/images/cafe.png)`
+            backgroundImage:`url(/images/${scene.background}.png)` // Assuming background images are .png
           }}
         >
         <div className="absolute inset-0 bg-black opacity-60"></div>
@@ -278,38 +270,49 @@ const Story = () => {
   // Render dialogue scene
   const renderDialogueScene = (scene: Scene) => {
     return (
-      <div className="relative min-h-96 p-4">
-        {/* Background elements - café environment */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center" 
-          style={{ 
-            backgroundImage:`url(/images/cafe.png)`
-          }}
-        >
-        <div className="absolute inset-0 bg-black opacity-30"></div>
-        </div>
+      // This div is now the background image container, takes full height (flex-1 from parent), and sets the background
+      <div 
+        className="relative flex-1 bg-cover bg-center" // Ensures it fills space and sets background
+        style={{ backgroundImage: `url(/images/${scene.background}.png)` }} // Construct full path, assuming .png
+      >
+        {/* Dark overlay for better text contrast */}
+        <div className="absolute inset-0 bg-black opacity-60"></div>
 
-        {/* Character circles and dialogue */}
-        <div className="flex justify-between items-center relative z-10 pt-12 px-8 min-h-72">
-          {/* Left character */}
-          {renderCharacter(scene.leftCharacter, "ml-4", "left")}
+        {/* Main content container for characters, dialogue, visual aids */}
+        {/* This container is relative to stack above the overlay (z-10) and uses flex to arrange its children */}
+        {/* h-full allows it to use the full height of the parent, p-4/md:p-8 for padding */}
+        <div className="relative z-10 flex h-full flex-col justify-between p-4 md:p-8">
           
-          {/* Central dialogue (if active) */}
-          {scene.centralDialogue && scene.centralDialogue.active && (
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-4 rounded-lg border border-amber-300 max-w-xs text-center z-20">
-              <p className="text-sm">{scene.centralDialogue.content}</p>
+          {/* Top row for characters and central content, using flex-grow to take space */}
+          {/* items-center to vertically align characters and central block if they have different heights */}
+          {/* justify-around provides space around elements, good for 2 or 3 items */}
+          <div className="flex flex-grow items-center justify-around">
+            {/* Left character */}
+            {renderCharacter(scene.leftCharacter, "ml-4 md:ml-8", "left")}
+            
+            {/* Central content wrapper (for dialogue or visual aid) */}
+            {/* This div will take up space in the middle and center its content */}
+            <div className="flex-grow flex items-center justify-center">
+              {/* Central dialogue (if active) */}
+              {scene.centralDialogue && scene.centralDialogue.active && (
+                <div className="bg-white p-4 rounded-lg border border-amber-300 max-w-xs text-center shadow-lg">
+                  <p className="text-sm font-quicksand">{scene.centralDialogue.content}</p>
+                </div>
+              )}
+              
+              {/* Visual Aid (if present and no central dialogue, or if designed to coexist) */}
+              {scene.visualAid && (!scene.centralDialogue || !scene.centralDialogue.active) && ( // Example: Show visual aid if no central dialogue
+                <div className="shadow-lg">
+                  {renderVisualAid(scene.visualAid)}
+                </div>
+              )}
             </div>
-          )}
-          
-          {/* Visual Aid (if present) */}
-          {scene.visualAid && (
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
-              {renderVisualAid(scene.visualAid)}
-            </div>
-          )}
-          
-          {/* Right character */}
-          {renderCharacter(scene.rightCharacter, "mr-4", "right")}
+            
+            {/* Right character */}
+            {renderCharacter(scene.rightCharacter, "mr-4 md:mr-8", "right")}
+          </div>
+
+          {/* Navigation arrows are handled globally in the main Story component return, so no specific nav here */}
         </div>
       </div>
     );
@@ -320,10 +323,18 @@ const Story = () => {
     <div className="fixed inset-0 w-screen h-screen overflow-hidden"> 
       {/* Top Navigation Bar */}
       <nav className="bg-[#F8AB28] h-16 flex justify-between items-center px-14 shadow-md z-20">
-        {/* Home Icon Button */}
-        <button className="p-1 hover:bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-white ml-2">
-          <img src="/icons/home.svg" alt="Home" className="w-10 h-10" />
-        </button>
+        {/* Left group: Home + Story Info */}
+        <div className="flex items-center">
+          <button className="p-1 hover:bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-white ml-2">
+            <img src="/icons/home.svg" alt="Home" className="w-10 h-10" />
+          </button>
+          {currentScene.type !== 'intro' && (
+            <div className="flex flex-col items-start justify-center ml-2 gap-[3px]">
+              <span className="text-[#070C02] text-[14px] font-quicksand font-normal leading-none">Story 1</span>
+              <span className="text-[#070C02] text-[14px] font-quicksand font-semibold leading-none">Bitcoin Basics</span>
+            </div>
+          )}
+        </div>
         {/* Profile Icon Button */}
         <button className="p-1 hover:bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-white mr-2">
           <img src="/icons/profile.svg" alt="Profile" className="w-10 h-10" />
@@ -331,16 +342,13 @@ const Story = () => {
       </nav>
 
       {/* Content Area Below Nav Bar */}
+      {/* Compute first and last dialogue scene indices for navigation arrows */}
+      
       <div className="absolute inset-0 top-16 flex flex-col"> 
         {/* Scene information (only visible for non-intro scenes) */}
-        {currentScene.type !== "intro" && (
-          <div className="text-center mb-4 text-gray-600">
-            Story {currentScene.storyNumber} | Scene {currentScene.sceneNumber}
-          </div>
-        )}
 
         {/* Main content - changes based on scene type */}
-        <div className={`overflow-hidden flex-grow relative flex flex-col ${currentScene.type === 'intro' ? 'mb-0' : 'rounded-lg shadow-md mb-4 bg-amber-50'}`}> 
+        <div className={`overflow-hidden flex-grow relative flex flex-col ${currentScene.type === 'intro' ? 'mb-0' : ''}`}> 
           {currentScene.type === 'intro' 
             ? renderIntroScene(currentScene)
             : renderDialogueScene(currentScene)
@@ -349,25 +357,47 @@ const Story = () => {
           {/* Navigation Arrows - Conditionally Rendered & Absolutely Positioned within this container */}
           {currentScene.type !== 'intro' && (
             <>
-              {/* Previous Arrow Button */}
-              <button
-                onClick={goToPrevScene}
-                disabled={currentSceneIndex === 0}
-                className="absolute bottom-4 left-4 z-30 p-2 rounded-full text-white hover:bg-black hover:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                aria-label="Previous Scene"
-              >
-                <img src="/icons/arrow-left.svg" alt="Previous" className="w-7 h-7 md:w-8 md:h-8" />
-              </button>
+              {/* Only the right arrow on the first dialogue scene */}
+              {currentSceneIndex === firstDialogueSceneIndex && (
+                <button
+                  onClick={goToNextScene}
+                  className="absolute bottom-4 right-4 z-30 p-2 rounded-full text-white hover:bg-black hover:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 transition-colors"
+                  aria-label="Next Scene"
+                >
+                  <img src="/icons/arrow-right.svg" alt="Next" className="w-7 h-7 md:w-8 md:h-8" />
+                </button>
+              )}
 
-              {/* Next Arrow Button */}
-              <button
-                onClick={goToNextScene}
-                disabled={currentSceneIndex === dialogueData.scenes.length - 1}
-                className="absolute bottom-4 right-4 z-30 p-2 rounded-full text-white hover:bg-black hover:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                aria-label="Next Scene"
-              >
-                <img src="/icons/arrow-right.svg" alt="Next" className="w-7 h-7 md:w-8 md:h-8" />
-              </button>
+              {/* Both arrows on middle dialogue scenes */}
+              {currentSceneIndex > firstDialogueSceneIndex && currentSceneIndex < lastDialogueSceneIndex && (
+                <div className="absolute bottom-4 right-4 flex gap-3 z-30">
+                  <button
+                    onClick={goToPrevScene}
+                    className="p-2 rounded-full text-white hover:bg-black hover:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 transition-colors"
+                    aria-label="Previous Scene"
+                  >
+                    <img src="/icons/arrow-left.svg" alt="Previous" className="w-7 h-7 md:w-8 md:h-8" />
+                  </button>
+                  <button
+                    onClick={goToNextScene}
+                    className="p-2 rounded-full text-white hover:bg-black hover:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 transition-colors"
+                    aria-label="Next Scene"
+                  >
+                    <img src="/icons/arrow-right.svg" alt="Next" className="w-7 h-7 md:w-8 md:h-8" />
+                  </button>
+                </div>
+              )}
+
+              {/* Only the left arrow on the last dialogue scene */}
+              {currentSceneIndex === lastDialogueSceneIndex && (
+                <button
+                  onClick={goToPrevScene}
+                  className="absolute bottom-4 right-[75px] z-30 p-2 rounded-full text-white hover:bg-black hover:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 transition-colors"
+                  aria-label="Previous Scene"
+                >
+                  <img src="/icons/arrow-left.svg" alt="Previous" className="w-7 h-7 md:w-8 md:h-8" />
+                </button>
+              )}
             </>
           )}
         </div>
