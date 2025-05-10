@@ -26,6 +26,7 @@ interface Scene {
   rightCharacter?: Character;
   centralDialogue?: CentralDialogue;
   visualAid?: string | null;
+  duration?: string;
 }
 
 interface DialogueData {
@@ -59,6 +60,7 @@ interface RawScene {
     content: string;
   };
   visualAid?: string | null;
+  duration?: string;
 }
 
 interface RawDialogueData {
@@ -219,7 +221,7 @@ const Story = () => {
   // Render intro scene (landing page)
   const renderIntroScene = (scene: Scene) => {
     return (
-      <div className="relative h-96">
+      <div className="relative flex-1">
         {/* Background image (cafe) */}
         <div 
           className="absolute inset-0 bg-cover bg-center" 
@@ -227,24 +229,47 @@ const Story = () => {
             backgroundImage:`url(/images/cafe.png)`
           }}
         >
-        <div className="absolute inset-0 bg-black opacity-30"></div>
+        <div className="absolute inset-0 bg-black opacity-60"></div>
         </div>
         
-        {/* Content */}
-        <div className="absolute inset-0 flex flex-col justify-center items-center text-white z-10 p-8">
-          <h1 className="text-4xl font-bold mb-4">{scene.title}</h1>
-          <p className="text-lg mb-8 max-w-md text-center">{scene.subtitle}</p>
-          <button 
+        {/* Content - Left Aligned with Corrected Container and Button */}
+        <div className="absolute inset-0 flex flex-col justify-end bottom-0 left-0 p-8 md:p-12 lg:p-16 items-start z-10 pl-16 pr-4 md:pl-20 text-white lg:pl-24">
+          <h1
+            className="text-4xl font-bold mb-2 md:mb-3 text-left"
+            style={{ fontFamily: 'Quicksand, sans-serif' }} 
+          >
+            {scene.title}
+          </h1>
+          <p
+            className="text-lg mb-3 md:mb-4 max-w-xl text-left"
+            style={{ fontFamily: 'Quicksand, sans-serif' }} 
+          >
+            {scene.subtitle}
+          </p>
+          <p
+            className="text-sm mb-6 md:mb-8 opacity-90 text-left"
+            style={{ fontFamily: 'Quicksand, sans-serif' }} 
+          >
+            Duration: {scene.duration || '5 min'}
+          </p>
+          <button
             onClick={goToNextScene}
-            className="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-6 rounded-full transition-all transform hover:scale-105"
+            className="absolute flex justify-center items-center bg-[#F02B6C] hover:bg-pink-700 text-white font-bold rounded-[5px]"
+            style={{
+              left: 1094,
+              bottom: 140,
+              width: 153, 
+              height: 44,
+              padding: '12px 20px',
+              gap: 10,
+              fontFamily: 'Quicksand', 
+              fontWeight: 700,
+              fontSize: 16, 
+              lineHeight: '20px'
+            }}
           >
             {scene.ctaButton}
           </button>
-        </div>
-        
-        {/* Bitcoin icon */}
-        <div className="absolute bottom-6 right-6 w-16 h-16 bg-yellow-400 rounded-full opacity-70 flex items-center justify-center z-20">
-          <span className="text-white text-2xl font-bold">₿</span>
         </div>
       </div>
     );
@@ -292,40 +317,60 @@ const Story = () => {
 
   // Main render function
   return (
-    <div className="bg-gray-100 min-h-screen p-4">
+    <div className="fixed inset-0 w-screen h-screen overflow-hidden"> 
+      {/* Top Navigation Bar */}
+      <nav className="bg-[#F8AB28] h-16 flex justify-between items-center px-14 shadow-md z-20">
+        {/* Home Icon Button */}
+        <button className="p-1 hover:bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-white ml-2">
+          <img src="/icons/home.svg" alt="Home" className="w-10 h-10" />
+        </button>
+        {/* Profile Icon Button */}
+        <button className="p-1 hover:bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-white mr-2">
+          <img src="/icons/profile.svg" alt="Profile" className="w-10 h-10" />
+        </button>
+      </nav>
 
-      {/* Scene information (only visible for non-intro scenes) */}
-      {currentScene.type !== "intro" && (
-        <div className="text-center mb-4 text-gray-600">
-          Story {currentScene.storyNumber} | Scene {currentScene.sceneNumber}
+      {/* Content Area Below Nav Bar */}
+      <div className="absolute inset-0 top-16 flex flex-col"> 
+        {/* Scene information (only visible for non-intro scenes) */}
+        {currentScene.type !== "intro" && (
+          <div className="text-center mb-4 text-gray-600">
+            Story {currentScene.storyNumber} | Scene {currentScene.sceneNumber}
+          </div>
+        )}
+
+        {/* Main content - changes based on scene type */}
+        <div className={`overflow-hidden flex-grow relative flex flex-col ${currentScene.type === 'intro' ? 'mb-0' : 'rounded-lg shadow-md mb-4 bg-amber-50'}`}> 
+          {currentScene.type === 'intro' 
+            ? renderIntroScene(currentScene)
+            : renderDialogueScene(currentScene)
+          }
+
+          {/* Navigation Arrows - Conditionally Rendered & Absolutely Positioned within this container */}
+          {currentScene.type !== 'intro' && (
+            <>
+              {/* Previous Arrow Button */}
+              <button
+                onClick={goToPrevScene}
+                disabled={currentSceneIndex === 0}
+                className="absolute bottom-4 left-4 z-30 p-2 rounded-full text-white hover:bg-black hover:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                aria-label="Previous Scene"
+              >
+                <img src="/icons/arrow-left.svg" alt="Previous" className="w-7 h-7 md:w-8 md:h-8" />
+              </button>
+
+              {/* Next Arrow Button */}
+              <button
+                onClick={goToNextScene}
+                disabled={currentSceneIndex === dialogueData.scenes.length - 1}
+                className="absolute bottom-4 right-4 z-30 p-2 rounded-full text-white hover:bg-black hover:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                aria-label="Next Scene"
+              >
+                <img src="/icons/arrow-right.svg" alt="Next" className="w-7 h-7 md:w-8 md:h-8" />
+              </button>
+            </>
+          )}
         </div>
-      )}
-
-      {/* Main content - changes based on scene type */}
-      <div className="bg-amber-50 rounded-lg shadow-md mb-4 overflow-hidden">
-        {currentScene.type === 'intro' 
-          ? renderIntroScene(currentScene)
-          : renderDialogueScene(currentScene)
-        }
-      </div>
-      
-      {/* Navigation controls */}
-      <div className="flex justify-between mt-4">
-        <button 
-          onClick={goToPrevScene}
-          disabled={currentSceneIndex === 0}
-          className={`px-4 py-2 rounded-lg ${currentSceneIndex === 0 ? 'bg-gray-300 cursor-not-allowed' : 'bg-yellow-500 hover:bg-yellow-600 text-white'}`}
-        >
-          Previous
-        </button>
-        
-        <button 
-          onClick={goToNextScene}
-          disabled={currentSceneIndex === dialogueData.scenes.length - 1}
-          className={`px-4 py-2 rounded-lg ${currentSceneIndex === dialogueData.scenes.length - 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-yellow-500 hover:bg-yellow-600 text-white'}`}
-        >
-          Next
-        </button>
       </div>
     </div>
   );
