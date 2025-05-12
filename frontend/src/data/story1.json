@@ -18,20 +18,22 @@
         "type": "dialogue",
         "background": "cafe",
         "leftCharacter": {
-          "image": "character1-neutral.png",
-          "emotion": "neutral",
-          "dialogueActive": false,
-          "dialogue": ""
+          "image": "bob_excited.png",
+          "emotion": "excited",
+          "dialogueActive": true,
+          "dialogue": "Hi there, I'm Bob.",
+          "size": "large"
         },
         "rightCharacter": {
-          "image": "character2-neutral.png",
-          "emotion": "neutral",
-          "dialogueActive": false,
-          "dialogue": ""
+          "image": "carol_excited.png",
+          "emotion": "excited",
+          "dialogueActive": true,
+          "dialogue": "Hey Bob, I'm Carol. \nI'm excited to learn about Bitcoin with you!",
+          "size": "large"
         },
         "centralDialogue": {
-          "active": true,
-          "content": "Welcome to the deep dive. Where we take complex topics and make 'em make sense."
+          "active": false,
+          "content": ""
         },
         "visualAid": null
       },
@@ -42,16 +44,18 @@
         "type": "dialogue",
         "background": "cafe",
         "leftCharacter": {
-          "image": "character1-neutral.png",
+          "image": "bob_neutral.png",
           "emotion": "neutral",
           "dialogueActive": true,
-          "dialogue": "So Bob. Bitcoin. What's the deal?"
+          "dialogue": "Interesting question, Carol",
+          "size": "small"
         },
         "rightCharacter": {
-          "image": "character2-neutral.png",
-          "emotion": "neutral",
-          "dialogueActive": false,
-          "dialogue": ""
+          "image": "carol_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "So Bob, What's Bitcoin?\nThere's been so much buzz about it lately, with the price increasing!",
+          "size": "large"
         },
         "centralDialogue": {
           "active": false,
@@ -68,14 +72,14 @@
         "leftCharacter": {
           "image": "character1-thinking.png",
           "emotion": "thinking",
-          "dialogueActive": false,
-          "dialogue": ""
+          "dialogueActive": true,
+          "dialogue": "Ah Bitcoin. It's like digital cash."
         },
         "rightCharacter": {
           "image": "character2-explaining.png",
           "emotion": "explaining",
           "dialogueActive": true,
-          "dialogue": "Ah Bitcoin. It's like digital cash."
+          "dialogue": "digital cash? \nI'm not sure I understand."
         },
         "centralDialogue": {
           "active": false,
@@ -140,14 +144,16 @@
         "leftCharacter": {
           "image": "character1-neutral.png",
           "emotion": "neutral",
-          "dialogueActive": false,
-          "dialogue": ""
+          "dialogueActive": true,
+          "dialogue": "Good question! Here's the magic: The blockchain!\nIt's a public ledger of all Bitcoin transactions.",
+          "size": "large"
         },
         "rightCharacter": {
           "image": "character2-teaching.png",
           "emotion": "teaching",
           "dialogueActive": true,
-          "dialogue": "Good question! Here's the magic: blockchain."
+          "dialogue": "hmm, I'm not sure I understand.",
+          "size": "small"
         },
         "centralDialogue": {
           "active": false,

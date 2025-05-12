@@ -6,6 +6,7 @@ interface Character {
   emotion: string;
   dialogueActive: boolean;
   dialogue: string;
+  size?: 'small' | 'large';
 }
 
 interface CentralDialogue {
@@ -48,12 +49,14 @@ interface RawScene {
     emotion: string;
     dialogueActive: boolean;
     dialogue: string;
+    size?: 'small' | 'large';
   };
   rightCharacter?: {
     image: string;
     emotion: string;
     dialogueActive: boolean;
     dialogue: string;
+    size?: 'small' | 'large';
   };
   centralDialogue?: {
     active: boolean;
@@ -184,7 +187,55 @@ const Story = () => {
     return null;
   };
 
-  // Helper function to render character with dialogue
+  // Function to render a character with dialogue bubble (Figma style)
+  const renderCharacterWithBubble = (
+    character: Character | undefined,
+    position: 'left' | 'right'
+  ) => {
+    if (!character) return null;
+
+    // Set image file based on character data
+    const imageSrc = `/images/characters/${character.image}`;
+      
+    // Different styling based on position
+    const containerClass = position === 'left'
+      ? "flex items-center" 
+      : "flex items-center flex-row-reverse"; // Dialogue bubble renders before avatar for right character
+    
+    // Determine character size: from JSON, or default based on position
+    const defaultSize = position === 'left' ? 'small' : 'large';
+    const currentSize = character.size || defaultSize;
+
+    const avatarSizeClass = currentSize === 'large'
+      ? "w-40 h-40 md:w-80 md:h-80" // Larger size
+      : "w-32 h-32 md:w-50 md:h-50"; // Smaller size
+      
+    const bubbleClass = position === 'left'
+      ? "ml-3 max-w-[260px]" 
+      : "mr-3 max-w-[260px]";
+      
+    const textSizeClass = currentSize === 'large'
+      ? "text-xl" // Larger text
+      : "text-lg"; // Smaller text
+
+    return (
+      <div className={`${containerClass} gap-4 my-6`}>
+        {/* Character Avatar */}
+        <div className={`${avatarSizeClass} rounded-full overflow-hidden shadow-md`}>
+          <img src={imageSrc} alt={character.emotion || 'character'} className="w-full h-full object-cover" />
+        </div>
+        
+        {/* Dialogue Bubble - only show if active and dialogue exists */}
+        {character.dialogueActive && character.dialogue && (
+          <div className={`px-4 py-3 bg-[#FFF8F1] border-2 border-[#F8AB28] rounded-xl shadow font-quicksand ${textSizeClass} text-[#070C02] ${bubbleClass} ${position === 'right' ? 'text-left' : ''}`}>
+            {character.dialogue}
+          </div>
+        )}
+      </div>
+    );
+  };
+  
+  // Original renderCharacter function (keeping for compatibility)
   const renderCharacter = (character: Character | undefined, position: string, characterType: 'left' | 'right') => {
     if (!character) return null;
     
@@ -269,53 +320,92 @@ const Story = () => {
   
   // Render dialogue scene
   const renderDialogueScene = (scene: Scene) => {
-    return (
-      // This div is now the background image container, takes full height (flex-1 from parent), and sets the background
-      <div 
-        className="relative flex-1 bg-cover bg-center" // Ensures it fills space and sets background
-        style={{ backgroundImage: `url(/images/${scene.background}.png)` }} // Construct full path, assuming .png
-      >
-        {/* Dark overlay for better text contrast */}
-        <div className="absolute inset-0 bg-black opacity-60"></div>
+    // Determine if this scene should use the new Figma-style two-character layout
+    const useFigmaStyleLayout = 
+      scene.leftCharacter && 
+      scene.rightCharacter && 
+      (scene.leftCharacter.dialogueActive || scene.rightCharacter.dialogueActive) &&
+      !scene.centralDialogue?.active; // Also ensure central dialogue isn't the focus
 
-        {/* Main content container for characters, dialogue, visual aids */}
-        {/* This container is relative to stack above the overlay (z-10) and uses flex to arrange its children */}
-        {/* h-full allows it to use the full height of the parent, p-4/md:p-8 for padding */}
-        <div className="relative z-10 flex h-full flex-col justify-between p-4 md:p-8">
-          
-          {/* Top row for characters and central content, using flex-grow to take space */}
-          {/* items-center to vertically align characters and central block if they have different heights */}
-          {/* justify-around provides space around elements, good for 2 or 3 items */}
-          <div className="flex flex-grow items-center justify-around">
-            {/* Left character */}
-            {renderCharacter(scene.leftCharacter, "ml-4 md:ml-8", "left")}
+    if (useFigmaStyleLayout) {
+      const leftChar = scene.leftCharacter!;
+      const rightChar = scene.rightCharacter!;
+      const hasVisualAid = !!scene.visualAid && (scene.type === 'dialogue'); // Ensure visual aid is for dialogue type
+
+      return (
+        <div 
+          className="relative flex-1 bg-cover bg-center"
+          style={{ backgroundImage: `url(/images/${scene.background}.png)` }}
+        >
+          {/* Dark overlay for better text contrast */}
+          <div className="absolute inset-0 bg-black opacity-60"></div>
+
+          {/* Character and dialogue layout container */}
+          {/* Adjusts vertical distribution based on presence of visual aid */}
+          <div className={`relative z-10 flex h-full flex-col ${hasVisualAid ? 'justify-around py-4 sm:py-6 md:py-8' : 'justify-center'}`}>
             
-            {/* Central content wrapper (for dialogue or visual aid) */}
-            {/* This div will take up space in the middle and center its content */}
-            <div className="flex-grow flex items-center justify-center">
-              {/* Central dialogue (if active) */}
-              {scene.centralDialogue && scene.centralDialogue.active && (
-                <div className="bg-white p-4 rounded-lg border border-amber-300 max-w-xs text-center shadow-lg">
-                  <p className="text-sm font-quicksand">{scene.centralDialogue.content}</p>
-                </div>
-              )}
-              
-              {/* Visual Aid (if present and no central dialogue, or if designed to coexist) */}
-              {scene.visualAid && (!scene.centralDialogue || !scene.centralDialogue.active) && ( // Example: Show visual aid if no central dialogue
-                <div className="shadow-lg">
-                  {renderVisualAid(scene.visualAid)}
-                </div>
-              )}
+            {/* Characters Container */}
+            {/* Pushes characters up if visual aid is present, otherwise centers them. */}
+            <div
+              className={`flex justify-between w-full px-10 md:px-16 ${hasVisualAid ? '' : 'items-center'}`}
+            >
+              <div className="flex flex-col justify-center">
+                {renderCharacterWithBubble(leftChar, 'left')}
+              </div>
+              <div className="flex flex-col justify-center">
+                {renderCharacterWithBubble(rightChar, 'right')}
+              </div>
             </div>
-            
-            {/* Right character */}
-            {renderCharacter(scene.rightCharacter, "mr-4 md:mr-8", "right")}
-          </div>
 
-          {/* Navigation arrows are handled globally in the main Story component return, so no specific nav here */}
+            {/* Visual Aid - rendered below characters if active */}
+            {hasVisualAid && (
+              <div className="flex justify-center items-center">
+                {renderVisualAid(scene.visualAid)}
+              </div>
+            )}
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      // Fallback to the original layout for other types of dialogue scenes
+      // (e.g., scenes with central dialogue, or single character focus if any)
+      return (
+        <div 
+          className="relative flex-1 bg-cover bg-center"
+          style={{ backgroundImage: `url(/images/${scene.background}.png)` }}
+        >
+          <div className="absolute inset-0 bg-black opacity-60"></div> {/* Original overlay */}
+          
+          {/* Original layout structure from before */}
+          <div className="absolute inset-0 flex flex-col justify-between p-4 md:p-8">
+            <div className="flex flex-grow items-center justify-around">
+              {/* Left character (using original renderCharacter) */}
+              {renderCharacter(scene.leftCharacter, "ml-4 md:ml-8", "left")}
+              
+              {/* Central content wrapper */}
+              <div className="flex-grow flex items-center justify-center">
+                {/* Central dialogue (if active) */}
+                {scene.centralDialogue && scene.centralDialogue.active && (
+                  <div className="bg-white p-4 rounded-lg border border-amber-300 max-w-xs text-center shadow-lg">
+                    <p className="text-sm font-quicksand">{scene.centralDialogue.content}</p>
+                  </div>
+                )}
+                
+                {/* Visual Aid */}
+                {scene.visualAid && (!scene.centralDialogue || !scene.centralDialogue.active) && (
+                  <div className="shadow-lg">
+                    {renderVisualAid(scene.visualAid)}
+                  </div>
+                )}
+              </div>
+              
+              {/* Right character (using original renderCharacter) */}
+              {renderCharacter(scene.rightCharacter, "mr-4 md:mr-8", "right")}
+            </div>
+          </div>
+        </div>
+      );
+    }
   };
 
   // Main render function
