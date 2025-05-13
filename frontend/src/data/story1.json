@@ -47,7 +47,7 @@
           "image": "bob_neutral.png",
           "emotion": "neutral",
           "dialogueActive": true,
-          "dialogue": "Interesting question, Carol",
+          "dialogue": "...",
           "size": "small"
         },
         "rightCharacter": {
@@ -70,16 +70,18 @@
         "type": "dialogue",
         "background": "cafe",
         "leftCharacter": {
-          "image": "character1-thinking.png",
-          "emotion": "thinking",
-          "dialogueActive": true,
-          "dialogue": "Ah Bitcoin. It's like digital cash."
-        },
-        "rightCharacter": {
-          "image": "character2-explaining.png",
+          "image": "bob_explaining.png",
           "emotion": "explaining",
           "dialogueActive": true,
-          "dialogue": "digital cash? \nI'm not sure I understand."
+          "dialogue": "Bitcoin! It's like digital cash.",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_question.png",
+          "emotion": "confused",
+          "dialogueActive": true,
+          "dialogue": "digital cash? \nI'm not sure I understand.",
+          "size": "large"
         },
         "centralDialogue": {
           "active": false,
@@ -94,16 +96,18 @@
         "type": "dialogue",
         "background": "cafe",
         "leftCharacter": {
-          "image": "character1-curious.png",
-          "emotion": "curious",
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
           "dialogueActive": true,
-          "dialogue": "No banks, no middlemen --just payments from person to person"
+          "dialogue": "Think of it like this—imagine sending money to a friend over email, but securely and without needing permission from a bank.",
+          "size": "large"
         },
         "rightCharacter": {
-          "image": "character2-neutral.png",
-          "emotion": "neutral",
-          "dialogueActive": false,
-          "dialogue": ""
+          "image": "carol_question.png",
+          "emotion": "confused",
+          "dialogueActive": true,
+          "dialogue": "Ohhh… so I don’t need a bank app or anything?",
+          "size": "large"
         },
         "centralDialogue": {
           "active": false,
@@ -112,22 +116,102 @@
         "visualAid": null
       },
       {
+        "id": "2.4",
+        "storyNumber": 1,
+        "sceneNumber": "2.4",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "Exactly. Bitcoin uses a special network called the blockchain to keep track of who owns what. It’s public, but super secure.",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": null
+      },
+      {
+        "id": "2.5",
+        "storyNumber": 1,
+        "sceneNumber": "2.5",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_holding_phone.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...hold on, I'm getting a message",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_asking.png",
+          "emotion": "question",
+          "dialogueActive": true,
+          "dialogue": "Wait, blockchain? I’ve heard that word thrown around, but I don’t really get it.",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": null
+      },
+      {
+        "id": "2.6",
+        "storyNumber": 1,
+        "sceneNumber": "2.6",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "Picture a notebook that everyone can see, but no one can erase or fake. Every time someone sends Bitcoin, a new line gets written. That notebook? That’s the blockchain.",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "blockchain-diagram"
+      },
+      {
         "id": "3.1",
         "storyNumber": 1,
         "sceneNumber": "3.1",
         "type": "dialogue",
         "background": "cafe",
         "leftCharacter": {
-          "image": "character1-confused.png",
-          "emotion": "confused",
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
           "dialogueActive": true,
-          "dialogue": "Okay, but how does it stay safe? Can't someone just copy the cash?"
+          "dialogue": "...",
+          "size": "small"
         },
         "rightCharacter": {
-          "image": "character2-neutral.png",
-          "emotion": "neutral",
-          "dialogueActive": false,
-          "dialogue": ""
+          "image": "carol_shocked.png",
+          "emotion": "shocked",
+          "dialogueActive": true,
+          "dialogue": "Okay, but how does it stay safe? Can’t someone just copy the cash?",
+          "size": "large"
         },
         "centralDialogue": {
           "active": false,
@@ -142,24 +226,24 @@
         "type": "dialogue",
         "background": "cafe",
         "leftCharacter": {
-          "image": "character1-neutral.png",
-          "emotion": "neutral",
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
           "dialogueActive": true,
-          "dialogue": "Good question! Here's the magic: The blockchain!\nIt's a public ledger of all Bitcoin transactions.",
+          "dialogue": "Good question! Think of it as a public, digital diary of all Bitcoin transactions. Once something’s written, it’s locked in!",
           "size": "large"
         },
         "rightCharacter": {
-          "image": "character2-teaching.png",
-          "emotion": "teaching",
+          "image": "carol_listening.png",
+          "emotion": "listening",
           "dialogueActive": true,
-          "dialogue": "hmm, I'm not sure I understand.",
+          "dialogue": "...",
           "size": "small"
         },
         "centralDialogue": {
           "active": false,
           "content": ""
         },
-        "visualAid": "blockchain-diagram"
+        "visualAid": "bitcoin-padlock"
       },
       {
         "id": "3.3",
@@ -168,22 +252,310 @@
         "type": "dialogue",
         "background": "cafe",
         "leftCharacter": {
-          "image": "character1-neutral.png",
+          "image": "bob_neutral.png",
           "emotion": "neutral",
-          "dialogueActive": false,
-          "dialogue": ""
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
         },
         "rightCharacter": {
-          "image": "character2-explaining.png",
-          "emotion": "explaining",
+          "image": "carol_understanding.png",
+          "emotion": "understanding",
           "dialogueActive": true,
-          "dialogue": "Think of it as a public digital diary of all Bitcoin transactions."
+          "dialogue": "So it’s like a diary no one can erase?",
+          "size": "large"
         },
         "centralDialogue": {
           "active": false,
           "content": ""
         },
-        "visualAid": "bitcoin-ledger"
+        "visualAid": "null"
+      },
+      {
+        "id": "3.4",
+        "storyNumber": 1,
+        "sceneNumber": "3.4",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "Exactly. Each new page—aka ‘block’—is locked to the previous one. It’s like a chain of events no one can change!",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "blockchain-illustration"
+      },
+      {
+        "id": "4.0",
+        "storyNumber": 1,
+        "sceneNumber": "4.0",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_satisfied.png",
+          "emotion": "satisfied",
+          "dialogueActive": true,
+          "dialogue": "Alright, but who’s in charge of keeping this diary?",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "4.1",
+        "storyNumber": 1,
+        "sceneNumber": "4.1",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "Nobody’s in charge, actually. It’s decentralized. Thousands of computers all over the world keep track of everything. That’s where mining comes in.",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "bitcoin-mining"
+      },
+      {
+        "id": "4.2",
+        "storyNumber": 1,
+        "sceneNumber": "4.2",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_smirk.png",
+          "emotion": "smirking",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_inquisitive.png",
+          "emotion": "inquisitive",
+          "dialogueActive": true,
+          "dialogue": "Wait. Mining? Like, pickaxes and shovels?",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "4.3",
+        "storyNumber": 1,
+        "sceneNumber": "4.3",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_teaching.png",
+          "emotion": "deep_stare",
+          "dialogueActive": true,
+          "dialogue": "Not quite! It’s about solving super tough puzzles to add a new block to the chain. When someone solves it, they get new Bitcoin as a reward!",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "bitcoin-reward"
+      },
+      {
+        "id": "5.0",
+        "storyNumber": 1,
+        "sceneNumber": "5.0",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_thinking.png",
+          "emotion": "thinking",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_understanding.png",
+          "emotion": "understanding",
+          "dialogueActive": true,
+          "dialogue": "So it’s like a treasure hunt, but for everyone?",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "5.1",
+        "storyNumber": 1,
+        "sceneNumber": "5.1",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "Exactly! No bosses. If someone tries to mess with the system, everyone else knows. It’s like a big, global team keeping everything honest.",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "6.0",
+        "storyNumber": 1,
+        "sceneNumber": "6.0",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "Okay, how do I get my hands on some Bitcoins?",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "bitcoin-mining"
+      },
+      {
+        "id": "4.4",
+        "storyNumber": 1,
+        "sceneNumber": "4.4",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "bitcoin-mining"
+      },
+      {
+        "id": "4.4",
+        "storyNumber": 1,
+        "sceneNumber": "4.4",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "bitcoin-mining"
+      },
+      {
+        "id": "4.4",
+        "storyNumber": 1,
+        "sceneNumber": "4.4",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "bitcoin-mining"
       }
     ]
 }

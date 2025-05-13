@@ -99,6 +99,56 @@ const processDialogueData = (data: RawDialogueData): DialogueData => {
 // Process the dialogue data
 const dialogueData = processDialogueData(rawDialogueData as RawDialogueData);
 
+// Define the mapping outside the component or memoize it if inside
+const visualAidMap: { 
+  [key: string]: { 
+    src: string | null; 
+    alt: string; 
+    displaySize?: 'small' | 'medium' | 'large'; // Added display size
+  } 
+} = {
+  "blockchain-diagram": {
+    src: "/images/visual-aids/blockchain-diagram.png",
+    alt: "Blockchain diagram illustration",
+    displaySize: 'medium', // Explicitly medium
+  },
+  "bitcoin-ledger": {
+    src: "/images/visual-aids/bitcoin-ledger.png", 
+    alt: "Bitcoin ledger illustration",
+    displaySize: 'medium', // Defaulting to medium
+  },
+  "blockchain-illustration": {
+    src: "/images/visual-aids/blochain_illustration.png", 
+    alt: "Illustration explaining blockchain",
+    displaySize: 'large',
+  },
+  "bitcoin-padlock": {
+    src: "/images/visual-aids/bitcoin_padlock.png", 
+    alt: "Illustration of Bitcoin security with a padlock",
+    displaySize: 'large', 
+  },
+  "bitcoin-mining": {
+    src: "/images/visual-aids/bitcoin_mining.png", 
+    alt: "Illustration of Bitcoin mining",
+    displaySize: 'medium',
+  },
+  "bitcoin-reward": {
+    src: "/images/visual-aids/bitcoin_reward.png",
+    alt: "Illustration of Bitcoin reward",
+    displaySize: 'medium',
+  },
+  "bitcoin-puzzle": {
+    src: "/images/visual-aids/bitcoin_puzzle.png",
+    alt: "Illustration of Bitcoin puzzle",
+    displaySize: 'medium',
+  },
+  "bitcoin-block": {
+    src: "/images/visual-aids/bitcoin_block.png",
+    alt: "Illustration of Bitcoin block",
+    displaySize: 'medium',
+  },
+};
+
 const Story = () => {
   // Track the current scene index
   const [currentSceneIndex, setCurrentSceneIndex] = useState(0);
@@ -127,64 +177,44 @@ const Story = () => {
 
   // Helper function to render the visual aid
   const renderVisualAid = (type: string | null | undefined) => {
-    if (!type) return null;
+    if (!type || !visualAidMap[type]) return null;
 
-    if (type === "blockchain-diagram") {
-      return (
-        <div className="bg-white p-4 rounded-lg border-2 border-gray-300 w-64 mx-auto">
-          <div className="flex justify-center items-center">
-            <div className="text-3xl text-teal-500">
-              <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7 7h10a2 2 0 0 1 2 2v1M7 7V6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1M7 7v10a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                <path d="M17 17H7a2 2 0 0 1-2-2v-1M17 17v1a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2v-1M17 17V7a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-              </svg>
-            </div>
-            <div className="text-3xl text-teal-500 mx-2">
-              <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7 7h10a2 2 0 0 1 2 2v1M7 7V6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1M7 7v10a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                <path d="M17 17H7a2 2 0 0 1-2-2v-1M17 17v1a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2v-1M17 17V7a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-              </svg>
-            </div>
-            <div className="text-3xl text-teal-500">
-              <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7 7h10a2 2 0 0 1 2 2v1M7 7V6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1M7 7v10a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                <path d="M17 17H7a2 2 0 0 1-2-2v-1M17 17v1a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2v-1M17 17V7a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-              </svg>
-            </div>
-          </div>
-          <h2 className="text-xl font-bold text-center mt-2">BLOCKCHAIN</h2>
-        </div>
-      );
-    } else if (type === "bitcoin-ledger") {
-      return (
-        <div className="bg-white p-4 rounded-lg border-2 border-gray-300 w-64 mx-auto">
-          <div className="flex justify-center relative">
-            <div className="bg-blue-100 p-2 rounded border border-blue-300 w-48">
-              <div className="flex items-center mb-2">
-                <div className="bg-yellow-400 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-1">₿</div>
-                <div className="bg-gray-200 h-2 flex-1 rounded"></div>
-              </div>
-              <div className="flex items-center mb-2">
-                <div className="bg-yellow-400 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-1">₿</div>
-                <div className="bg-gray-200 h-2 flex-1 rounded"></div>
-              </div>
-              <div className="flex items-center">
-                <div className="bg-yellow-400 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-1">₿</div>
-                <div className="bg-gray-200 h-2 flex-1 rounded"></div>
-              </div>
-              <div className="absolute -top-2 -right-2">
-                <div className="bg-gray-500 rounded p-1">
-                  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      );
+    const aidData = visualAidMap[type];
+    const size = aidData.displaySize || 'medium'; // Default to medium
+
+    // Determine container class based on size
+    let sizeClass = '';
+    switch (size) {
+      case 'small':
+        sizeClass = 'max-w-sm'; // Example: max-width 24rem
+        break;
+      case 'large':
+        sizeClass = 'max-w-lg'; // Example: max-width 32rem
+        break;
+      case 'medium':
+      default:
+        sizeClass = 'max-w-md'; // Example: max-width 28rem
+        break;
     }
-    return null;
+    
+    const visualAidBaseContainerClasses = " p-4 rounded-lg mx-auto"; // Removed width/border, handled by size + image
+    const visualAidImageClasses = "w-full h-auto object-contain shadow-lg rounded-lg"; // Added shadow/rounding to image itself
+
+    return (
+      // Apply base classes and dynamic size class
+      <div className={`${visualAidBaseContainerClasses} ${sizeClass}`}>
+        {aidData.src ? (
+          <img
+            src={aidData.src}
+            alt={aidData.alt}
+            className={visualAidImageClasses}
+          />
+        ) : (
+          // Render placeholder text if no image source is defined
+          <p className="text-center text-gray-500 italic h-40 flex items-center justify-center border border-dashed border-gray-400 rounded-lg">{aidData.alt}</p>
+        )}
+      </div>
+    );
   };
 
   // Function to render a character with dialogue bubble (Figma style)
@@ -341,13 +371,12 @@ const Story = () => {
           <div className="absolute inset-0 bg-black opacity-60"></div>
 
           {/* Character and dialogue layout container */}
-          {/* Adjusts vertical distribution based on presence of visual aid */}
-          <div className={`relative z-10 flex h-full flex-col ${hasVisualAid ? 'justify-around py-4 sm:py-6 md:py-8' : 'justify-center'}`}>
+          {/* Using justify-center for vertical centering of the block */}
+          <div className={`relative z-10 flex h-full flex-col justify-center`}> 
             
-            {/* Characters Container */}
-            {/* Pushes characters up if visual aid is present, otherwise centers them. */}
+            {/* Characters Container - Removed items-start and bottom padding */}
             <div
-              className={`flex justify-between w-full px-10 md:px-16 ${hasVisualAid ? '' : 'items-center'}`}
+              className={`flex justify-between w-full px-10 md:px-16`}
             >
               <div className="flex flex-col justify-center">
                 {renderCharacterWithBubble(leftChar, 'left')}
@@ -359,7 +388,8 @@ const Story = () => {
 
             {/* Visual Aid - rendered below characters if active */}
             {hasVisualAid && (
-              <div className="flex justify-center items-center">
+              // Re-added a small top margin to control spacing
+              <div className="flex justify-center items-center mt-2"> 
                 {renderVisualAid(scene.visualAid)}
               </div>
             )}
