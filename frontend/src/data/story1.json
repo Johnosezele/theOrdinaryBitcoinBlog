@@ -1,0 +1,1861 @@
+{
+    "scenes": [
+      {
+        "id": "0.1",
+        "storyNumber": 1,
+        "sceneNumber": "0.1",
+        "type": "intro",
+        "background": "cafe",
+        "title": "Understanding Bitcoin Basics",
+        "subtitle": "Join Carol and Bob as they walk you through the fundamentals of Bitcoin.",
+        "ctaButton": "Start Learning",
+        "visualAid": null
+      },
+      {
+        "id": "1.1",
+        "storyNumber": 1,
+        "sceneNumber": "1.1",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_excited.png",
+          "emotion": "excited",
+          "dialogueActive": true,
+          "dialogue": "Hi there, I'm Bob.",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_excited.png",
+          "emotion": "excited",
+          "dialogueActive": true,
+          "dialogue": "Hey Bob, I'm Carol. \nI'm excited to learn about the fundamentals of Bitcoin with you!",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": null
+      },
+      {
+        "id": "2.1",
+        "storyNumber": 1,
+        "sceneNumber": "2.1",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "So Bob, What's Bitcoin?\nThere's been so much buzz about it lately, with the price increasing!",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": null
+      },
+      {
+        "id": "2.2",
+        "storyNumber": 1,
+        "sceneNumber": "2.2",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "Bitcoin! It's like digital cash.",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_inquisitive.png",
+          "emotion": "confused",
+          "dialogueActive": true,
+          "dialogue": "digital cash? \nI'm not sure I understand.",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": null
+      },
+      {
+        "id": "2.3",
+        "storyNumber": 1,
+        "sceneNumber": "2.3",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "Think of it like this,\nimagine sending money to a friend over email, but securely and without needing permission from a bank.",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_satisfied.png",
+          "emotion": "confused",
+          "dialogueActive": true,
+          "dialogue": "Ohhh… so I don’t need a bank app or anything?",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": null
+      },
+      {
+        "id": "2.4",
+        "storyNumber": 1,
+        "sceneNumber": "2.4",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "Exactly. Bitcoin uses a special network called the blockchain to keep track of who owns what. It’s public, but super secure.",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "bitcoin-block"
+      },
+      {
+        "id": "2.5",
+        "storyNumber": 1,
+        "sceneNumber": "2.5",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_asking.png",
+          "emotion": "question",
+          "dialogueActive": true,
+          "dialogue": "Wait, blockchain? I’ve heard that word thrown around, but I don’t really get it.",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": null
+      },
+      {
+        "id": "2.6",
+        "storyNumber": 1,
+        "sceneNumber": "2.6",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "Picture a notebook that everyone can see, but no one can erase or fake. Every time someone sends Bitcoin, a new line gets written. That notebook? That’s the blockchain.",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "blockchain-diagram"
+      },
+      {
+        "id": "3.1",
+        "storyNumber": 1,
+        "sceneNumber": "3.1",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_shocked.png",
+          "emotion": "shocked",
+          "dialogueActive": true,
+          "dialogue": "Okay, but how does it stay safe? Can’t someone just copy the cash?",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": null
+      },
+      {
+        "id": "3.2",
+        "storyNumber": 1,
+        "sceneNumber": "3.2",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "Good question! Think of it as a public, digital diary of all Bitcoin transactions. Once something’s written, it’s locked in!",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "bitcoin-padlock"
+      },
+      {
+        "id": "3.3",
+        "storyNumber": 1,
+        "sceneNumber": "3.3",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_understanding.png",
+          "emotion": "understanding",
+          "dialogueActive": true,
+          "dialogue": "So it’s like a diary no one can erase?",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "3.4",
+        "storyNumber": 1,
+        "sceneNumber": "3.4",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "Exactly. Each new page aka ‘block’ is locked to the previous one. It’s like a chain of events no one can change!",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "blockchain-illustration"
+      },
+      {
+        "id": "4.0",
+        "storyNumber": 1,
+        "sceneNumber": "4.0",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_satisfied.png",
+          "emotion": "satisfied",
+          "dialogueActive": true,
+          "dialogue": "Alright, but who’s in charge of keeping this diary?",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "4.1",
+        "storyNumber": 1,
+        "sceneNumber": "4.1",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "Nobody’s in charge, actually. It’s decentralized. Thousands of computers all over the world keep track of everything. That’s where mining comes in.",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "bitcoin-mining"
+      },
+      {
+        "id": "4.2",
+        "storyNumber": 1,
+        "sceneNumber": "4.2",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_smirk.png",
+          "emotion": "smirking",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_inquisitive.png",
+          "emotion": "inquisitive",
+          "dialogueActive": true,
+          "dialogue": "Wait. Mining? Like, pickaxes and shovels?",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "4.3",
+        "storyNumber": 1,
+        "sceneNumber": "4.3",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_holding_puzzle.png",
+          "emotion": "deep_stare",
+          "dialogueActive": true,
+          "dialogue": "Not quite! It’s about solving super tough puzzles to add a new block to the chain. When someone solves it, they get new Bitcoin as a reward!",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "bitcoin-reward"
+      },
+      {
+        "id": "5.0",
+        "storyNumber": 1,
+        "sceneNumber": "5.0",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_understanding.png",
+          "emotion": "understanding",
+          "dialogueActive": true,
+          "dialogue": "So it’s like a treasure hunt, but for everyone?",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "5.1",
+        "storyNumber": 1,
+        "sceneNumber": "5.1",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "Exactly! No bosses. If someone tries to mess with the system, everyone else knows. It’s like a big, global team keeping everything honest.",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "6.0",
+        "storyNumber": 1,
+        "sceneNumber": "6.0",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_excited.png",
+          "emotion": "excited",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_excited.png",
+          "emotion": "excited",
+          "dialogueActive": true,
+          "dialogue": "Okay, how do I get my hands on some Bitcoins?",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "bitcoin-machine"
+      },
+      {
+        "id": "6.1",
+        "storyNumber": 1,
+        "sceneNumber": "6.1",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "It’s all about keys! You’ve got a private key like your secret password and a public key, which is like your address for receiving Bitcoin",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "6.2",
+        "storyNumber": 1,
+        "sceneNumber": "6.2",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_inquisitive.png",
+          "emotion": "inquisitive",
+          "dialogueActive": true,
+          "dialogue": "So I don’t actually ‘hold’ Bitcoin? I hold the keys to access it?",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "bitcoin-key"
+      },
+      {
+        "id": "6.3",
+        "storyNumber": 1,
+        "sceneNumber": "6.3",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "Exactly! Your wallet holds the keys, not the Bitcoin itself. It’s like a digital keychain!",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "bitcoin-wallet"
+      },
+      {
+        "id": "6.4",
+        "storyNumber": 1,
+        "sceneNumber": "6.4",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_inquisitive.png",
+          "emotion": "inquisitive",
+          "dialogueActive": true,
+          "dialogue": "Wait, so how do I actually get those keys in the first place?",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "6.5",
+        "storyNumber": 1,
+        "sceneNumber": "6.5",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "You do when you purchase Bitcoin mostly from an exchange: basically a marketplace. Some are centralized, like Coinbase, Binance... Others are decentralized, like Bisq, RoboSats...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "bitcoin-exchange"
+      },
+      {
+        "id": "6.6",
+        "storyNumber": 1,
+        "sceneNumber": "6.6",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_inquisitive.png",
+          "emotion": "inquisitive",
+          "dialogueActive": true,
+          "dialogue": "So if I buy Bitcoin there… they give me the keys?",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "6.7",
+        "storyNumber": 1,
+        "sceneNumber": "6.7",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "Well, it depends. Most centralized exchanges keep the keys for you, so you don’t fully own the Bitcoin unless you transfer it to your own wallet.",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "6.8",
+        "storyNumber": 1,
+        "sceneNumber": "6.8",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_satisfied.png",
+          "emotion": "satisfied",
+          "dialogueActive": true,
+          "dialogue": "So it’s like… they let me borrow the keys?",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "6.9",
+        "storyNumber": 1,
+        "sceneNumber": "6.9",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "Kinda",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_question_small.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "7.0",
+        "storyNumber": 1,
+        "sceneNumber": "7.0",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_understanding.png",
+          "emotion": "understanding",
+          "dialogueActive": true,
+          "dialogue": "So the public key is like my inbox, anyone can send Bitcoin there. And the private key is like the password to open it and actually spend the coins. If I lose the private key, it’s like losing the key to a vault no one can get in, not even me",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "7.1",
+        "storyNumber": 1,
+        "sceneNumber": "7.1",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "Exactly! Also, if you want real ownership, you move your Bitcoin off the exchange into your own wallet, where you hold the private keys.”",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_question_small.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "7.2",
+        "storyNumber": 1,
+        "sceneNumber": "7.2",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_thinking.png",
+          "emotion": "thinking",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_asking.png",
+          "emotion": "asking",
+          "dialogueActive": true,
+          "dialogue": "And these wallets, are they apps or what?",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "7.3",
+        "storyNumber": 1,
+        "sceneNumber": "7.3",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "They can be apps, browser extensions, or even physical devices. There are three types: hot, warm, and cold wallets.",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_question_small.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "7.4",
+        "storyNumber": 1,
+        "sceneNumber": "7.4",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_smirk.png",
+          "emotion": "smirking",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_laughing.png",
+          "emotion": "laughing",
+          "dialogueActive": true,
+          "dialogue": "Sounds like a spa menu.",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "7.5",
+        "storyNumber": 1,
+        "sceneNumber": "7.5",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "Hot wallets are connected to the internet, easy to use, but more vulnerable to hacks. Cold wallets are totally offline, super secure, like a USB stick that stores your keys",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_question_small.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "hardware-wallet"
+      },
+      {
+        "id": "7.6",
+        "storyNumber": 1,
+        "sceneNumber": "7.6",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_satisfied.png",
+          "emotion": "satisfied",
+          "dialogueActive": true,
+          "dialogue": "And warm wallets?",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "7.7",
+        "storyNumber": 1,
+        "sceneNumber": "7.7",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "They’re kind of in between. Could be a mobile app with extra security layers. More convenient than cold, but safer than hot.",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "7.8",
+        "storyNumber": 1,
+        "sceneNumber": "7.8",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "Okay, I downloaded a wallet app. It gave me this crazy string of words…”",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "mobile-seedphrase"
+      },
+      {
+        "id": "7.9",
+        "storyNumber": 1,
+        "sceneNumber": "7.9",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "That’s your seed phrase. It’s like the master key to your wallet. Write it down, never screenshot it, and don’t share it.",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "written-seedphrase"
+      },
+      {
+        "id": "8.0",
+        "storyNumber": 1,
+        "sceneNumber": "8.0",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "I'm not sure I understand. What's a seed phrase?",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "8.1",
+        "storyNumber": 1,
+        "sceneNumber": "8.1",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "A seed phrase is a list of 12 or 24 random words that unlock your entire wallet. It’s like the master backup. As long as you have it, you can recover your Bitcoin, even if you lose your phone or delete the app.",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "8.2",
+        "storyNumber": 1,
+        "sceneNumber": "8.2",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_satisfied.png",
+          "emotion": "satisfied",
+          "dialogueActive": true,
+          "dialogue": "Got it. Now, how do I get some Bitcoin in here?",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "8.3",
+        "storyNumber": 1,
+        "sceneNumber": "8.3",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "Using your public address, it's like your Bitcoin email and it’s safe to share so people can send you money... when you want to send Bitcoin, your wallet uses your private key to sign the transaction and send it from your address to someone else’s",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "8.4",
+        "storyNumber": 1,
+        "sceneNumber": "8.4",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_excited.png",
+          "emotion": "excited",
+          "dialogueActive": true,
+          "dialogue": "I'm ready to get some Bitcoin! This is my receiving address.",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "bitcoin-address"
+      },
+      {
+        "id": "8.5",
+        "storyNumber": 1,
+        "sceneNumber": "8.5",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_holding_phone.png",
+          "emotion": "excited",
+          "dialogueActive": true,
+          "dialogue": "I’ll send you a few sats, that’s short for satoshis, the smallest unit of Bitcoin.",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_excited.png",
+          "emotion": "excited",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "8.6",
+        "storyNumber": 1,
+        "sceneNumber": "8.6",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_holding_phone.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_excited.png",
+          "emotion": "excited",
+          "dialogueActive": true,
+          "dialogue": "Like Bitcoin cents?",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "8.7",
+        "storyNumber": 1,
+        "sceneNumber": "8.7",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_holding_phone.png",
+          "emotion": "excited",
+          "dialogueActive": true,
+          "dialogue": "Exactly. 100 million sats make one Bitcoin.",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "8.8",
+        "storyNumber": 1,
+        "sceneNumber": "8.8",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_excited.png",
+          "emotion": "excited",
+          "dialogueActive": true,
+          "dialogue": "Oh wow! It showed up. Pending, but it’s there.",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "bitcoin-pending"
+      },
+      {
+        "id": "8.9",
+        "storyNumber": 1,
+        "sceneNumber": "8.9",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_knuckle_up.png",
+          "emotion": "excited",
+          "dialogueActive": true,
+          "dialogue": "That’s the magic! It’ll get confirmed soon...",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "9.0",
+        "storyNumber": 1,
+        "sceneNumber": "9.0",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_satisfied.png",
+          "emotion": "satisfied",
+          "dialogueActive": true,
+          "dialogue": "Okay… that felt kind of cool.”",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "bitcoin-confirmed"
+      },
+      {
+        "id": "9.1",
+        "storyNumber": 1,
+        "sceneNumber": "9.1",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_knuckle_up.png",
+          "emotion": "excited",
+          "dialogueActive": true,
+          "dialogue": "Welcome to the Bitcoinverse!",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_excited.png",
+          "emotion": "excited",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "9.2",
+        "storyNumber": 1,
+        "sceneNumber": "9.2",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_inquisitive.png",
+          "emotion": "satisfied",
+          "dialogueActive": true,
+          "dialogue": "Ideally, how long do bitcoin transactions take to be successful?",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "9.3",
+        "storyNumber": 1,
+        "sceneNumber": "9.3",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "Once it’s confirmed by the network. Usually within 10 minutes, but sometimes it can take longer.",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "9.4",
+        "storyNumber": 1,
+        "sceneNumber": "9.4",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_inquisitive.png",
+          "emotion": "satisfied",
+          "dialogueActive": true,
+          "dialogue": "And what’s this little fee I see here?",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "9.5",
+        "storyNumber": 1,
+        "sceneNumber": "9.5",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "That’s the miner fee. It’s how you pay the network to include your transaction in the blockchain. If the network’s busy, you might pay more to get confirmed faster.",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "9.6",
+        "storyNumber": 1,
+        "sceneNumber": "9.6",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_inquisitive.png",
+          "emotion": "inquisitive",
+          "dialogueActive": true,
+          "dialogue": "So, what happens if I send Bitcoin to the wrong address?",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "9.7",
+        "storyNumber": 1,
+        "sceneNumber": "9.7",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_teaching.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "That’s the one thing you really need to watch out for. There’s no ‘undo’ button in Bitcoin. If you send to the wrong address... poof! It’s gone forever",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_shocked.png",
+          "emotion": "shocked",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "9.8",
+        "storyNumber": 1,
+        "sceneNumber": "9.8",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_scared.png",
+          "emotion": "scared",
+          "dialogueActive": true,
+          "dialogue": "Yikes. That’s intense.",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "9.9",
+        "storyNumber": 1,
+        "sceneNumber": "9.9",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "Always double check the address. Even better, use QR codes to scan it, not copy-paste. Some viruses can even swap addresses on your clipboard.",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_scared.png",
+          "emotion": "scared",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "10.0",
+        "storyNumber": 1,
+        "sceneNumber": "10.0",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_scared.png",
+          "emotion": "scared",
+          "dialogueActive": true,
+          "dialogue": "How do I keep my Bitcoin safe, though? This feels kind of powerful… and risky.",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "10.1",
+        "storyNumber": 1,
+        "sceneNumber": "10.1",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "You’re right to think that. The golden rule: Keep your private key secure. That means backing up your recovery phrase offline, pen and paper, not screenshots.",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "10.3",
+        "storyNumber": 1,
+        "sceneNumber": "10.3",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_satisfied.png",
+          "emotion": "satisfied",
+          "dialogueActive": true,
+          "dialogue": "Done. This goes in my sock drawer… or maybe a fireproof box.",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "10.5",
+        "storyNumber": 1,
+        "sceneNumber": "10.5",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "Smart. And if you’re storing a lot, use a hardware wallet, it’s like a digital vault that keeps your keys offline.",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "10.6",
+        "storyNumber": 1,
+        "sceneNumber": "10.6",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_scared.png",
+          "emotion": "scared",
+          "dialogueActive": true,
+          "dialogue": "And if I lose the key…?",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "10.7",
+        "storyNumber": 1,
+        "sceneNumber": "10.7",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_thinking_filled.png",
+          "emotion": "thinking",
+          "dialogueActive": true,
+          "dialogue": "No key, no Bitcoin.",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_scared.png",
+          "emotion": "scared",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "10.71",
+        "storyNumber": 1,
+        "sceneNumber": "10.71",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_satisfied.png",
+          "emotion": "satisfied",
+          "dialogueActive": true,
+          "dialogue": "Okay okay... lesson burned in",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "10.8",
+        "storyNumber": 1,
+        "sceneNumber": "10.8",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "And the best part? Bitcoin’s evolving. There’s something called the Lightning Network, a layer on top of Bitcoin that makes payments super fast and super cheap",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "10.9",
+        "storyNumber": 1,
+        "sceneNumber": "10.9",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_inquisitive.png",
+          "emotion": "inquisitive",
+          "dialogueActive": true,
+          "dialogue": "Wait, faster and cheaper? Like, instantly?",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "11.0",
+        "storyNumber": 1,
+        "sceneNumber": "11.0",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "Pretty much. It’s like opening a private lane between two people. They can send sats back and forth instantly, and only settle the final result on the blockchain.",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "11.1",
+        "storyNumber": 1,
+        "sceneNumber": "11.1",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_question.png",
+          "emotion": "understanding",
+          "dialogueActive": true,
+          "dialogue": "So… Bitcoin isn’t just digital cash. It’s a whole financial system in the making.",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "11.2",
+        "storyNumber": 1,
+        "sceneNumber": "11.2",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_explaining.png",
+          "emotion": "explaining",
+          "dialogueActive": true,
+          "dialogue": "Exactly. A decentralized, permissionless, borderless system built on math with no middlemen involved. And we’re still early!",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_listening.png",
+          "emotion": "listening",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "11.3",
+        "storyNumber": 1,
+        "sceneNumber": "11.3",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_neutral.png",
+          "emotion": "neutral",
+          "dialogueActive": true,
+          "dialogue": "...",
+          "size": "small"
+        },
+        "rightCharacter": {
+          "image": "carol_winks.png",
+          "emotion": "happy",
+          "dialogueActive": true,
+          "dialogue": "I get it now! Bitcoin’s not just about money. It’s a whole new way to think about how we trade, pay, and trust each other.",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      },
+      {
+        "id": "11.4",
+        "storyNumber": 1,
+        "sceneNumber": "11.4",
+        "type": "dialogue",
+        "background": "cafe",
+        "leftCharacter": {
+          "image": "bob_knuckle_up.png",
+          "emotion": "excited",
+          "dialogueActive": true,
+          "dialogue": "Exactly! And it’s only getting started. You’re the bank now!",
+          "size": "large"
+        },
+        "rightCharacter": {
+          "image": "carol_excited.png",
+          "emotion": "excited",
+          "dialogueActive": true,
+          "dialogue": "Whoop! I’m the bank now!",
+          "size": "large"
+        },
+        "centralDialogue": {
+          "active": false,
+          "content": ""
+        },
+        "visualAid": "null"
+      }
+    ]
+}
