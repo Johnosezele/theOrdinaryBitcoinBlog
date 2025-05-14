@@ -19,18 +19,51 @@ def verify():
         return jsonify({"error": "Missing token"}), 401
     
     token = auth_header.split("Bearer ")[-1]
+    
     try:
         user = supabase.auth.get_user(token).user
         
-        if user:
-            return jsonify({
-                "info": {
-                    "email": user.email,
-                    "name": user.user_metadata.get("full name", "NA"),
-                }
-            })
-        else:
+        if not user:
             return jsonify({"error": "User not found."}), 404
+
+        user_id = user.id
+        email = user.email
+        full_name = user.user_metadata.get("full name", "NA")
+
+        existing = supabase.table("User").select("id").eq("id", user_id).execute()
+
+        # If user doesn't already exist, insert new user data
+        if not existing.data:
+            supabase.table("User").insert({
+                "id": user_id,
+                "username": full_name,  
+                "email": email,
+                "created_at": user.created_at,  
+            }).execute()
+
+        auth_data = {
+            "provider": user.app_metadata.get("provider"),
+            "provider_user_id": user.identities[0]["id"] if user.identities else "unknown",
+            "auth_data": user.dict()  
+        }
+
+        existing_auth = supabase.table("UserAuth").select("id").eq("user_id", user_id).execute()
+
+        # Insert user data into 'UserAuth' table 
+        if not existing_auth.data:
+            supabase.table("UserAuth").insert({
+                "user_id": user_id,
+                "provider": auth_data["provider"],
+                "provider_user_id": auth_data["provider_user_id"],
+                "auth_data": auth_data
+            }).execute()
+
+        return jsonify({
+            "info": {
+                "email": email,
+                "name": full_name,
+            }
+        })
         
     except Exception as e:
-        return jsonify({"error": str{e}}), 500
+        return jsonify({"error": str(e)}), 500
