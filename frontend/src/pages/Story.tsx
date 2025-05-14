@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Confetti from 'react-confetti';
+import useWindowSize from 'react-use/lib/useWindowSize';
 import rawDialogueData from '../data/story1.json';
 
 interface Character {
@@ -196,12 +198,38 @@ const Story = () => {
   // Get the current scene data
   const currentScene = dialogueData.scenes[currentSceneIndex];
 
+  // State for confetti animation and quiz modal
+  const { width, height } = useWindowSize();
+  const [confettiActive, setConfettiActive] = useState(false);
+  const [showQuizModal, setShowQuizModal] = useState(false);
+
   // Compute first and last dialogue scene indices for navigation arrows
   const firstDialogueSceneIndex = dialogueData.scenes.findIndex(scene => scene.type === 'dialogue');
   const lastDialogueSceneIndex = (() => {
     const reversedIndex = [...dialogueData.scenes].reverse().findIndex(scene => scene.type === 'dialogue');
     return reversedIndex === -1 ? -1 : dialogueData.scenes.length - 1 - reversedIndex;
   })();
+
+  // Effect to control confetti animation and quiz modal
+  useEffect(() => {
+    // Only activate on the last dialogue scene
+    if (currentSceneIndex === lastDialogueSceneIndex && currentScene.type === 'dialogue') {
+      setConfettiActive(true);
+      
+      // Start a 3-second timer
+      const timer = setTimeout(() => {
+        setConfettiActive(false); // Stop confetti
+        setShowQuizModal(true);   // Show quiz modal
+      }, 5000);
+      
+      // Clean up timer if component unmounts or scene changes
+      return () => clearTimeout(timer);
+    } else {
+      // Reset states when not on last scene
+      setConfettiActive(false);
+      setShowQuizModal(false);
+    }
+  }, [currentSceneIndex, lastDialogueSceneIndex, currentScene.type]);
   
   const goToNextScene = () => {
     if (currentSceneIndex < dialogueData.scenes.length - 1) {
@@ -562,6 +590,87 @@ const Story = () => {
           )}
         </div>
       </div>
+
+      {/* Confetti animation - only shown on the last dialogue scene */}
+      {confettiActive && (
+        <Confetti
+          width={width}
+          height={height}
+          recycle={false}
+          numberOfPieces={300}
+          gravity={0.15}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            zIndex: 5, // Above scene content, below UI elements
+            pointerEvents: 'none' // Allow clicking through confetti
+          }}
+        />
+      )}
+
+      {/* Clapping hands animation - shown with confetti */}
+      {(currentSceneIndex === lastDialogueSceneIndex && currentScene.type === 'dialogue' && !showQuizModal) && (
+        <img
+          src="/public/images/gifs/clapping_hands.gif"
+          alt="Clapping hands"
+          style={{
+            position: 'fixed',
+            bottom: '0',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '100%',
+            maxWidth: '600px',
+            zIndex: 10, // Above confetti, below modal
+            pointerEvents: 'none' // Allow clicking through animation
+          }}
+        />
+      )}
+
+      {/* 'Proceed to Quiz' modal */}
+      {showQuizModal && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent background
+            backdropFilter: 'blur(8px)', // Background blur effect
+            WebkitBackdropFilter: 'blur(8px)', // For Safari
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 100, // Above everything else
+          }}
+        >
+          <button
+            onClick={() => {
+              console.log("Navigate to Quiz!");
+              // Add navigation logic here, e.g.:
+              // navigate('/quiz') if using React Router
+              // or window.location.href = '/quiz'
+            }}
+            style={{
+              padding: '20px 40px',
+              fontSize: '1.5rem',
+              fontFamily: 'Quicksand, sans-serif',
+              fontWeight: 'bold',
+              color: '#333',
+              backgroundColor: '#FFD700', // Gold color
+              border: 'none',
+              borderRadius: '12px',
+              cursor: 'pointer',
+              boxShadow: '0 6px 12px rgba(0,0,0,0.25)',
+            }}
+          >
+            Proceed to Quiz
+          </button>
+        </div>
+      )}
     </div>
   );
 };
