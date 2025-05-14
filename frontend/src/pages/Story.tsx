@@ -110,12 +110,12 @@ const visualAidMap: {
   "blockchain-diagram": {
     src: "/images/visual-aids/blockchain-diagram.png",
     alt: "Blockchain diagram illustration",
-    displaySize: 'medium', // Explicitly medium
+    displaySize: 'medium', 
   },
-  "bitcoin-ledger": {
-    src: "/images/visual-aids/bitcoin-ledger.png", 
-    alt: "Bitcoin ledger illustration",
-    displaySize: 'medium', // Defaulting to medium
+  "bitcoin-key": {
+    src: "/images/visual-aids/bitcoin_key.png", 
+    alt: "Bitcoin key illustration",
+    displaySize: 'small', 
   },
   "blockchain-illustration": {
     src: "/images/visual-aids/blochain_illustration.png", 
@@ -137,16 +137,56 @@ const visualAidMap: {
     alt: "Illustration of Bitcoin reward",
     displaySize: 'medium',
   },
-  "bitcoin-puzzle": {
-    src: "/images/visual-aids/bitcoin_puzzle.png",
-    alt: "Illustration of Bitcoin puzzle",
+  "bitcoin-machine": {
+    src: "/images/visual-aids/bitcoin_machine.png",
+    alt: "Illustration of Bitcoin machine",
     displaySize: 'medium',
   },
   "bitcoin-block": {
     src: "/images/visual-aids/bitcoin_block.png",
     alt: "Illustration of Bitcoin block",
-    displaySize: 'medium',
+    displaySize: 'small',
   },
+  "bitcoin-wallet": {
+    src: "/images/visual-aids/bitcoin_wallet.png", 
+    alt: "Bitcoin wallet illustration",
+    displaySize: 'large', 
+  },
+  "bitcoin-exchange": {
+    src: "/images/visual-aids/bitcoin_exchange.png", 
+    alt: "Bitcoin exchange illustration",
+    displaySize: 'medium', 
+  },
+  "hardware-wallet": {
+    src: "/images/visual-aids/hardware_wallets.png", 
+    alt: "Hardware wallet illustration",
+    displaySize: 'medium', 
+  },
+  "written-seedphrase": {
+    src: "/images/visual-aids/written_seedphrase.png", 
+    alt: "Written seedphrase illustration",
+    displaySize: 'medium', 
+  },
+  "mobile-seedphrase": {
+    src: "/images/visual-aids/mobile_seedphrase.png", 
+    alt: "Mobile seedphrase illustration",
+    displaySize: 'small', 
+  },
+  "bitcoin-address": {
+    src: "/images/visual-aids/bitcoin_address.png", 
+    alt: "Bitcoin address illustration",
+    displaySize: 'small', 
+  },
+    "bitcoin-pending": {
+      src: "/images/visual-aids/bitcoin_pending.png", 
+      alt: "Bitcoin pending illustration",
+      displaySize: 'small', 
+    },
+    "bitcoin-confirmed": {
+      src: "/images/visual-aids/bitcoin_confirmed.png", 
+      alt: "Bitcoin confirmed illustration",
+      displaySize: 'small', 
+    },
 };
 
 const Story = () => {
