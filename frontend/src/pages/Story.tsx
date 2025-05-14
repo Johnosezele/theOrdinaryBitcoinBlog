@@ -202,6 +202,10 @@ const Story = () => {
   const { width, height } = useWindowSize();
   const [confettiActive, setConfettiActive] = useState(false);
   const [showQuizModal, setShowQuizModal] = useState(false);
+  // State for progress bar pulse animation
+  const [progressPulse, setProgressPulse] = useState(false);
+  // State for progress bar fade animation at the end
+  const [progressFading, setProgressFading] = useState(false);
 
   // Compute first and last dialogue scene indices for navigation arrows
   const firstDialogueSceneIndex = dialogueData.scenes.findIndex(scene => scene.type === 'dialogue');
@@ -214,31 +218,81 @@ const Story = () => {
   useEffect(() => {
     // Only activate on the last dialogue scene
     if (currentSceneIndex === lastDialogueSceneIndex && currentScene.type === 'dialogue') {
-      setConfettiActive(true);
+      // Start progress bar fade animation
+      setProgressFading(true);
       
-      // Start a 3-second timer
-      const timer = setTimeout(() => {
+      // After a short delay, start confetti
+      const confettiTimer = setTimeout(() => {
+        setConfettiActive(true);
+      }, 500); // 500ms delay after progress completes
+      
+      // Start the main animation timer
+      const modalTimer = setTimeout(() => {
         setConfettiActive(false); // Stop confetti
         setShowQuizModal(true);   // Show quiz modal
       }, 5000);
       
-      // Clean up timer if component unmounts or scene changes
-      return () => clearTimeout(timer);
+      // Clean up timers if component unmounts or scene changes
+      return () => {
+        clearTimeout(confettiTimer);
+        clearTimeout(modalTimer);
+      };
     } else {
       // Reset states when not on last scene
       setConfettiActive(false);
       setShowQuizModal(false);
+      setProgressFading(false);
     }
   }, [currentSceneIndex, lastDialogueSceneIndex, currentScene.type]);
   
+  // Effect to handle progress bar pulse animation on scene change
+  useEffect(() => {
+    if (currentScene.type === 'dialogue' && currentSceneIndex !== lastDialogueSceneIndex) {
+      setProgressPulse(true);
+      const pulseTimer = setTimeout(() => {
+        setProgressPulse(false);
+      }, 1000); // Pulse for 1 second
+      
+      return () => clearTimeout(pulseTimer);
+    }
+  }, [currentSceneIndex, currentScene.type, lastDialogueSceneIndex]);
+
+  // Effect to inject the pulse animation CSS into the document
+  useEffect(() => {
+    // Create a style element
+    const styleElement = document.createElement('style');
+    // Define the CSS for the pulse animation
+    styleElement.textContent = `
+      @keyframes progressPulse {
+        0% { box-shadow: 0 0 5px 0 rgba(240, 173, 78, 0.5); }
+        50% { box-shadow: 0 0 15px 5px rgba(240, 173, 78, 0.8); }
+        100% { box-shadow: 0 0 5px 0 rgba(240, 173, 78, 0.5); }
+      }
+      .pulse-animation {
+        animation: progressPulse 1s ease-in-out;
+      }
+    `;
+    // Append the style element to the document head
+    document.head.appendChild(styleElement);
+
+    // Clean up function to remove the style element when the component unmounts
+    return () => {
+      document.head.removeChild(styleElement);
+    };
+  }, []); // Empty dependency array means this runs once on component mount
+  
   const goToNextScene = () => {
     if (currentSceneIndex < dialogueData.scenes.length - 1) {
+      // Reset pulse before setting new index to ensure animation triggers
+      setProgressPulse(false);
       setCurrentSceneIndex(currentSceneIndex + 1);
     }
   };
 
   const goToPrevScene = () => {
     if (currentSceneIndex > 0) {
+      // Reset pulse before setting new index to ensure animation triggers
+      setProgressPulse(false);
       setCurrentSceneIndex(currentSceneIndex - 1);
     }
   };
@@ -590,6 +644,28 @@ const Story = () => {
           )}
         </div>
       </div>
+      
+      {/* Progress Bar - shown during dialogue scenes, hidden during intro and quiz modal */}
+      {currentScene.type === 'dialogue' && !showQuizModal && (
+        <div 
+          className={`absolute bottom-0 left-0 w-full h-1.5 bg-gray-200 overflow-hidden z-20 transition-opacity duration-1000 ${progressFading ? 'opacity-0' : 'opacity-100'}`}
+          style={{ transition: 'opacity 1.5s ease-out' }}
+        >
+          <div 
+            className={`h-full bg-[#f0ad4e] transition-all duration-500 ease-out ${progressPulse ? 'pulse-animation' : ''}`}
+            style={{
+              width: `${Math.max(
+                5, // Minimum 5% width even at first dialogue scene
+                ((currentSceneIndex - firstDialogueSceneIndex) / 
+                (lastDialogueSceneIndex - firstDialogueSceneIndex)) * 100
+              )}%`,
+              boxShadow: progressPulse ? '0 0 10px 3px rgba(240, 173, 78, 0.7)' : 'none'
+            }}
+          />
+        </div>
+      )}
+      
+      {/* The pulse animation CSS is added via useEffect hook */}
 
       {/* Confetti animation - only shown on the last dialogue scene */}
       {confettiActive && (
