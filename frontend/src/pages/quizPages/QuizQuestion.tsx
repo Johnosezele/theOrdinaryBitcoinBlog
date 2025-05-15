@@ -1,6 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
+interface BackendQuestion {
+  story_id: string;
+  question_text: string;
+  correct_option: string;
+  option_a: string;
+  option_b: string;
+  option_c: string;
+  option_d: string;
+}
+
 interface Question {
   id: string;
   text: string;
@@ -35,43 +45,57 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
     const [userAnswers, setUserAnswers] = useState<{[questionIndex: number]: string}>({})
     const [correctAnswers, setCorrectAnswers] = useState(0);
       
-    // Placeholder data 
-    const placeholderQuestions: Question[] = [
-      {
-        id: "1",
-        text: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa?",
+    // Function to convert backend data to frontend format
+    const transformBackendData = (backendQuestions: BackendQuestion[]): Question[] => {
+      return backendQuestions.map((q, index) => ({
+        id: (index + 1).toString(),
+        text: q.question_text,
         options: [
-          { id: "a", text: "Answer option" },
-          { id: "b", text: "Answer option" },
-          { id: "c", text: "Answer option" }
+          { id: "a", text: q.option_a },
+          { id: "b", text: q.option_b },
+          { id: "c", text: q.option_c },
+          { id: "d", text: q.option_d }
         ],
-        correct_answer: "Answer option"
-      },
-    ];
+        correct_answer: q.correct_option
+      }));
+    };
+    
+    // // Placeholder data 
+    // const placeholderQuestions: Question[] = [
+    //   {
+    //     id: "1",
+    //     text: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa?",
+    //     options: [
+    //       { id: "a", text: "Answer option" },
+    //       { id: "b", text: "Answer option" },
+    //       { id: "c", text: "Answer option" }
+    //     ],
+    //     correct_answer: "Answer option"
+    //   },
+    // ];
 
     // Fetch quiz from backend
     useEffect(() => {
       const fetchQuestions = async () => {
         setLoading(true);
         setError(null);
-        /* 
         
         try {
-          const response = await fetch(`quizQuestions`);
+          const response = await fetch('http://localhost:5000/quiz/questions');
           if (!response.ok) throw new Error('Failed to fetch questions');
           
           const data = await response.json();
-          setQuestions(data.questions);
+          const transformedQuestions = transformBackendData(data.questions);
+          setQuestions(transformedQuestions);
         } catch (err) {
           setError(err instanceof Error ? err.message : 'Failed to fetch questions');
           console.error('Error fetching questions:', err);
         } finally {
           setLoading(false);
         }
-        */
         
-        // Temporary: Use placeholder data
-        setQuestions(placeholderQuestions);
+        // // Temporary: Use placeholder data
+        // setQuestions(placeholderQuestions);
       };
       
       fetchQuestions();
