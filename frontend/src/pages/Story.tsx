@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Confetti from 'react-confetti';
 import useWindowSize from 'react-use/lib/useWindowSize';
+import { useNavigate } from 'react-router-dom';
 import rawDialogueData from '../data/story1.json';
 
 interface Character {
@@ -104,24 +105,25 @@ const visualAidMap: {
   } 
 } = {
   "blockchain-diagram": { src: "/images/visual-aids/blockchain-diagram.png", alt: "Blockchain diagram illustration", displaySize: 'medium' },
-  "bitcoin-key": { src: "/images/visual-aids/bitcoin_key.png", alt: "Bitcoin key illustration", displaySize: 'small' },
+  "bitcoin-key": { src: "/images/visual-aids/bitcoin_key.png", alt: "Bitcoin key illustration", displaySize: 'medium' },
   "blockchain-illustration": { src: "/images/visual-aids/blochain_illustration.png", alt: "Illustration explaining blockchain", displaySize: 'large' },
   "bitcoin-padlock": { src: "/images/visual-aids/bitcoin_padlock.png", alt: "Illustration of Bitcoin security with a padlock", displaySize: 'large' },
-  "bitcoin-mining": { src: "/images/visual-aids/bitcoin_mining.png", alt: "Illustration of Bitcoin mining", displaySize: 'medium' },
-  "bitcoin-reward": { src: "/images/visual-aids/bitcoin_reward.png", alt: "Illustration of Bitcoin reward", displaySize: 'medium' },
-  "bitcoin-machine": { src: "/images/visual-aids/bitcoin_machine.png", alt: "Illustration of Bitcoin machine", displaySize: 'medium' },
-  "bitcoin-block": { src: "/images/visual-aids/bitcoin_block.png", alt: "Illustration of Bitcoin block", displaySize: 'small' },
+  "bitcoin-mining": { src: "/images/visual-aids/bitcoin_mining.png", alt: "Illustration of Bitcoin mining", displaySize: 'large' },
+  "bitcoin-reward": { src: "/images/visual-aids/bitcoin_reward.png", alt: "Illustration of Bitcoin reward", displaySize: 'large' },
+  "bitcoin-machine": { src: "/images/visual-aids/bitcoin_machine.png", alt: "Illustration of Bitcoin machine", displaySize: 'large' },
+  "bitcoin-block": { src: "/images/visual-aids/bitcoin_block.png", alt: "Illustration of Bitcoin block", displaySize: 'large' },
   "bitcoin-wallet": { src: "/images/visual-aids/bitcoin_wallet.png", alt: "Bitcoin wallet illustration", displaySize: 'large' },
-  "bitcoin-exchange": { src: "/images/visual-aids/bitcoin_exchange.png", alt: "Bitcoin exchange illustration", displaySize: 'medium' },
-  "hardware-wallet": { src: "/images/visual-aids/hardware_wallets.png", alt: "Hardware wallet illustration", displaySize: 'medium' },
-  "written-seedphrase": { src: "/images/visual-aids/written_seedphrase.png", alt: "Written seedphrase illustration", displaySize: 'medium' },
-  "mobile-seedphrase": { src: "/images/visual-aids/mobile_seedphrase.png", alt: "Mobile seedphrase illustration", displaySize: 'small' },
-  "bitcoin-address": { src: "/images/visual-aids/bitcoin_address.png", alt: "Bitcoin address illustration", displaySize: 'small' },
-  "bitcoin-pending": { src: "/images/visual-aids/bitcoin_pending.png", alt: "Bitcoin pending illustration", displaySize: 'small' },
-  "bitcoin-confirmed": { src: "/images/visual-aids/bitcoin_confirmed.png", alt: "Bitcoin confirmed illustration", displaySize: 'small' },
+  "bitcoin-exchange": { src: "/images/visual-aids/bitcoin_exchange.png", alt: "Bitcoin exchange illustration", displaySize: 'large' },
+  "hardware-wallet": { src: "/images/visual-aids/hardware_wallets.png", alt: "Hardware wallet illustration", displaySize: 'large' },
+  "written-seedphrase": { src: "/images/visual-aids/written_seedphrase.png", alt: "Written seedphrase illustration", displaySize: 'large' },
+  "mobile-seedphrase": { src: "/images/visual-aids/mobile_seedphrase.png", alt: "Mobile seedphrase illustration", displaySize: 'large' },
+  "bitcoin-address": { src: "/images/visual-aids/bitcoin_address.png", alt: "Bitcoin address illustration", displaySize: 'medium' },
+  "bitcoin-pending": { src: "/images/visual-aids/bitcoin_pending.png", alt: "Bitcoin pending illustration", displaySize: 'medium' },
+  "bitcoin-confirmed": { src: "/images/visual-aids/bitcoin_confirmed.png", alt: "Bitcoin confirmed illustration", displaySize: 'medium' },
 };
 
-const Story = () => {
+const Story: React.FC = () => {
+  const navigate = useNavigate();
   const [currentSceneIndex, setCurrentSceneIndex] = useState(0);
   const currentScene = dialogueData.scenes[currentSceneIndex];
   const { width, height } = useWindowSize();
@@ -444,7 +446,10 @@ const Story = () => {
     <div className="fixed inset-0 w-screen h-screen flex flex-col overflow-hidden"> 
       <nav className="bg-[#F8AB28] h-14 sm:h-16 flex justify-between items-center px-3 sm:px-6 md:px-10 lg:px-14 shadow-md z-20 flex-shrink-0">
         <div className="flex items-center">
-          <button className="p-1 hover:bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-white">
+          <button 
+            onClick={() => navigate('/')} 
+            className="p-1 hover:bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-white"
+          >
             <img src="/icons/home.svg" alt="Home" className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10" />
           </button>
           {currentScene.type !== 'intro' && (
@@ -455,7 +460,7 @@ const Story = () => {
           )}
         </div>
         <button className="p-1 hover:bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-white">
-          <img src="/icons/profile.svg" alt="Profile" className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10" />
+          {/*<img src="/icons/profile.svg" alt="Profile" className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10" />*/}
         </button>
       </nav>
 
@@ -548,7 +553,8 @@ const Story = () => {
             className="bg-[#FFD700] hover:bg-amber-400 text-gray-800 font-bold rounded-xl shadow-xl
                        py-3 px-6 sm:py-4 sm:px-8 
                        text-base sm:text-lg md:text-xl 
-                       font-quicksand transition-colors duration-150"
+                       transition-colors duration-150"
+            style={{ fontFamily: 'Quicksand, sans-serif' }}
           >
             Proceed to Quiz
           </button>
