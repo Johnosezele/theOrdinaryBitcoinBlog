@@ -1,7 +1,6 @@
 
-![IMAGE 2025-04-21 12:01:30 AM](https://github.com/user-attachments/assets/332f6091-c7f3-4581-a584-e72752e87705)
+# The Ordinary Bitcoin Blog![OBTCBlog](https://github.com/user-attachments/assets/d2a01c5f-b334-47b2-97ba-fb1da8381280)
 
-# The Ordinary Bitcoin Blog
 
 **Making Bitcoin simple, social, and seriously fun.**
 
