@@ -4,7 +4,7 @@
 
 **Making Bitcoin simple, social, and seriously fun.**
 
-The **Ordinary Bitcoin Blog** transforms complex Bitcoin topics into friendly, visual, and interactive stories. Through playful conversations between cartoon friends—Carol, Bob, Alex, and more—each blog entry (called an **Issue**) breaks down key concepts in a way that's easy to understand, visually rich, and fun to share.
+The **Ordinary Bitcoin Blog** transforms complex Bitcoin topics into friendly, visual, and interactive stories. Through playful conversations between cartoon friends Carol and Bob, each blog entry (called an **Issue**) breaks down key concepts in a way that's easy to understand, visually rich, and fun to share.
 
 > Like chatting with a friend, but about Bitcoin. And with cartoons. 
 
@@ -38,7 +38,7 @@ We're building this in **30 days** for the Bitcoin++ Hackathon and forming a tea
 - Design a landing page that introduces the blog and connects all issues.
 
 #### Illustrators / Animators
-- Bring Carol, Bob, Alex, and other characters to life.
+- Bring Carol, Bob, and other characters to life.
 - Create fun, vibrant assets to enhance storytelling.
 - Animate scenes to make learning more engaging.
 
