@@ -49,21 +49,21 @@ const Home: React.FC = () => {
       <div className="flex-grow relative flex flex-col overflow-hidden">
         <div 
           className="overflow-hidden flex-grow relative flex flex-col" 
-          style={{ backgroundImage: 'url(/images/cafe.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}
+          style={{ backgroundImage: 'url(/images/bob_carol.svg)', backgroundSize: 'cover', backgroundPosition: 'center' }}
         >
           {/* Dark overlay */}
           <div className="absolute inset-0 bg-black opacity-60"></div>
           
           {/* Content */}
-          <div className="relative z-10 flex flex-col items-center justify-start w-full h-full overflow-y-auto py-10 px-4">
+          <div className="relative z-10 flex flex-col items-center justify-center w-full h-full overflow-y-auto py-10 px-4">
             <h1 
-              className="text-4xl font-bold text-white mb-6 text-center" 
+              className="text-4xl font-bold text-white mb-8 text-center" 
               style={{ fontFamily: 'Quicksand, sans-serif', fontWeight: 600 }}
             >
-              Learn Bitcoin through fun conversations
+              Learn Bitcoin through fun conversations <br /> with Carol and Bob
             </h1>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full mx-auto">
               {/* Story Card */}
               <div className="bg-[#F8AB28] rounded-lg overflow-hidden shadow-lg border border-[#F8AB28] border-opacity-80">
                 <div className="p-6">
