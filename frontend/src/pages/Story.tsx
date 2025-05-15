@@ -79,14 +79,10 @@ function isValidSceneType(type: string): type is 'intro' | 'dialogue' {
 
 // Process the raw data to ensure it has the right types
 const processDialogueData = (data: RawDialogueData): DialogueData => {
-  // Map over the scenes and make sure they have the correct type
   const processedScenes = data.scenes.map((scene: RawScene): Scene => {
-    // Validate scene type
     if (!isValidSceneType(scene.type)) {
       throw new Error(`Invalid scene type: ${scene.type}`);
     }
-    
-    // Return the processed scene with correct types
     return {
       ...scene,
       type: scene.type
@@ -98,178 +94,136 @@ const processDialogueData = (data: RawDialogueData): DialogueData => {
   };
 };
 
-// Process the dialogue data
 const dialogueData = processDialogueData(rawDialogueData as RawDialogueData);
 
-// Define the mapping outside the component or memoize it if inside
 const visualAidMap: { 
   [key: string]: { 
     src: string | null; 
     alt: string; 
-    displaySize?: 'small' | 'medium' | 'large'; // Added display size
+    displaySize?: 'small' | 'medium' | 'large';
   } 
 } = {
-  "blockchain-diagram": {
-    src: "/images/visual-aids/blockchain-diagram.png",
-    alt: "Blockchain diagram illustration",
-    displaySize: 'medium', 
-  },
-  "bitcoin-key": {
-    src: "/images/visual-aids/bitcoin_key.png", 
-    alt: "Bitcoin key illustration",
-    displaySize: 'small', 
-  },
-  "blockchain-illustration": {
-    src: "/images/visual-aids/blochain_illustration.png", 
-    alt: "Illustration explaining blockchain",
-    displaySize: 'large',
-  },
-  "bitcoin-padlock": {
-    src: "/images/visual-aids/bitcoin_padlock.png", 
-    alt: "Illustration of Bitcoin security with a padlock",
-    displaySize: 'large', 
-  },
-  "bitcoin-mining": {
-    src: "/images/visual-aids/bitcoin_mining.png", 
-    alt: "Illustration of Bitcoin mining",
-    displaySize: 'medium',
-  },
-  "bitcoin-reward": {
-    src: "/images/visual-aids/bitcoin_reward.png",
-    alt: "Illustration of Bitcoin reward",
-    displaySize: 'medium',
-  },
-  "bitcoin-machine": {
-    src: "/images/visual-aids/bitcoin_machine.png",
-    alt: "Illustration of Bitcoin machine",
-    displaySize: 'medium',
-  },
-  "bitcoin-block": {
-    src: "/images/visual-aids/bitcoin_block.png",
-    alt: "Illustration of Bitcoin block",
-    displaySize: 'small',
-  },
-  "bitcoin-wallet": {
-    src: "/images/visual-aids/bitcoin_wallet.png", 
-    alt: "Bitcoin wallet illustration",
-    displaySize: 'large', 
-  },
-  "bitcoin-exchange": {
-    src: "/images/visual-aids/bitcoin_exchange.png", 
-    alt: "Bitcoin exchange illustration",
-    displaySize: 'medium', 
-  },
-  "hardware-wallet": {
-    src: "/images/visual-aids/hardware_wallets.png", 
-    alt: "Hardware wallet illustration",
-    displaySize: 'medium', 
-  },
-  "written-seedphrase": {
-    src: "/images/visual-aids/written_seedphrase.png", 
-    alt: "Written seedphrase illustration",
-    displaySize: 'medium', 
-  },
-  "mobile-seedphrase": {
-    src: "/images/visual-aids/mobile_seedphrase.png", 
-    alt: "Mobile seedphrase illustration",
-    displaySize: 'small', 
-  },
-  "bitcoin-address": {
-    src: "/images/visual-aids/bitcoin_address.png", 
-    alt: "Bitcoin address illustration",
-    displaySize: 'small', 
-  },
-    "bitcoin-pending": {
-      src: "/images/visual-aids/bitcoin_pending.png", 
-      alt: "Bitcoin pending illustration",
-      displaySize: 'small', 
-    },
-    "bitcoin-confirmed": {
-      src: "/images/visual-aids/bitcoin_confirmed.png", 
-      alt: "Bitcoin confirmed illustration",
-      displaySize: 'small', 
-    },
+  "blockchain-diagram": { src: "/images/visual-aids/blockchain-diagram.png", alt: "Blockchain diagram illustration", displaySize: 'medium' },
+  "bitcoin-key": { src: "/images/visual-aids/bitcoin_key.png", alt: "Bitcoin key illustration", displaySize: 'small' },
+  "blockchain-illustration": { src: "/images/visual-aids/blochain_illustration.png", alt: "Illustration explaining blockchain", displaySize: 'large' },
+  "bitcoin-padlock": { src: "/images/visual-aids/bitcoin_padlock.png", alt: "Illustration of Bitcoin security with a padlock", displaySize: 'large' },
+  "bitcoin-mining": { src: "/images/visual-aids/bitcoin_mining.png", alt: "Illustration of Bitcoin mining", displaySize: 'medium' },
+  "bitcoin-reward": { src: "/images/visual-aids/bitcoin_reward.png", alt: "Illustration of Bitcoin reward", displaySize: 'medium' },
+  "bitcoin-machine": { src: "/images/visual-aids/bitcoin_machine.png", alt: "Illustration of Bitcoin machine", displaySize: 'medium' },
+  "bitcoin-block": { src: "/images/visual-aids/bitcoin_block.png", alt: "Illustration of Bitcoin block", displaySize: 'small' },
+  "bitcoin-wallet": { src: "/images/visual-aids/bitcoin_wallet.png", alt: "Bitcoin wallet illustration", displaySize: 'large' },
+  "bitcoin-exchange": { src: "/images/visual-aids/bitcoin_exchange.png", alt: "Bitcoin exchange illustration", displaySize: 'medium' },
+  "hardware-wallet": { src: "/images/visual-aids/hardware_wallets.png", alt: "Hardware wallet illustration", displaySize: 'medium' },
+  "written-seedphrase": { src: "/images/visual-aids/written_seedphrase.png", alt: "Written seedphrase illustration", displaySize: 'medium' },
+  "mobile-seedphrase": { src: "/images/visual-aids/mobile_seedphrase.png", alt: "Mobile seedphrase illustration", displaySize: 'small' },
+  "bitcoin-address": { src: "/images/visual-aids/bitcoin_address.png", alt: "Bitcoin address illustration", displaySize: 'small' },
+  "bitcoin-pending": { src: "/images/visual-aids/bitcoin_pending.png", alt: "Bitcoin pending illustration", displaySize: 'small' },
+  "bitcoin-confirmed": { src: "/images/visual-aids/bitcoin_confirmed.png", alt: "Bitcoin confirmed illustration", displaySize: 'small' },
 };
 
 const Story = () => {
-  // Track the current scene index
   const [currentSceneIndex, setCurrentSceneIndex] = useState(0);
-  
-  // Get the current scene data
   const currentScene = dialogueData.scenes[currentSceneIndex];
-
-  // State for confetti animation and quiz modal
   const { width, height } = useWindowSize();
   const [confettiActive, setConfettiActive] = useState(false);
   const [showQuizModal, setShowQuizModal] = useState(false);
+  const [progressPulse, setProgressPulse] = useState(false);
+  const [progressFading, setProgressFading] = useState(false);
 
-  // Compute first and last dialogue scene indices for navigation arrows
   const firstDialogueSceneIndex = dialogueData.scenes.findIndex(scene => scene.type === 'dialogue');
   const lastDialogueSceneIndex = (() => {
-    const reversedIndex = [...dialogueData.scenes].reverse().findIndex(scene => scene.type === 'dialogue');
+    if (dialogueData.scenes.length === 0) return -1;
+    const reversedScenes = [...dialogueData.scenes].reverse();
+    const reversedIndex = reversedScenes.findIndex(scene => scene.type === 'dialogue');
     return reversedIndex === -1 ? -1 : dialogueData.scenes.length - 1 - reversedIndex;
   })();
 
-  // Effect to control confetti animation and quiz modal
   useEffect(() => {
-    // Only activate on the last dialogue scene
-    if (currentSceneIndex === lastDialogueSceneIndex && currentScene.type === 'dialogue') {
-      setConfettiActive(true);
-      
-      // Start a 3-second timer
-      const timer = setTimeout(() => {
-        setConfettiActive(false); // Stop confetti
-        setShowQuizModal(true);   // Show quiz modal
+    if (dialogueData.scenes.length > 0 && lastDialogueSceneIndex !== -1 && currentSceneIndex === lastDialogueSceneIndex && currentScene.type === 'dialogue') {
+      setProgressFading(true);
+      const confettiTimer = setTimeout(() => setConfettiActive(true), 500);
+      const modalTimer = setTimeout(() => {
+        setConfettiActive(false);
+        setShowQuizModal(true);
       }, 5000);
-      
-      // Clean up timer if component unmounts or scene changes
-      return () => clearTimeout(timer);
+      return () => {
+        clearTimeout(confettiTimer);
+        clearTimeout(modalTimer);
+      };
     } else {
-      // Reset states when not on last scene
       setConfettiActive(false);
       setShowQuizModal(false);
+      setProgressFading(false);
     }
-  }, [currentSceneIndex, lastDialogueSceneIndex, currentScene.type]);
+  }, [currentSceneIndex, lastDialogueSceneIndex, currentScene.type, dialogueData.scenes.length]);
+  
+  useEffect(() => {
+    if (currentScene.type === 'dialogue' && (lastDialogueSceneIndex === -1 || currentSceneIndex !== lastDialogueSceneIndex) ) {
+      setProgressPulse(true);
+      const pulseTimer = setTimeout(() => setProgressPulse(false), 1000);
+      return () => clearTimeout(pulseTimer);
+    }
+  }, [currentSceneIndex, currentScene.type, lastDialogueSceneIndex]);
+
+  useEffect(() => {
+    const styleElement = document.createElement('style');
+    styleElement.textContent = `
+      @keyframes progressPulse {
+        0% { box-shadow: 0 0 5px 0 rgba(240, 173, 78, 0.5); }
+        50% { box-shadow: 0 0 15px 5px rgba(240, 173, 78, 0.8); }
+        100% { box-shadow: 0 0 5px 0 rgba(240, 173, 78, 0.5); }
+      }
+      .pulse-animation {
+        animation: progressPulse 1s ease-in-out;
+      }
+    `;
+    document.head.appendChild(styleElement);
+    return () => {
+      document.head.removeChild(styleElement);
+    };
+  }, []);
   
   const goToNextScene = () => {
     if (currentSceneIndex < dialogueData.scenes.length - 1) {
+      setProgressPulse(false);
       setCurrentSceneIndex(currentSceneIndex + 1);
     }
   };
 
   const goToPrevScene = () => {
     if (currentSceneIndex > 0) {
+      setProgressPulse(false);
       setCurrentSceneIndex(currentSceneIndex - 1);
     }
   };
 
-  // Helper function to render the visual aid
   const renderVisualAid = (type: string | null | undefined) => {
     if (!type || !visualAidMap[type]) return null;
 
     const aidData = visualAidMap[type];
-    const size = aidData.displaySize || 'medium'; // Default to medium
+    const size = aidData.displaySize || 'medium'; 
 
-    // Determine container class based on size
     let sizeClass = '';
+    // NEW, MUCH LARGER SIZES FOR VISUAL AIDS
     switch (size) {
-      case 'small':
-        sizeClass = 'max-w-sm'; // Example: max-width 24rem
+      case 'small': 
+        // Small visual aids should still be relatively modest
+        sizeClass = 'w-32 sm:w-36 md:w-40 lg:w-48'; // Approx 128px to 192px
         break;
-      case 'large':
-        sizeClass = 'max-w-lg'; // Example: max-width 32rem
+      case 'large': 
+        // This is for very prominent visual aids like the padlock
+        sizeClass = 'w-48 sm:w-64 md:w-80 lg:w-96 xl:w-[448px]'; // Approx 192px up to 448px (28rem)
         break;
-      case 'medium':
-      default:
-        sizeClass = 'max-w-md'; // Example: max-width 28rem
+      case 'medium': 
+      default: 
+        sizeClass = 'w-40 sm:w-48 md:w-56 lg:w-64 xl:w-80'; // Approx 160px up to 320px
         break;
     }
     
-    const visualAidBaseContainerClasses = " p-4 rounded-lg mx-auto"; // Removed width/border, handled by size + image
-    const visualAidImageClasses = "w-full h-auto object-contain shadow-lg rounded-lg"; // Added shadow/rounding to image itself
+    const visualAidBaseContainerClasses = "p-1 sm:p-2 md:p-3 rounded-lg mx-auto";
+    const visualAidImageClasses = "w-full h-auto object-contain shadow-lg rounded-lg";
 
     return (
-      // Apply base classes and dynamic size class
       <div className={`${visualAidBaseContainerClasses} ${sizeClass}`}>
         {aidData.src ? (
           <img
@@ -278,227 +232,206 @@ const Story = () => {
             className={visualAidImageClasses}
           />
         ) : (
-          // Render placeholder text if no image source is defined
-          <p className="text-center text-gray-500 italic h-40 flex items-center justify-center border border-dashed border-gray-400 rounded-lg">{aidData.alt}</p>
+          <p className="text-center text-gray-500 italic h-32 sm:h-40 flex items-center justify-center border border-dashed border-gray-400 rounded-lg text-xs sm:text-sm">{aidData.alt}</p>
         )}
       </div>
     );
   };
 
-  // Function to render a character with dialogue bubble (Figma style)
   const renderCharacterWithBubble = (
     character: Character | undefined,
     position: 'left' | 'right'
   ) => {
     if (!character) return null;
 
-    // Set image file based on character data
     const imageSrc = `/images/characters/${character.image}`;
+    const currentSize = character.size || 'small'; 
+
+    let avatarSizeClass = '';
+    let bubbleMaxWidthClass = '';
+    let textSizeClass = '';
+
+    if (currentSize === 'large') {
+      // SIGNIFICANTLY LARGER AVATAR SIZES
+      avatarSizeClass = "w-32 h-32 sm:w-36 sm:h-36 md:w-48 md:h-48 lg:w-56 lg:h-56"; // Approx 128px to 224px
+      // WIDER BUBBLE
+      bubbleMaxWidthClass = "md:max-w-sm lg:max-w-md xl:max-w-lg"; // Approx 24rem to 32rem
+      // LARGER TEXT
+      textSizeClass = "text-base sm:text-lg md:text-xl"; 
+    } else { // 'small' (listening character)
+      avatarSizeClass = "w-16 h-16 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-32 lg:h-32"; 
+      bubbleMaxWidthClass = "md:max-w-[150px] lg:max-w-[180px]";
+      textSizeClass = "text-xs sm:text-sm";
+    }
       
-    // Different styling based on position
-    const containerClass = position === 'left'
-      ? "flex items-center" 
-      : "flex items-center flex-row-reverse"; // Dialogue bubble renders before avatar for right character
+    const containerClass = `flex flex-col items-center w-full ${
+        position === 'left' ? 'md:items-start' : 'md:items-end'
+      } md:w-1/2`; 
     
-    // Determine character size: from JSON, or default based on position
-    const defaultSize = position === 'left' ? 'small' : 'large';
-    const currentSize = character.size || defaultSize;
+    const bubbleBaseClass = `bg-[#FFF8F1] border-2 border-[#F8AB28] rounded-xl shadow font-quicksand text-[#070C02]
+      px-3 py-2 sm:px-4 sm:py-3 mt-2 
+      w-[90%] sm:w-[80%] md:w-auto max-w-full 
+      ${position === 'left' ? 'text-left' : 'text-left'} md:text-left`;
 
-    const avatarSizeClass = currentSize === 'large'
-      ? "w-40 h-40 md:w-80 md:h-80" // Larger size
-      : "w-32 h-32 md:w-50 md:h-50"; // Smaller size
+    const dialogueContent = character.dialogueActive && character.dialogue ? character.dialogue : '...';
       
-    const bubbleClass = position === 'left'
-      ? "ml-3 max-w-[260px]" 
-      : "mr-3 max-w-[260px]";
-      
-    const textSizeClass = currentSize === 'large'
-      ? "text-xl" // Larger text
-      : "text-lg"; // Smaller text
-
     return (
-      <div className={`${containerClass} gap-4 my-6`}>
-        {/* Character Avatar */}
-        <div className={`${avatarSizeClass} rounded-full overflow-hidden shadow-md`}>
-          <img src={imageSrc} alt={character.emotion || 'character'} className="w-full h-full object-cover" />
+      <div className={`${containerClass} my-2 md:my-3`}>
+        <div className={`flex ${position === 'left' ? 'md:flex-row' : 'md:flex-row-reverse'} items-start gap-3 sm:gap-4 w-full md:w-auto`}> 
+            <div className={`${avatarSizeClass} rounded-full overflow-hidden shadow-md flex-shrink-0`}>
+              <img src={imageSrc} alt={character.emotion || 'character'} className="w-full h-full object-cover" />
+            </div>
+            
+            {character.dialogueActive && character.dialogue && (
+              <div className={`${bubbleBaseClass} ${bubbleMaxWidthClass} ${textSizeClass}`}>
+                {dialogueContent.split('\n').map((line, index) => (
+                  <span key={index} className="block">{line}</span>
+                ))}
+              </div>
+            )}
         </div>
-        
-        {/* Dialogue Bubble - only show if active and dialogue exists */}
-        {character.dialogueActive && character.dialogue && (
-          <div className={`px-4 py-3 bg-[#FFF8F1] border-2 border-[#F8AB28] rounded-xl shadow font-quicksand ${textSizeClass} text-[#070C02] ${bubbleClass} ${position === 'right' ? 'text-left' : ''}`}>
-            {character.dialogue}
-          </div>
-        )}
       </div>
     );
   };
   
-  // Original renderCharacter function (keeping for compatibility)
   const renderCharacter = (character: Character | undefined, position: string, characterType: 'left' | 'right') => {
     if (!character) return null;
-    
-    // Construct the image source directly from the character's image property in the JSON
-    // Ensure your character image files are in public/images/characters/
-    // and their names match what's in story1.json (e.g., character1-neutral.png)
     const imageSrc = `/images/characters/${character.image}`;
-    
     return (
-      <div className={`flex flex-col items-center ${position}`}>
-        {/* Character image */}
-        <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-[#F8AB28] bg-white shadow-md">
+      <div className={`flex flex-col items-center ${position} p-1 sm:p-2`}>
+        <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-2 sm:border-4 border-[#F8AB28] bg-white shadow-md">
           <img src={imageSrc} alt={`Character ${characterType}`} className="w-full h-full object-cover" />
         </div>
-        
-        {/* Dialogue bubble - only show if active */}
         {character.dialogueActive && character.dialogue && (
-          <div className="mt-4 p-3 bg-white rounded-lg border border-gray-300 shadow-lg max-w-xs">
-            <p className="text-sm font-quicksand">{character.dialogue}</p>
+          <div className="mt-2 p-1 sm:p-2 bg-white rounded-lg border border-gray-300 shadow-lg max-w-[150px] sm:max-w-xs">
+            <p className="text-xs sm:text-sm font-quicksand">{character.dialogue}</p>
           </div>
         )}
       </div>
     );
   };
-  
-  // Render intro scene (landing page)
+
   const renderIntroScene = (scene: Scene) => {
     return (
       <div className="relative flex-1">
-        {/* Background image (cafe) */}
         <div 
           className="absolute inset-0 bg-cover bg-center" 
-          style={{ 
-            backgroundImage:`url(/images/${scene.background}.png)` // Assuming background images are .png
-          }}
+          style={{ backgroundImage:`url(/images/${scene.background}.png)` }}
         >
-        <div className="absolute inset-0 bg-black opacity-60"></div>
+          <div className="absolute inset-0 bg-black opacity-60"></div>
         </div>
         
-        {/* Content - Left Aligned with Corrected Container and Button */}
-        <div className="absolute inset-0 flex flex-col justify-end bottom-0 left-0 p-8 md:p-12 lg:p-16 items-start z-10 pl-16 pr-4 md:pl-20 text-white lg:pl-24">
-          <h1
-            className="text-4xl font-bold mb-2 md:mb-3 text-left"
-            style={{ fontFamily: 'Quicksand, sans-serif' }} 
-          >
-            {scene.title}
-          </h1>
-          <p
-            className="text-lg mb-3 md:mb-4 max-w-xl text-left"
-            style={{ fontFamily: 'Quicksand, sans-serif' }} 
-          >
-            {scene.subtitle}
-          </p>
-          <p
-            className="text-sm mb-6 md:mb-8 opacity-90 text-left"
-            style={{ fontFamily: 'Quicksand, sans-serif' }} 
-          >
-            Duration: {scene.duration || '5 min'}
-          </p>
-          <button
-            onClick={goToNextScene}
-            className="absolute flex justify-center items-center bg-[#F02B6C] hover:bg-pink-700 text-white font-bold rounded-[5px]"
-            style={{
-              left: 1094,
-              bottom: 140,
-              width: 153, 
-              height: 44,
-              padding: '12px 20px',
-              gap: 10,
-              fontFamily: 'Quicksand', 
-              fontWeight: 700,
-              fontSize: 16, 
-              lineHeight: '20px'
-            }}
-          >
-            {scene.ctaButton}
-          </button>
+        <div className="relative z-10 flex flex-col justify-end h-full p-4 sm:p-6 md:p-8 lg:p-12 text-white">
+          <div className="mb-10 sm:mb-12 md:mb-16 max-w-full sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl"> 
+            <h1
+              className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 text-left"
+              style={{ fontFamily: 'Quicksand, sans-serif', fontWeight: 700 }} 
+            >
+              {scene.title}
+            </h1>
+            <p
+              className="text-sm sm:text-base md:text-lg mb-3 sm:mb-4 text-left"
+              style={{ fontFamily: 'Quicksand, sans-serif' }}
+            >
+              {scene.subtitle}
+            </p>
+            <p
+              className="text-xs sm:text-sm opacity-90 text-left" 
+              style={{ fontFamily: 'Quicksand, sans-serif' }}
+            >
+              Duration: {scene.duration || '5 min'}
+            </p>
+          </div>
+
+          <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 lg:bottom-12 lg:right-12">
+            <button
+              onClick={goToNextScene}
+              className="bg-[#F02B6C] hover:bg-pink-700 text-white rounded-md 
+                         py-2 px-4 sm:py-2 sm:px-5 md:py-3 md:px-6 
+                         text-sm sm:text-base transition-colors"
+              style={{ fontFamily: 'Quicksand, sans-serif', fontWeight: 700 }} 
+            >
+              {scene.ctaButton}
+            </button>
+          </div>
         </div>
       </div>
     );
   };
   
-  // Render dialogue scene
+
+
   const renderDialogueScene = (scene: Scene) => {
-    // Determine if this scene should use the new Figma-style two-character layout
     const useFigmaStyleLayout = 
       scene.leftCharacter && 
       scene.rightCharacter && 
       (scene.leftCharacter.dialogueActive || scene.rightCharacter.dialogueActive) &&
-      !scene.centralDialogue?.active; // Also ensure central dialogue isn't the focus
+      !scene.centralDialogue?.active;
 
     if (useFigmaStyleLayout) {
       const leftChar = scene.leftCharacter!;
       const rightChar = scene.rightCharacter!;
-      const hasVisualAid = !!scene.visualAid && (scene.type === 'dialogue'); // Ensure visual aid is for dialogue type
+      const hasVisualAid = !!scene.visualAid && visualAidMap[scene.visualAid] && (scene.type === 'dialogue');
+
+      // Determine the layout for the character container
+      // If there's a visual aid, keep them spread. If not, bring them closer.
+      const characterContainerLayoutClass = hasVisualAid 
+        ? "justify-around" // Spread out if there's a visual aid
+        : "justify-center md:justify-evenly"; // Center on mobile, more evenly spaced on md+ but not full spread
 
       return (
         <div 
           className="relative flex-1 bg-cover bg-center"
           style={{ backgroundImage: `url(/images/${scene.background}.png)` }}
         >
-          {/* Dark overlay for better text contrast */}
           <div className="absolute inset-0 bg-black opacity-60"></div>
 
-          {/* Character and dialogue layout container */}
-          {/* Using justify-center for vertical centering of the block */}
-          <div className={`relative z-10 flex h-full flex-col justify-center`}> 
+          <div className={`relative z-10 flex flex-col h-full p-2 sm:p-3 md:p-4 overflow-y-auto ${!hasVisualAid ? 'justify-center' : 'justify-between'}`}> 
+            {/* If no visual aid, main container tries to center its content vertically */}
             
-            {/* Characters Container - Removed items-start and bottom padding */}
-            <div
-              className={`flex justify-between w-full px-10 md:px-16`}
-            >
-              <div className="flex flex-col justify-center">
+            {/* Character Container: Apply dynamic layout class */}
+            <div className={`flex flex-col md:flex-row ${characterContainerLayoutClass} items-start md:items-center w-full gap-2 md:gap-4 flex-shrink-0`}>
                 {renderCharacterWithBubble(leftChar, 'left')}
-              </div>
-              <div className="flex flex-col justify-center">
                 {renderCharacterWithBubble(rightChar, 'right')}
-              </div>
             </div>
 
-            {/* Visual Aid - rendered below characters if active */}
+            {/* Visual Aid Container: Only takes space if visual aid is present */}
             {hasVisualAid && (
-              // Re-added a small top margin to control spacing
-              <div className="flex justify-center items-center mt-2"> 
-                {renderVisualAid(scene.visualAid)}
-              </div>
+                <div className="flex flex-grow justify-center items-center my-2 md:my-4 min-h-0"> 
+                    {renderVisualAid(scene.visualAid)}
+                </div>
             )}
+            {/* If no visual aid, and we want characters more centered vertically, 
+                we might not need a flex-grow spacer here, or a smaller one. 
+                The parent 'justify-center' will handle it. */}
+            {!hasVisualAid && <div className="flex-grow-0 sm:flex-grow-[0.2] md:flex-grow-[0.3]"></div> /* Optional: small spacer to prevent characters sticking to top if screen is very tall */}
           </div>
         </div>
       );
     } else {
       // Fallback to the original layout for other types of dialogue scenes
-      // (e.g., scenes with central dialogue, or single character focus if any)
       return (
         <div 
           className="relative flex-1 bg-cover bg-center"
           style={{ backgroundImage: `url(/images/${scene.background}.png)` }}
         >
-          <div className="absolute inset-0 bg-black opacity-60"></div> {/* Original overlay */}
-          
-          {/* Original layout structure from before */}
-          <div className="absolute inset-0 flex flex-col justify-between p-4 md:p-8">
-            <div className="flex flex-grow items-center justify-around">
-              {/* Left character (using original renderCharacter) */}
-              {renderCharacter(scene.leftCharacter, "ml-4 md:ml-8", "left")}
-              
-              {/* Central content wrapper */}
-              <div className="flex-grow flex items-center justify-center">
-                {/* Central dialogue (if active) */}
+          <div className="absolute inset-0 bg-black opacity-60"></div>
+          <div className="absolute inset-0 flex flex-col justify-around p-2 sm:p-4 md:p-6">
+            <div className="flex flex-col md:flex-row flex-grow items-center justify-around gap-2 md:gap-4">
+              {renderCharacter(scene.leftCharacter, "md:ml-4", "left")}
+              <div className="flex-grow flex flex-col items-center justify-center my-2 md:my-0">
                 {scene.centralDialogue && scene.centralDialogue.active && (
-                  <div className="bg-white p-4 rounded-lg border border-amber-300 max-w-xs text-center shadow-lg">
-                    <p className="text-sm font-quicksand">{scene.centralDialogue.content}</p>
+                  <div className="bg-white p-2 sm:p-3 rounded-lg border border-amber-300 max-w-xs text-center shadow-lg">
+                    <p className="text-xs sm:text-sm font-quicksand">{scene.centralDialogue.content}</p>
                   </div>
                 )}
-                
-                {/* Visual Aid */}
                 {scene.visualAid && (!scene.centralDialogue || !scene.centralDialogue.active) && (
-                  <div className="shadow-lg">
+                  <div className="shadow-lg my-2">
                     {renderVisualAid(scene.visualAid)}
                   </div>
                 )}
               </div>
-              
-              {/* Right character (using original renderCharacter) */}
-              {renderCharacter(scene.rightCharacter, "mr-4 md:mr-8", "right")}
+              {renderCharacter(scene.rightCharacter, "md:mr-4", "right")}
             </div>
           </div>
         </div>
@@ -506,166 +439,116 @@ const Story = () => {
     }
   };
 
-  // Main render function
+
   return (
-    <div className="fixed inset-0 w-screen h-screen overflow-hidden"> 
-      {/* Top Navigation Bar */}
-      <nav className="bg-[#F8AB28] h-16 flex justify-between items-center px-14 shadow-md z-20">
-        {/* Left group: Home + Story Info */}
+    <div className="fixed inset-0 w-screen h-screen flex flex-col overflow-hidden"> 
+      <nav className="bg-[#F8AB28] h-14 sm:h-16 flex justify-between items-center px-3 sm:px-6 md:px-10 lg:px-14 shadow-md z-20 flex-shrink-0">
         <div className="flex items-center">
-          <button className="p-1 hover:bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-white ml-2">
-            <img src="/icons/home.svg" alt="Home" className="w-10 h-10" />
+          <button className="p-1 hover:bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-white">
+            <img src="/icons/home.svg" alt="Home" className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10" />
           </button>
           {currentScene.type !== 'intro' && (
-            <div className="flex flex-col items-start justify-center ml-2 gap-[3px]">
-              <span className="text-[#070C02] text-[14px] font-quicksand font-normal leading-none">Story 1</span>
-              <span className="text-[#070C02] text-[14px] font-quicksand font-semibold leading-none">Bitcoin Basics</span>
+            <div className="flex flex-col items-start justify-center ml-2 sm:ml-3 gap-[2px]">
+              <span className="text-[#070C02] text-[10px] sm:text-xs md:text-sm font-quicksand font-normal leading-none">Story 1</span>
+              <span className="text-[#070C02] text-[10px] sm:text-xs md:text-sm font-quicksand font-semibold leading-none">Bitcoin Basics</span>
             </div>
           )}
         </div>
-        {/* Profile Icon Button */}
-        <button className="p-1 hover:bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-white mr-2">
-          <img src="/icons/profile.svg" alt="Profile" className="w-10 h-10" />
+        <button className="p-1 hover:bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-white">
+          <img src="/icons/profile.svg" alt="Profile" className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10" />
         </button>
       </nav>
 
-      {/* Content Area Below Nav Bar */}
-      {/* Compute first and last dialogue scene indices for navigation arrows */}
-      
-      <div className="absolute inset-0 top-16 flex flex-col"> 
-        {/* Scene information (only visible for non-intro scenes) */}
-
-        {/* Main content - changes based on scene type */}
-        <div className={`overflow-hidden flex-grow relative flex flex-col ${currentScene.type === 'intro' ? 'mb-0' : ''}`}> 
+      <div className="flex-grow relative flex flex-col overflow-hidden">
+        <div className={`overflow-hidden flex-grow relative flex flex-col`}> 
           {currentScene.type === 'intro' 
             ? renderIntroScene(currentScene)
             : renderDialogueScene(currentScene)
           }
-
-          {/* Navigation Arrows - Conditionally Rendered & Absolutely Positioned within this container */}
-          {currentScene.type !== 'intro' && (
-            <>
-              {/* Only the right arrow on the first dialogue scene */}
-              {currentSceneIndex === firstDialogueSceneIndex && (
-                <button
-                  onClick={goToNextScene}
-                  className="absolute bottom-4 right-4 z-30 p-2 rounded-full text-white hover:bg-black hover:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 transition-colors"
-                  aria-label="Next Scene"
-                >
-                  <img src="/icons/arrow-right.svg" alt="Next" className="w-7 h-7 md:w-8 md:h-8" />
-                </button>
-              )}
-
-              {/* Both arrows on middle dialogue scenes */}
-              {currentSceneIndex > firstDialogueSceneIndex && currentSceneIndex < lastDialogueSceneIndex && (
-                <div className="absolute bottom-4 right-4 flex gap-3 z-30">
-                  <button
-                    onClick={goToPrevScene}
-                    className="p-2 rounded-full text-white hover:bg-black hover:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 transition-colors"
-                    aria-label="Previous Scene"
-                  >
-                    <img src="/icons/arrow-left.svg" alt="Previous" className="w-7 h-7 md:w-8 md:h-8" />
-                  </button>
-                  <button
-                    onClick={goToNextScene}
-                    className="p-2 rounded-full text-white hover:bg-black hover:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 transition-colors"
-                    aria-label="Next Scene"
-                  >
-                    <img src="/icons/arrow-right.svg" alt="Next" className="w-7 h-7 md:w-8 md:h-8" />
-                  </button>
-                </div>
-              )}
-
-              {/* Only the left arrow on the last dialogue scene */}
-              {currentSceneIndex === lastDialogueSceneIndex && (
+          {currentScene.type !== 'intro' && firstDialogueSceneIndex !== -1 && (
+            <div className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 md:bottom-4 md:right-4 flex gap-2 z-30">
+              {currentSceneIndex > firstDialogueSceneIndex && (
                 <button
                   onClick={goToPrevScene}
-                  className="absolute bottom-4 right-[75px] z-30 p-2 rounded-full text-white hover:bg-black hover:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 transition-colors"
+                  className="p-1 sm:p-2 rounded-full text-white hover:bg-black hover:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 transition-colors"
                   aria-label="Previous Scene"
                 >
-                  <img src="/icons/arrow-left.svg" alt="Previous" className="w-7 h-7 md:w-8 md:h-8" />
+                  <img src="/icons/arrow-left.svg" alt="Previous" className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" />
                 </button>
               )}
-            </>
+              {(lastDialogueSceneIndex === -1 || currentSceneIndex < lastDialogueSceneIndex) && (
+                 currentSceneIndex < dialogueData.scenes.length -1 && 
+                <button
+                  onClick={goToNextScene}
+                  className="p-1 sm:p-2 rounded-full text-white hover:bg-black hover:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 transition-colors"
+                  aria-label="Next Scene"
+                >
+                  <img src="/icons/arrow-right.svg" alt="Next" className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" />
+                </button>
+              )}
+            </div>
           )}
         </div>
       </div>
-
-      {/* Confetti animation - only shown on the last dialogue scene */}
+      
+      {currentScene.type === 'dialogue' && !showQuizModal && firstDialogueSceneIndex !== -1 && lastDialogueSceneIndex !== -1 && lastDialogueSceneIndex >= firstDialogueSceneIndex && (
+        <div 
+          className={`absolute bottom-0 left-0 w-full h-1 sm:h-1.5 bg-gray-200 overflow-hidden z-20 transition-opacity duration-1000 ${progressFading ? 'opacity-0' : 'opacity-100'}`}
+          style={{ transition: 'opacity 1.5s ease-out' }}
+        >
+          <div 
+            className={`h-full bg-[#f0ad4e] transition-all duration-500 ease-out ${progressPulse ? 'pulse-animation' : ''}`}
+            style={{
+              width: `${Math.max(
+                5, 
+                ((currentSceneIndex - firstDialogueSceneIndex) / 
+                Math.max(1, lastDialogueSceneIndex - firstDialogueSceneIndex)) * 100 
+              )}%`,
+              boxShadow: progressPulse ? '0 0 10px 3px rgba(240, 173, 78, 0.7)' : 'none'
+            }}
+          />
+        </div>
+      )}
+      
       {confettiActive && (
         <Confetti
           width={width}
           height={height}
           recycle={false}
-          numberOfPieces={300}
+          numberOfPieces={width < 768 ? 150 : 300} 
           gravity={0.15}
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            zIndex: 5, // Above scene content, below UI elements
-            pointerEvents: 'none' // Allow clicking through confetti
-          }}
+          style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 50, pointerEvents: 'none' }}
         />
       )}
 
-      {/* Clapping hands animation - shown with confetti */}
-      {(currentSceneIndex === lastDialogueSceneIndex && currentScene.type === 'dialogue' && !showQuizModal) && (
+      {(currentSceneIndex === lastDialogueSceneIndex && currentScene.type === 'dialogue' && !showQuizModal && lastDialogueSceneIndex !== -1) && (
         <img
-          src="/public/images/gifs/clapping_hands.gif"
+          src="/images/gifs/clapping_hands.gif" 
           alt="Clapping hands"
           style={{
-            position: 'fixed',
-            bottom: '0',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: '100%',
-            maxWidth: '600px',
-            zIndex: 10, // Above confetti, below modal
-            pointerEvents: 'none' // Allow clicking through animation
+            position: 'fixed', bottom: '0', left: '50%', transform: 'translateX(-50%)',
+            width: '80%', maxWidth: '400px', maxHeight: '30vh', 
+            objectFit: 'contain', zIndex: 60, pointerEvents: 'none' 
           }}
         />
       )}
 
-      {/* 'Proceed to Quiz' modal */}
       {showQuizModal && (
         <div
           style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent background
-            backdropFilter: 'blur(8px)', // Background blur effect
-            WebkitBackdropFilter: 'blur(8px)', // For Safari
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 100, // Above everything else
+            position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.6)', 
+            backdropFilter: 'blur(5px)', WebkitBackdropFilter: 'blur(5px)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            zIndex: 100, padding: '1rem'
           }}
         >
           <button
-            onClick={() => {
-              console.log("Navigate to Quiz!");
-              // Add navigation logic here, e.g.:
-              // navigate('/quiz') if using React Router
-              // or window.location.href = '/quiz'
-            }}
-            style={{
-              padding: '20px 40px',
-              fontSize: '1.5rem',
-              fontFamily: 'Quicksand, sans-serif',
-              fontWeight: 'bold',
-              color: '#333',
-              backgroundColor: '#FFD700', // Gold color
-              border: 'none',
-              borderRadius: '12px',
-              cursor: 'pointer',
-              boxShadow: '0 6px 12px rgba(0,0,0,0.25)',
-            }}
+            onClick={() => { console.log("Navigate to Quiz!"); }}
+            className="bg-[#FFD700] hover:bg-amber-400 text-gray-800 font-bold rounded-xl shadow-xl
+                       py-3 px-6 sm:py-4 sm:px-8 
+                       text-base sm:text-lg md:text-xl 
+                       font-quicksand transition-colors duration-150"
           >
             Proceed to Quiz
           </button>

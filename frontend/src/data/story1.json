@@ -282,7 +282,7 @@
           "emotion": "explaining",
           "dialogueActive": true,
           "dialogue": "Exactly. Each new page aka ‘block’ is locked to the previous one. It’s like a chain of events no one can change!",
-          "size": "small"
+          "size": "large"
         },
         "rightCharacter": {
           "image": "carol_listening.png",
@@ -471,7 +471,7 @@
           "emotion": "excited",
           "dialogueActive": true,
           "dialogue": "Okay, how do I get my hands on some Bitcoins?",
-          "size": "small"
+          "size": "large"
         },
         "centralDialogue": {
           "active": false,
@@ -523,7 +523,7 @@
           "emotion": "inquisitive",
           "dialogueActive": true,
           "dialogue": "So I don’t actually ‘hold’ Bitcoin? I hold the keys to access it?",
-          "size": "small"
+          "size": "large"
         },
         "centralDialogue": {
           "active": false,
@@ -594,7 +594,7 @@
           "emotion": "explaining",
           "dialogueActive": true,
           "dialogue": "You do when you purchase Bitcoin mostly from an exchange: basically a marketplace. Some are centralized, like Coinbase, Binance... Others are decentralized, like Bisq, RoboSats...",
-          "size": "small"
+          "size": "large"
         },
         "rightCharacter": {
           "image": "carol_listening.png",
@@ -1251,7 +1251,7 @@
           "emotion": "satisfied",
           "dialogueActive": true,
           "dialogue": "Okay… that felt kind of cool.”",
-          "size": "small"
+          "size": "large"
         },
         "centralDialogue": {
           "active": false,
