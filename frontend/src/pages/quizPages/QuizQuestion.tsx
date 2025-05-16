@@ -60,53 +60,6 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
       }));
     };
     
-    // Placeholder data for when API is unavailable
-    const placeholderQuestions: Question[] = [
-      {
-        id: "1",
-        text: "What is Bitcoin?",
-        options: [
-          { id: "a", text: "A digital currency" },
-          { id: "b", text: "A stock market index" },
-          { id: "c", text: "A computer program" },
-          { id: "d", text: "A type of blockchain" }
-        ],
-        correct_answer: "A digital currency"
-      },
-      {
-        id: "2",
-        text: "Who created Bitcoin?",
-        options: [
-          { id: "a", text: "Satoshi Nakamoto" },
-          { id: "b", text: "Elon Musk" },
-          { id: "c", text: "Bill Gates" },
-          { id: "d", text: "Mark Zuckerberg" }
-        ],
-        correct_answer: "Satoshi Nakamoto"
-      },
-      {
-        id: "3",
-        text: "What year was Bitcoin launched?",
-        options: [
-          { id: "a", text: "2009" },
-          { id: "b", text: "2011" },
-          { id: "c", text: "2013" },
-          { id: "d", text: "2015" }
-        ],
-        correct_answer: "2009"
-      },
-      {
-        id: "4",
-        text: "What is the maximum supply of Bitcoin?",
-        options: [
-          { id: "a", text: "1 million" },
-          { id: "b", text: "21 million" },
-          { id: "c", text: "100 million" },
-          { id: "d", text: "Unlimited" }
-        ],
-        correct_answer: "21 million"
-      }
-    ];
 
     // Fetch quiz from backend
     useEffect(() => {
@@ -125,11 +78,8 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
           setQuestions(transformedQuestions);
         } catch (err) {
           console.error('Error fetching questions:', err);
-          console.log('Using fallback placeholder questions');
-          
-          // Use placeholder data when API fails
-          setQuestions(placeholderQuestions);
-          setError(null); // Clear error since we're providing fallback data
+          setLoading(false);
+          setError('Failed to load questions. Please try again later.');
         } finally {
           setLoading(false);
         }
@@ -174,12 +124,13 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
         const finalCorrect = correctAnswers + (selectedOption && currentQuestion ? 1 : 0);
         const percentage = Math.round((finalCorrect / (questions.length || totalQuestions)) * 100);
         
-        navigate(`/story/${storyId}/quiz-results`, { 
+        navigate(`/quiz-results`, { 
           state: { 
             score: percentage,
             correctAnswers: finalCorrect,
             totalQuestions: questions.length || totalQuestions,
-            userAnswers: userAnswers
+            userAnswers: userAnswers,
+            storyId: storyId // Keep the storyId in state if needed later
           } 
         });
       }
@@ -225,7 +176,7 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
         {/* Back button */}
         <div 
           className="absolute top-8 left-8 text-2xl font-bold cursor-pointer" 
-          onClick={() => navigate('/')}
+          onClick={() => navigate(`/story/${storyId}`)}
         >
           &lt;
       </div>

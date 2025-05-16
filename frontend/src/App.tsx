@@ -85,11 +85,11 @@ function App() {
           {/* Protected routes */}
           <Route element={<ProtectedRoute />}>
             <Route path='/story' element={<Story/>} />
+            <Route path='/story/:storyId' element={<Story/>} />
+            <Route path='/quiz-question/:questionId' element={<QuizQuestion/>} />
+            <Route path='/quiz-results' element={<QuizResults/>} />
             {/* Add more protected routes here */}
           </Route>
-          <Route path='/quiz-question/:questionId' element={ <QuizQuestion/> } />
-          <Route path='/quiz-results' element={ <QuizResults/> } />
-          <Route path='/story/:storyId/quiz-results' element={ <QuizResults/> } />
       </Routes>
       </BrowserRouter>
     </AuthProvider>

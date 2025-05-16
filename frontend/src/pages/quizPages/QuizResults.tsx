@@ -1,17 +1,23 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 interface QuizResultsProps {
   score?: number;
   totalQuestions?: number;
   correctAnswers?: number;
+  storyId?: string;
 }
 
-const QuizResults: React.FC<QuizResultsProps> = ({ 
-  score = 100, 
-//   totalQuestions = 4, 
-//   correctAnswers = 4 
-}) => {
+const QuizResults: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  
+  // Get actual quiz results from router state
+  const resultData = location.state as QuizResultsProps || {
+    score: 0,
+    totalQuestions: 0,
+    correctAnswers: 0,
+    storyId: 'unknown'
+  };
   
   const handleShareOnSocials = () => {
     // Implement social sharing logic here
@@ -20,6 +26,7 @@ const QuizResults: React.FC<QuizResultsProps> = ({
   
   const handleNextStory = () => {
     // Navigate to the next story or section
+    // If we have a specific story ID, we could use that for smarter navigation
     navigate('/story');
   };
   
@@ -33,7 +40,7 @@ const QuizResults: React.FC<QuizResultsProps> = ({
       {/* Circular indicator */}
       <div className="relative mb-8">
         <div className="w-40 h-40 rounded-full border-8 border-gray-600 flex items-center justify-center bg-white">
-          <span className="text-3xl font-bold">{score}%</span>
+          <span className="text-3xl font-bold">{resultData.score}%</span>
         </div>
       </div>
       
@@ -42,7 +49,7 @@ const QuizResults: React.FC<QuizResultsProps> = ({
       
       {/* Description */}
       <p className="text-center text-gray-700 mb-16 max-w-md leading-relaxed">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.
+        You answered {resultData.correctAnswers} out of {resultData.totalQuestions} questions correctly!
       </p>
       
       {/* Action buttons */}
