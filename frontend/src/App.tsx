@@ -9,23 +9,31 @@ import AuthCallback from './pages/Auth/AuthCallback';
 import ProtectedRoute from './routes/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
 import LoadingScreen from './components/LoadingScreen';
-import { preloadImages } from './utils/imagePreloader';
+import { loadCriticalImages, loadCommonAssets } from './utils/enhancedImagePreloader';
 
 function App() {
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
+  const [loadingPhase, setLoadingPhase] = useState<'critical' | 'common' | 'complete'>('critical');
 
   useEffect(() => {
-    // Create individual image loading promises
-    const imagePromises = preloadImages();
-    
-    // When all images are loaded
-    imagePromises
-      .then((results) => {
-        // All images loaded successfully
-        console.log(`Preloaded ${results.length} images successfully`);
+    // Phase 1: Load critical images first (home page, first scene)
+    loadCriticalImages((progress) => {
+      // Update progress for critical images (0-70%)
+      setLoadingProgress(progress * 0.7);
+    })
+      .then(() => {
+        console.log('Critical images loaded successfully');
+        setLoadingPhase('common');
         
-        // Add a small delay to ensure smooth transition
+        // Phase 2: Load common assets (frequently used characters, early visual aids)
+        return loadCommonAssets();
+      })
+      .then(() => {
+        console.log('Common assets loaded successfully');
+        setLoadingPhase('complete');
+        
+        // Show the app with a small delay for smooth transition
         setTimeout(() => {
           setImagesLoaded(true);
         }, 500);
@@ -38,21 +46,25 @@ function App() {
         }, 3000);
       });
       
-    // Set up a timer to simulate progress since we can't track individual image loads easily
+    // Set up a timer to simulate progress for common assets (70-100%)
+    // This runs in parallel with the actual loading
     const progressInterval = setInterval(() => {
       setLoadingProgress(prev => {
-        const newProgress = prev + 2;
-        if (newProgress >= 100) {
-          clearInterval(progressInterval);
-          return 100;
+        // Only update if we're in the common loading phase
+        if (loadingPhase === 'common') {
+          const newProgress = prev + 1;
+          if (newProgress >= 100) {
+            clearInterval(progressInterval);
+            return 100;
+          }
+          return newProgress;
         }
-        return newProgress;
+        return prev;
       });
     }, 100);
     
-    // Clean up interval on unmount
     return () => clearInterval(progressInterval);
-  }, []);
+  }, [loadingPhase]);
 
   if (!imagesLoaded) {
     return <LoadingScreen progress={loadingProgress} />;
