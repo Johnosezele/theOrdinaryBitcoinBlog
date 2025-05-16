@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Confetti from 'react-confetti';
 import useWindowSize from 'react-use/lib/useWindowSize';
 import { useNavigate } from 'react-router-dom';
+import { preloadUpcomingScenes, Scene as StoryScene } from '../utils/enhancedImagePreloader';
 import rawDialogueData from '../data/story1.json';
 
 interface Character {
@@ -131,14 +132,27 @@ const Story: React.FC = () => {
   const [showQuizModal, setShowQuizModal] = useState(false);
   const [progressPulse, setProgressPulse] = useState(false);
   const [progressFading, setProgressFading] = useState(false);
+  const [firstDialogueSceneIndex, setFirstDialogueSceneIndex] = useState(-1);
+  const [lastDialogueSceneIndex, setLastDialogueSceneIndex] = useState(-1);
 
-  const firstDialogueSceneIndex = dialogueData.scenes.findIndex(scene => scene.type === 'dialogue');
-  const lastDialogueSceneIndex = (() => {
-    if (dialogueData.scenes.length === 0) return -1;
-    const reversedScenes = [...dialogueData.scenes].reverse();
-    const reversedIndex = reversedScenes.findIndex(scene => scene.type === 'dialogue');
-    return reversedIndex === -1 ? -1 : dialogueData.scenes.length - 1 - reversedIndex;
-  })();
+  useEffect(() => {
+    if (currentScene.type === 'dialogue') {
+      // Find the first dialogue scene index
+      if (firstDialogueSceneIndex === -1) {
+        const firstIndex = dialogueData.scenes.findIndex(scene => scene.type === 'dialogue');
+        setFirstDialogueSceneIndex(firstIndex);
+      }
+      
+      // Find the last dialogue scene index
+      if (lastDialogueSceneIndex === -1) {
+        const lastIndex = dialogueData.scenes.length - 1;
+        setLastDialogueSceneIndex(lastIndex);
+      }
+      
+      // Preload upcoming scenes when current scene changes
+      preloadUpcomingScenes(dialogueData.scenes as StoryScene[], currentSceneIndex, 3);
+    }
+  }, [currentScene, currentSceneIndex, firstDialogueSceneIndex, lastDialogueSceneIndex]);
 
   useEffect(() => {
     if (dialogueData.scenes.length > 0 && lastDialogueSceneIndex !== -1 && currentSceneIndex === lastDialogueSceneIndex && currentScene.type === 'dialogue') {
