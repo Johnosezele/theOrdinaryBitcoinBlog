@@ -87,8 +87,9 @@ function App() {
             <Route path='/story' element={<Story/>} />
             {/* Add more protected routes here */}
           </Route>
-          <Route path='/quiz-question/' element={ <QuizQuestion/> } />
-        <Route path='/quiz-results/' element={ <QuizResults/> } />
+          <Route path='/quiz-question/:questionId' element={ <QuizQuestion/> } />
+          <Route path='/quiz-results' element={ <QuizResults/> } />
+          <Route path='/story/:storyId/quiz-results' element={ <QuizResults/> } />
       </Routes>
       </BrowserRouter>
     </AuthProvider>
