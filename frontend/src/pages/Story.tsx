@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import Confetti from 'react-confetti';
 import useWindowSize from 'react-use/lib/useWindowSize';
 import { useNavigate } from 'react-router-dom';
-import { preloadUpcomingScenes, Scene as StoryScene } from '../utils/enhancedImagePreloader';
 import rawDialogueData from '../data/story1.json';
 
 interface Character {
@@ -149,8 +148,7 @@ const Story: React.FC = () => {
         setLastDialogueSceneIndex(lastIndex);
       }
       
-      // Preload upcoming scenes when current scene changes
-      preloadUpcomingScenes(dialogueData.scenes as StoryScene[], currentSceneIndex, 3);
+      // No need to preload upcoming scenes as all images are loaded upfront
     }
   }, [currentScene, currentSceneIndex, firstDialogueSceneIndex, lastDialogueSceneIndex]);
 
