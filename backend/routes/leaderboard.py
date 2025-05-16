@@ -1,6 +1,6 @@
 # Leaderboard related endpoints
 from flask import Blueprint, jsonify
-from supabase import create_client
+from supabase import create_client, Client
 import os
 
 leaderboard_route = Blueprint('leaderboard', __name__)

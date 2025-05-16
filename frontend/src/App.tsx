@@ -10,6 +10,8 @@ import ProtectedRoute from './routes/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
 import LoadingScreen from './components/LoadingScreen';
 import { loadCriticalImages, loadCommonAssets } from './utils/enhancedImagePreloader';
+import QuizQuestion from './pages/quizPages/QuizQuestion';
+import QuizResults from './pages/quizPages/QuizResults';
 
 function App() {
   const [imagesLoaded, setImagesLoaded] = useState(false);
@@ -83,9 +85,12 @@ function App() {
           {/* Protected routes */}
           <Route element={<ProtectedRoute />}>
             <Route path='/story' element={<Story/>} />
+            <Route path='/story/:storyId' element={<Story/>} />
+            <Route path='/quiz-question/:questionId' element={<QuizQuestion/>} />
+            <Route path='/quiz-results' element={<QuizResults/>} />
             {/* Add more protected routes here */}
           </Route>
-        </Routes>
+      </Routes>
       </BrowserRouter>
     </AuthProvider>
   )

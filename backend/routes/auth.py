@@ -1,6 +1,6 @@
 # Auth verification endpoints
 from flask import Blueprint, request, jsonify
-from supabase import create_client
+from supabase import create_client, Client
 from dotenv import load_dotenv
 import os
 

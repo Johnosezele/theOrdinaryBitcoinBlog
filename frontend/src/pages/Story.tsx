@@ -559,7 +559,7 @@ const Story: React.FC = () => {
           }}
         >
           <button
-            onClick={() => { console.log("Navigate to Quiz!"); }}
+            onClick={() => navigate('/quiz-question/1')} 
             className="bg-[#FFD700] hover:bg-amber-400 text-gray-800 font-bold rounded-xl shadow-xl
                        py-3 px-6 sm:py-4 sm:px-8 
                        text-base sm:text-lg md:text-xl 
