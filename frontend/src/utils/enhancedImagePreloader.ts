@@ -27,6 +27,12 @@ export interface Scene {
   visualAid?: string;
 }
 
+// Set to track image URLs that have been attempted to be preloaded
+const processedImageUrls = new Set<string>();
+
+// Set to track image URLs that failed to load
+const failedImageUrls = new Set<string>();
+
 // Group images by priority
 export const priorityGroups = {
   // Critical images needed for initial app rendering (home page, auth pages)
@@ -70,25 +76,41 @@ export const preloadImages = (
   imagePaths: string[], 
   progressCallback?: (loaded: number, total: number) => void
 ): Promise<void[]> => {
-  const total = imagePaths.length;
-  let loaded = 0;
+  // Filter out already processed images
+  const uniquePaths = imagePaths.filter(path => !processedImageUrls.has(path));
+  const total = uniquePaths.length;
+  let loadedCount = 0;
   
-  const imagePromises = imagePaths.map(src => {
+  // If all images are already processed, report 100% immediately
+  if (total === 0) {
+    if (progressCallback) {
+      progressCallback(1, 1); // Report 100% immediately
+    }
+    return Promise.resolve([]);
+  }
+  
+  const imagePromises = uniquePaths.map(src => {
+    // Mark as processing
+    processedImageUrls.add(src);
+
     return new Promise<void>((resolve) => {
       const img = new Image();
       img.src = src;
       img.onload = () => {
-        loaded++;
+        loadedCount++;
         if (progressCallback) {
-          progressCallback(loaded, total);
+          progressCallback(loadedCount, total);
         }
         resolve();
       };
       img.onerror = () => {
         console.warn(`Failed to preload image: ${src}`);
-        loaded++;
+        // Track failed image URL
+        failedImageUrls.add(src);
+        // Still count towards 'loaded' for progress to complete, even on error
+        loadedCount++; 
         if (progressCallback) {
-          progressCallback(loaded, total);
+          progressCallback(loadedCount, total);
         }
         resolve(); // Resolve anyway to not block the app
       };
@@ -190,9 +212,36 @@ export const loadCommonAssets = (): Promise<void[]> => {
   return preloadImages(commonAssets);
 };
 
+/**
+ * Returns a Set of image URLs that failed to load
+ * @returns Set of failed image URLs
+ */
+export const getFailedImageUrls = (): Set<string> => {
+  return new Set(failedImageUrls); // Return a copy to prevent direct mutation
+};
+
+/**
+ * Attempts to retry loading previously failed images
+ * @param progressCallback Optional callback to track retry progress
+ * @returns Promise that resolves when all retries are complete
+ */
+export const retryFailedImages = (
+  progressCallback?: (loaded: number, total: number) => void
+): Promise<void[]> => {
+  const failedUrls = Array.from(failedImageUrls);
+  
+  // Clear the failed URLs set before retrying
+  failedImageUrls.clear();
+  
+  // Retry loading these images
+  return preloadImages(failedUrls, progressCallback);
+};
+
 export default {
   loadCriticalImages,
   loadCommonAssets,
   preloadUpcomingScenes,
-  extractImagesFromScenes
+  extractImagesFromScenes,
+  getFailedImageUrls,
+  retryFailedImages
 };

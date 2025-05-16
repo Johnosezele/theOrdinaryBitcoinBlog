@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Confetti from 'react-confetti';
 import useWindowSize from 'react-use/lib/useWindowSize';
 import { useNavigate } from 'react-router-dom';
@@ -132,27 +132,23 @@ const Story: React.FC = () => {
   const [showQuizModal, setShowQuizModal] = useState(false);
   const [progressPulse, setProgressPulse] = useState(false);
   const [progressFading, setProgressFading] = useState(false);
-  const [firstDialogueSceneIndex, setFirstDialogueSceneIndex] = useState(-1);
-  const [lastDialogueSceneIndex, setLastDialogueSceneIndex] = useState(-1);
+  // Calculate dialogue scene indices once using useMemo instead of state + useEffect
+  const { firstDialogueSceneIndex, lastDialogueSceneIndex } = useMemo(() => {
+    const first = dialogueData.scenes.findIndex(scene => scene.type === 'dialogue');
+    const last = [...dialogueData.scenes].reverse()
+               .findIndex(scene => scene.type === 'dialogue');
+    return {
+      firstDialogueSceneIndex: first,
+      lastDialogueSceneIndex: last === -1 ? -1 : dialogueData.scenes.length - 1 - last,
+    };
+  }, [dialogueData.scenes]);
 
   useEffect(() => {
     if (currentScene.type === 'dialogue') {
-      // Find the first dialogue scene index
-      if (firstDialogueSceneIndex === -1) {
-        const firstIndex = dialogueData.scenes.findIndex(scene => scene.type === 'dialogue');
-        setFirstDialogueSceneIndex(firstIndex);
-      }
-      
-      // Find the last dialogue scene index
-      if (lastDialogueSceneIndex === -1) {
-        const lastIndex = dialogueData.scenes.length - 1;
-        setLastDialogueSceneIndex(lastIndex);
-      }
-      
       // Preload upcoming scenes when current scene changes
       preloadUpcomingScenes(dialogueData.scenes as StoryScene[], currentSceneIndex, 3);
     }
-  }, [currentScene, currentSceneIndex, firstDialogueSceneIndex, lastDialogueSceneIndex]);
+  }, [currentScene, currentSceneIndex, dialogueData.scenes]);
 
   useEffect(() => {
     if (dialogueData.scenes.length > 0 && lastDialogueSceneIndex !== -1 && currentSceneIndex === lastDialogueSceneIndex && currentScene.type === 'dialogue') {
