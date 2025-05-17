@@ -60,7 +60,6 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
       }));
     };
     
-
     // Fetch quiz from backend
     useEffect(() => {
       const fetchQuestions = async () => {
@@ -91,6 +90,16 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
     // Get current question
     const currentQuestion = questions[currentQuestionNumber - 1];
     
+    // Set the selected option from saved answers when navigating between questions
+    useEffect(() => {
+      const savedAnswer = userAnswers[currentQuestionNumber - 1];
+      if (savedAnswer) {
+        setSelectedOption(savedAnswer);
+      } else {
+        setSelectedOption(null); // Clear selection for new questions
+      }
+    }, [currentQuestionNumber, userAnswers]);
+    
     const handleOptionSelect = (optionId: string) => {
       setSelectedOption(optionId);
 
@@ -112,7 +121,10 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
       // Check if current answer is correct before moving
       if (currentQuestion && selectedOption) {
         const selectedOptionText = currentQuestion.options.find(opt => opt.id === selectedOption)?.text;
-        if (selectedOptionText === currentQuestion.correct_answer) {
+        const isCurrentCorrect = selectedOptionText === currentQuestion.correct_answer;
+        
+        // On last question, don't increment state as we'll calculate from all answers
+        if (isCurrentCorrect && currentQuestionNumber < (questions.length || totalQuestions)) {
           setCorrectAnswers(prev => prev + 1);
         }
       }
@@ -120,23 +132,33 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
       if (currentQuestionNumber < (questions.length || totalQuestions)) {
         navigate(`/quiz-question/${currentQuestionNumber + 1}`);
       } else {
-        // Calculate final score and navigate to results
-        const finalCorrect = correctAnswers + (selectedOption && currentQuestion ? 1 : 0);
-        const percentage = Math.round((finalCorrect / (questions.length || totalQuestions)) * 100);
+        // Calculate final score by counting all correct answers from userAnswers
+        let totalCorrect = 0;
+        
+        // Check each answer against the correct answer for each question
+        for (let i = 0; i < questions.length; i++) {
+          const userAnswer = userAnswers[i];
+          if (userAnswer) {
+            const question = questions[i];
+            const selectedOptionText = question.options.find(opt => opt.id === userAnswer)?.text;
+            if (selectedOptionText === question.correct_answer) {
+              totalCorrect++;
+            }
+          }
+        }
+        
+        const percentage = Math.round((totalCorrect / (questions.length || totalQuestions)) * 100);
         
         navigate(`/quiz-results`, { 
           state: { 
             score: percentage,
-            correctAnswers: finalCorrect,
+            correctAnswers: totalCorrect,
             totalQuestions: questions.length || totalQuestions,
             userAnswers: userAnswers,
             storyId: storyId // Keep the storyId in state if needed later
           } 
         });
       }
-      
-      // Reset selection for next question
-      setSelectedOption(null);
     };
 
 
@@ -172,65 +194,102 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
     }
     
     return (
-      <div className="relative flex flex-col items-center justify-center min-h-screen w-full p-5 bg-gray-400">
-        {/* Back button */}
+      <div className="relative min-h-screen w-full">
+        {/* Background with dark overlay */}
         <div 
-          className="absolute top-8 left-8 text-2xl font-bold cursor-pointer" 
-          onClick={() => navigate(`/story/${storyId}`)}
-        >
-          &lt;
-      </div>
+          className="absolute inset-0" 
+          style={{ 
+            backgroundImage: `url('/images/cafe.png')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        ></div>
+        <div className="absolute inset-0 bg-black opacity-60"></div>
         
-      {/* Character and speech bubble */}
-      <div className="flex items-center mb-6 w-full max-w-xl">
-        <div className="w-24 h-24 bg-gray-500 rounded-full flex items-center justify-center text-sm text-center text-gray-800 shrink-0 mr-2">
-            &lt;character head&gt;
-        </div>
-        <div className="bg-gray-200 rounded-3xl p-4 flex-1 shadow-md">
-            {currentQuestion ? currentQuestion.text : "Loading question..."}
-        </div>
-      </div>
-      
-      {/* Question card */}
-      <div className="bg-white rounded-3xl p-6 w-full max-w-lg shadow-md mb-8">
-        <div className="text-right mb-4 text-sm font-medium">
-          Question {currentQuestionNumber}/{questions.length || totalQuestions}
-        </div>
-        
-        {/* Answer options */}
-        <div className="space-y-4">
-          {currentQuestion?.options?.map((option: Option) => (
-            <div 
-              key={option.id}
-              className="flex items-center justify-between p-4 rounded-full border border-gray-200 cursor-pointer hover:bg-gray-50"
-              onClick={() => handleOptionSelect(option.id)}
-            >
-              <span className="ml-2">{option.text}</span>
-              <div className={`w-6 h-6 rounded-full border ${selectedOption === option.id ? 'border-gray-500' : 'border-gray-300'} flex items-center justify-center`}>
-                {selectedOption === option.id && <div className="w-3 h-3 rounded-full bg-gray-500"></div>}
-              </div>
+        {/* Content container */}
+        <div className="relative z-10 flex flex-col items-center justify-center min-h-screen w-full p-5">
+          {/* Back button */}
+          <div 
+            className="absolute top-8 left-8 cursor-pointer" 
+            onClick={() => navigate(`/story/${storyId}`)}
+          >
+            <img src="/icons/arrow-left.svg" alt="Back" width="30" height="30" />
+          </div>
+          
+          {/* Character and speech bubble */}
+          <div className="flex items-center mb-6 w-full max-w-xl">
+            <div className="w-24 h-24 rounded-full overflow-hidden shrink-0 mr-2">
+                <img src="/images/characters/carol_asking.png" alt="Carol" className="w-full h-full object-cover" />
             </div>
-          ))}
+            <div className="bg-gray-200 rounded-3xl p-4 flex-1 shadow-md">
+                <span className="text-lg font-medium">{currentQuestion ? currentQuestion.text : "Loading question..."}</span>
+            </div>
+          </div>
+          
+          {/* Question card */}
+          <div className="bg-white rounded-3xl p-6 w-full max-w-lg shadow-md mb-8">
+            <div className="text-right mb-4 text-sm font-medium">
+              Question {currentQuestionNumber}/{questions.length || totalQuestions}
+            </div>
+            
+            {/* Answer options */}
+            <div className="space-y-4">
+              {currentQuestion?.options?.map((option: Option) => (
+                <div 
+                  key={option.id}
+                  className="flex items-center justify-between p-4 rounded-full border border-gray-200 cursor-pointer hover:bg-gray-50"
+                  onClick={() => handleOptionSelect(option.id)}
+                >
+                  <span className="ml-2 text-base">{option.text}</span>
+                  <div className={`w-6 h-6 rounded-full border ${selectedOption === option.id ? 'border-gray-500' : 'border-gray-300'} flex items-center justify-center`}>
+                    {selectedOption === option.id && <div className="w-3 h-3 rounded-full bg-gray-500"></div>}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Navigation arrows */}
+          <div className="absolute bottom-8 right-8 flex space-x-6">
+            {/* Hide left arrow on first question */}
+            {currentQuestionNumber > 1 && (
+              <div 
+                className="w-10 h-10 flex items-center justify-center cursor-pointer" 
+                onClick={goToPrevious}
+              >
+                <img src="/icons/arrow-left.svg" alt="Previous" />
+              </div>
+            )}
+            
+            {/* Show right arrow on middle questions */}
+            {currentQuestionNumber < (questions.length || totalQuestions) && (
+              <div 
+                className="w-10 h-10 flex items-center justify-center cursor-pointer" 
+                onClick={goToNext}
+              >
+                <img src="/icons/arrow-right.svg" alt="Next" />
+              </div>
+            )}
+          </div>
+          
+          {/* Submit button on last question */}
+          {currentQuestionNumber === (questions.length || totalQuestions) && (
+            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+              <button
+                onClick={goToNext} 
+                className="bg-[#FFD700] hover:bg-amber-400 text-gray-800 font-bold rounded-xl shadow-xl
+                          py-3 px-6 sm:py-4 sm:px-8 
+                          text-base sm:text-lg md:text-xl 
+                          transition-colors duration-150"
+                style={{ fontFamily: 'Quicksand, sans-serif' }}
+              >
+                Submit Quiz
+              </button>
+            </div>
+          )}
         </div>
       </div>
-      
-      {/* Navigation arrows */}
-      <div className="absolute bottom-8 right-8 flex space-x-4">
-        <div 
-          className="w-10 h-10 flex items-center justify-center cursor-pointer" 
-          onClick={goToPrevious}
-        >
-          &lt;
-        </div>
-        <div 
-          className="w-10 h-10 flex items-center justify-center cursor-pointer" 
-          onClick={goToNext}
-        >
-          &gt;
-        </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default QuizQuestion;
