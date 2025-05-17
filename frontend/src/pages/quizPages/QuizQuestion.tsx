@@ -60,14 +60,17 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
     };
     
     // Fetch quiz from backend
+    // API base URL for all backend requests
+    const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://theordinarybitcoinblog.onrender.com';
+
     useEffect(() => {
       const fetchQuestions = async () => {
         setLoading(true);
         setError(null);
         
         try {
-          // Connect to the correct endpoint path (now using port 5001)
-          const response = await fetch('http://localhost:5001/quiz/questions');
+          // Use API_BASE_URL instead of hardcoded localhost
+          const response = await fetch(`${API_BASE_URL}/quiz/questions`);
           
           if (!response.ok) throw new Error('Failed to fetch questions');
           
