@@ -72,7 +72,7 @@ def get_user_quiz_data():
     
     
 # Quiz retrieval logic
-@quiz_route.route('/quiz/questions', methods=['GET'])
+@quiz_route.route('/questions', methods=['GET'])
 def get_quiz_questions():
     response = supabase.table("QuizQuestions").select("*").execute() 
     
