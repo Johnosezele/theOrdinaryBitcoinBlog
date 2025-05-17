@@ -11,7 +11,11 @@ load_dotenv()
 
 # Initialize flask app & set up CORS
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": ["https://ordinarybitcoinblog.vercel.app", "http://localhost:5173", "http://localhost:3000"]}})
+
+# More secure CORS setup with environment variable
+cors_origins = os.environ.get('CORS_ORIGINS', 'https://ordinarybitcoinblog.vercel.app,http://localhost:5173,http://localhost:3000')
+origins = cors_origins.split(',')
+CORS(app, resources={r"/*": {"origins": origins}})
 
 # Register Blueprints 
 app.register_blueprint(auth_route, url_prefix="/auth")
