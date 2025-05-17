@@ -61,7 +61,8 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
     
     // Fetch quiz from backend
     // API base URL for all backend requests
-    const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://theordinarybitcoinblog.onrender.com';
+    // Using Vite's environment variable format
+    const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://theordinarybitcoinblog.onrender.com';
 
     useEffect(() => {
       const fetchQuestions = async () => {
