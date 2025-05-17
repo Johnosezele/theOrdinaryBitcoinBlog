@@ -1199,7 +1199,7 @@
           "emotion": "excited",
           "dialogueActive": true,
           "dialogue": "Oh wow! It showed up. Pending, but it’s there.",
-          "size": "small"
+          "size": "large"
         },
         "centralDialogue": {
           "active": false,

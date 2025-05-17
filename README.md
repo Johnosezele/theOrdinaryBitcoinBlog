@@ -1,11 +1,10 @@
 
-![IMAGE 2025-04-21 12:01:30 AM](https://github.com/user-attachments/assets/332f6091-c7f3-4581-a584-e72752e87705)
+# The Ordinary Bitcoin Blog![OBTCBlog](https://github.com/user-attachments/assets/d2a01c5f-b334-47b2-97ba-fb1da8381280)
 
-# The Ordinary Bitcoin Blog
 
 **Making Bitcoin simple, social, and seriously fun.**
 
-The **Ordinary Bitcoin Blog** transforms complex Bitcoin topics into friendly, visual, and interactive stories. Through playful conversations between cartoon friends—Carol, Bob, Alex, and more—each blog entry (called an **Issue**) breaks down key concepts in a way that's easy to understand, visually rich, and fun to share.
+The **Ordinary Bitcoin Blog** transforms complex Bitcoin topics into friendly, visual, and interactive stories. Through playful conversations between cartoon friends Carol and Bob, each blog entry (called an **Issue**) breaks down key concepts in a way that's easy to understand, visually rich, and fun to share.
 
 > Like chatting with a friend, but about Bitcoin. And with cartoons. 
 
@@ -39,7 +38,7 @@ We're building this in **30 days** for the Bitcoin++ Hackathon and forming a tea
 - Design a landing page that introduces the blog and connects all issues.
 
 #### Illustrators / Animators
-- Bring Carol, Bob, Alex, and other characters to life.
+- Bring Carol, Bob, and other characters to life.
 - Create fun, vibrant assets to enhance storytelling.
 - Animate scenes to make learning more engaging.
 

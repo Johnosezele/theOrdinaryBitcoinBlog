@@ -1,6 +1,6 @@
 # Quiz submission endpoints
 from flask import Blueprint, request, jsonify
-from supabase import create_client
+from supabase import create_client, Client
 import os
 import uuid
 from datetime import datetime
