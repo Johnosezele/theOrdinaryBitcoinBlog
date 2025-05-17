@@ -11,7 +11,11 @@ load_dotenv()
 
 # Initialize flask app & set up CORS
 app = Flask(__name__)
-CORS(app)
+
+# More secure CORS setup with environment variable
+cors_origins = os.environ.get('CORS_ORIGINS', 'https://ordinarybitcoinblog.vercel.app,http://localhost:5173,http://localhost:3000')
+origins = cors_origins.split(',')
+CORS(app, resources={r"/*": {"origins": origins}})
 
 # Register Blueprints 
 app.register_blueprint(auth_route, url_prefix="/auth")
@@ -22,5 +26,10 @@ app.register_blueprint(leaderboard_route, url_prefix="/leaderboard")
 def home():
     return jsonify({"message": "Flask API running"})
 
+@app.route("/health")
+def health_check():
+    return jsonify({"status": "healthy"}), 200
+
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    port = int(os.environ.get("PORT", 5001))
+    app.run(host="0.0.0.0", port=port, debug=os.environ.get("FLASK_ENV") == "development")
