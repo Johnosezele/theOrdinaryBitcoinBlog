@@ -22,5 +22,10 @@ app.register_blueprint(leaderboard_route, url_prefix="/leaderboard")
 def home():
     return jsonify({"message": "Flask API running"})
 
+@app.route("/health")
+def health_check():
+    return jsonify({"status": "healthy"}), 200
+
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    port = int(os.environ.get("PORT", 5001))
+    app.run(host="0.0.0.0", port=port, debug=os.environ.get("FLASK_ENV") == "development")
