@@ -73,7 +73,7 @@ def get_user_quiz_data():
     
 # Quiz retrieval logic
 @quiz_route.route('/quiz/questions', methods=['GET'])
-def get_quiz_questions:
+def get_quiz_questions():
     response = supabase.table("QuizQuestions").select("*").execute() 
     
     # Retrieve data from rows
@@ -91,15 +91,15 @@ def get_quiz_questions:
         correct_answer_text = option_map.get(row["correct_option"], "Unknown option")
         
         row_data = {
-            story_id: row['story_id'],
-            question_text: row['question_text'],
-            correct_option: correct_answer_text,
-            option_a: row['option_a'],
-            option_b: row['option_b'],
-            option_c: row['option_c'],
-            option_d: row['option_d']
+            "story_id": row['story_id'],
+            "question_text": row['question_text'],
+            "correct_option": correct_answer_text,
+            "option_a": row['option_a'],
+            "option_b": row['option_b'],
+            "option_c": row['option_c'],
+            "option_d": row['option_d']
         }
         
         quiz_dict.append(row_data)
            
-    return {"questions": quiz_dict}
+    return jsonify({"questions": quiz_dict}), 200
