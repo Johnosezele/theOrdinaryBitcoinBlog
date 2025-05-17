@@ -43,7 +43,6 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
     const [userAnswers, setUserAnswers] = useState<{[questionIndex: number]: string}>({})
-    const [correctAnswers, setCorrectAnswers] = useState(0);
       
     // Function to convert backend data to frontend format
     const transformBackendData = (backendQuestions: BackendQuestion[]): Question[] => {
@@ -118,16 +117,8 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
     };
     
     const goToNext = () => {
-      // Check if current answer is correct before moving
-      if (currentQuestion && selectedOption) {
-        const selectedOptionText = currentQuestion.options.find(opt => opt.id === selectedOption)?.text;
-        const isCurrentCorrect = selectedOptionText === currentQuestion.correct_answer;
-        
-        // On last question, don't increment state as we'll calculate from all answers
-        if (isCurrentCorrect && currentQuestionNumber < (questions.length || totalQuestions)) {
-          setCorrectAnswers(prev => prev + 1);
-        }
-      }
+      // We'll calculate all correct answers when navigating to results
+      // No need to track individual correctness here
       
       if (currentQuestionNumber < (questions.length || totalQuestions)) {
         navigate(`/quiz-question/${currentQuestionNumber + 1}`);
