@@ -1,2 +1,16 @@
-venv
+# Python cache files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.env/
+ENV/
+env/
+.venv/
 .env
+
+# VSCode settings (optional)
+.vscode/
