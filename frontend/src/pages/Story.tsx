@@ -325,19 +325,19 @@ const Story: React.FC = () => {
 
   const renderIntroScene = (scene: Scene) => {
     return (
-      <div className="relative flex-1 overflow-hidden">
-        {/* Background with overlay - fixed in place */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center" 
-          style={{ backgroundImage:`url(/images/${scene.background}.png)` }}
-        >
-          <div className="absolute inset-0 bg-black opacity-60"></div>
-        </div>
-        
-        {/* Scrollable content container */}
-        <div className="relative z-10 h-full overflow-y-auto overflow-x-auto flex flex-col">
-          {/* Inner content with padding and flex-grow */}
-          <div className="p-4 sm:p-6 md:p-8 lg:p-12 text-white min-w-full flex flex-col flex-grow justify-between">
+      <div className="relative flex-1">
+      {/* Background with overlay - fixed in place */}
+      <div 
+        className="fixed inset-0 bg-cover bg-center" 
+        style={{ backgroundImage:`url(/images/${scene.background}.png)` }}
+      >
+        <div className="absolute inset-0 bg-black opacity-60"></div>
+      </div>
+      
+      {/* Content container */}
+      <div className="relative z-10 min-h-full flex flex-col">
+        {/* Inner content with padding */}
+        <div className="p-4 sm:p-6 md:p-8 lg:p-12 text-white min-w-full flex flex-col flex-grow">
             {/* Content Section - at the bottom of viewport by default */}
             <div className="mt-auto max-w-full sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl"> 
               <h1
@@ -377,8 +377,6 @@ const Story: React.FC = () => {
       </div>
     );
   };
-  
-
 
   const renderDialogueScene = (scene: Scene) => {
     const useFigmaStyleLayout = 
@@ -399,13 +397,15 @@ const Story: React.FC = () => {
         : "justify-center md:justify-evenly"; // Center on mobile, more evenly spaced on md+ but not full spread
 
       return (
+        <div className="relative flex-1">
         <div 
-          className="relative flex-1 bg-cover bg-center"
+          className="fixed inset-0 bg-cover bg-center" 
           style={{ backgroundImage: `url(/images/${scene.background}.png)` }}
         >
           <div className="absolute inset-0 bg-black opacity-60"></div>
+        </div>
 
-          <div className={`relative z-10 flex flex-col h-full p-2 sm:p-3 md:p-4 overflow-y-auto overflow-x-auto ${!hasVisualAid ? 'justify-center' : 'justify-between'}`}> 
+        <div className={`relative z-10 min-h-full flex flex-col p-2 sm:p-3 md:p-4 ${!hasVisualAid ? 'justify-center' : 'justify-between'}`}> 
             {/* If no visual aid, main container tries to center its content vertically */}
             
             {/* Character Container: Apply dynamic layout class */}
@@ -460,7 +460,7 @@ const Story: React.FC = () => {
 
 
   return (
-    <div className="fixed inset-0 w-screen h-screen flex flex-col overflow-hidden"> 
+    <div className="fixed inset-0 w-screen h-screen flex flex-col"> 
       <nav className="bg-[#F8AB28] h-14 sm:h-16 flex justify-between items-center px-3 sm:px-6 md:px-10 lg:px-14 shadow-md z-20 flex-shrink-0">
         <div className="flex items-center">
           <button 
@@ -481,14 +481,14 @@ const Story: React.FC = () => {
         </button>
       </nav>
 
-      <div className="flex-grow relative flex flex-col overflow-hidden">
-        <div className={`overflow-hidden flex-grow relative flex flex-col`}> 
+      <div className="flex-grow overflow-y-auto">
+        <div className="min-h-full relative flex flex-col"> 
           {currentScene.type === 'intro' 
             ? renderIntroScene(currentScene)
             : renderDialogueScene(currentScene)
           }
           {currentScene.type !== 'intro' && firstDialogueSceneIndex !== -1 && (
-            <div className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 md:bottom-4 md:right-4 flex gap-2 z-30">
+            <div className="fixed bottom-4 right-4 flex gap-2 z-30">
               {currentSceneIndex > firstDialogueSceneIndex && (
                 <button
                   onClick={goToPrevScene}
