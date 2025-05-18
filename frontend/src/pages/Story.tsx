@@ -125,13 +125,14 @@ const visualAidMap: {
 
 const Story: React.FC = () => {
   const navigate = useNavigate();
-  const [currentSceneIndex, setCurrentSceneIndex] = useState(0);
-  const currentScene = dialogueData.scenes[currentSceneIndex];
   const { width, height } = useWindowSize();
+  const [currentSceneIndex, setCurrentSceneIndex] = useState(0);
   const [confettiActive, setConfettiActive] = useState(false);
   const [showQuizModal, setShowQuizModal] = useState(false);
-  const [progressPulse, setProgressPulse] = useState(false);
   const [progressFading, setProgressFading] = useState(false);
+  const [progressPulse, setProgressPulse] = useState(false);
+  const [isContentScrollable, setIsContentScrollable] = useState(false);
+  const currentScene = dialogueData.scenes[currentSceneIndex];
   // Calculate dialogue scene indices once using useMemo instead of state + useEffect
   const { firstDialogueSceneIndex, lastDialogueSceneIndex } = useMemo(() => {
     const first = dialogueData.scenes.findIndex(scene => scene.type === 'dialogue');
@@ -195,6 +196,19 @@ const Story: React.FC = () => {
     };
   }, []);
   
+  useEffect(() => {
+    const checkScrollable = () => {
+      const storyContent = document.getElementById('story-content');
+      if (storyContent) {
+        setIsContentScrollable(storyContent.scrollHeight > storyContent.clientHeight);
+      }
+    };
+    
+    checkScrollable();
+    window.addEventListener('resize', checkScrollable);
+    return () => window.removeEventListener('resize', checkScrollable);
+  }, [currentSceneIndex]);
+
   const goToNextScene = () => {
     if (currentSceneIndex < dialogueData.scenes.length - 1) {
       setProgressPulse(false);
@@ -325,7 +339,7 @@ const Story: React.FC = () => {
 
   const renderIntroScene = (scene: Scene) => {
     return (
-      <div className="relative flex-1">
+      <div className="relative flex-1 min-h-0 overflow-auto">
         <div 
           className="absolute inset-0 bg-cover bg-center" 
           style={{ backgroundImage:`url(/images/${scene.background}.png)` }}
@@ -333,16 +347,18 @@ const Story: React.FC = () => {
           <div className="absolute inset-0 bg-black opacity-60"></div>
         </div>
         
-        <div className="relative z-10 flex flex-col justify-end h-full p-4 sm:p-6 md:p-8 lg:p-12 text-white">
-          <div className="mb-10 sm:mb-12 md:mb-16 max-w-full sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl"> 
+        {/* Added overflow handling and min-height for proper scrolling */}
+        <div className="relative z-10 flex flex-col justify-end min-h-full p-4 sm:p-6 md:p-8 lg:p-12 text-white overflow-auto">
+          {/* Added better responsive width constraints and padding */}
+          <div className="mb-10 sm:mb-12 md:mb-16 max-w-full w-full px-1 sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl"> 
             <h1
-              className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 text-left"
+              className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 text-left break-words"
               style={{ fontFamily: 'Quicksand, sans-serif', fontWeight: 700 }} 
             >
               {scene.title}
             </h1>
             <p
-              className="text-sm sm:text-base md:text-lg mb-3 sm:mb-4 text-left"
+              className="text-sm sm:text-base md:text-lg mb-3 sm:mb-4 text-left break-words"
               style={{ fontFamily: 'Quicksand, sans-serif' }}
             >
               {scene.subtitle}
@@ -355,7 +371,8 @@ const Story: React.FC = () => {
             </p>
           </div>
 
-          <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 lg:bottom-12 lg:right-12">
+          {/* Adjusted button positioning to ensure it's visible on all screen sizes */}
+          <div className="sm:absolute bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 lg:bottom-12 lg:right-12 mt-4 sm:mt-0 text-right">
             <button
               onClick={goToNextScene}
               className="bg-[#F02B6C] hover:bg-pink-700 text-white rounded-md 
@@ -453,28 +470,21 @@ const Story: React.FC = () => {
 
 
   return (
-    <div className="fixed inset-0 w-screen h-screen flex flex-col overflow-hidden"> 
-      <nav className="bg-[#F8AB28] h-14 sm:h-16 flex justify-between items-center px-3 sm:px-6 md:px-10 lg:px-14 shadow-md z-20 flex-shrink-0">
-        <div className="flex items-center">
-          <button 
-            onClick={() => navigate('/')} 
-            className="p-1 hover:bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-white"
-          >
-            <img src="/icons/home.svg" alt="Home" className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10" />
-          </button>
-          {currentScene.type !== 'intro' && (
-            <div className="flex flex-col items-start justify-center ml-2 sm:ml-3 gap-[2px]">
-              <span className="text-[#070C02] text-[10px] sm:text-xs md:text-sm font-quicksand font-normal leading-none">Story 1</span>
-              <span className="text-[#070C02] text-[10px] sm:text-xs md:text-sm font-quicksand font-semibold leading-none">Bitcoin Basics</span>
-            </div>
-          )}
-        </div>
-        <button className="p-1 hover:bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-white">
-          {/*<img src="/icons/profile.svg" alt="Profile" className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10" />*/}
+    <div className="flex flex-col h-screen bg-black relative overflow-hidden">
+      <div className="bg-[#ffa500] py-2 px-4 z-20 flex justify-between items-center shadow-md">
+        <button 
+          onClick={() => navigate('/')} 
+          className="focus:outline-none"
+          aria-label="Home"
+        >
+          <img src="/icons/home.svg" alt="Home" className="w-6 h-6" />
         </button>
-      </nav>
+        <button className="focus:outline-none" aria-label="Profile">
+          <img src="/icons/user.svg" alt="Profile" className="w-6 h-6" />
+        </button>
+      </div>
 
-      <div className="flex-grow relative flex flex-col overflow-hidden">
+      <div id="story-content" className="flex-1 flex flex-col relative overflow-auto">
         <div className={`overflow-hidden flex-grow relative flex flex-col`}> 
           {currentScene.type === 'intro' 
             ? renderIntroScene(currentScene)
@@ -534,6 +544,17 @@ const Story: React.FC = () => {
           gravity={0.15}
           style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 50, pointerEvents: 'none' }}
         />
+      )}
+      
+      {/* Scroll indicator for mobile - shows only when content is scrollable */}
+      {isContentScrollable && currentScene.type === 'intro' && (
+        <div className="fixed bottom-20 right-4 z-40 animate-bounce opacity-70 sm:hidden">
+          <div className="bg-white bg-opacity-30 rounded-full p-2">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </div>
+        </div>
       )}
 
       {(currentSceneIndex === lastDialogueSceneIndex && currentScene.type === 'dialogue' && !showQuizModal && lastDialogueSceneIndex !== -1) && (
