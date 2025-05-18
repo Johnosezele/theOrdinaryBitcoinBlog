@@ -334,10 +334,10 @@ const Story: React.FC = () => {
           <div className="absolute inset-0 bg-black opacity-60"></div>
         </div>
         
-        {/* Scrollable content container - uses flex-col and space-between to ensure button visibility */}
-        <div className="relative z-10 flex flex-col justify-between h-full overflow-x-auto overflow-y-auto">
-          {/* Inner content with padding to ensure proper spacing when scrolling */}
-          <div className="p-4 sm:p-6 md:p-8 lg:p-12 text-white min-w-full flex flex-col h-full justify-between">
+        {/* Scrollable content container */}
+        <div className="relative z-10 h-full overflow-y-auto overflow-x-auto flex flex-col">
+          {/* Inner content with padding and flex-grow */}
+          <div className="p-4 sm:p-6 md:p-8 lg:p-12 text-white min-w-full flex flex-col flex-grow justify-between">
             {/* Content Section - at the bottom of viewport by default */}
             <div className="mt-auto max-w-full sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl"> 
               <h1
@@ -405,7 +405,7 @@ const Story: React.FC = () => {
         >
           <div className="absolute inset-0 bg-black opacity-60"></div>
 
-          <div className={`relative z-10 flex flex-col h-full p-2 sm:p-3 md:p-4 overflow-y-auto ${!hasVisualAid ? 'justify-center' : 'justify-between'}`}> 
+          <div className={`relative z-10 flex flex-col h-full p-2 sm:p-3 md:p-4 overflow-y-auto overflow-x-auto ${!hasVisualAid ? 'justify-center' : 'justify-between'}`}> 
             {/* If no visual aid, main container tries to center its content vertically */}
             
             {/* Character Container: Apply dynamic layout class */}
@@ -435,7 +435,7 @@ const Story: React.FC = () => {
           style={{ backgroundImage: `url(/images/${scene.background}.png)` }}
         >
           <div className="absolute inset-0 bg-black opacity-60"></div>
-          <div className="absolute inset-0 flex flex-col justify-around p-2 sm:p-4 md:p-6">
+          <div className="relative z-10 h-full overflow-y-auto overflow-x-auto flex flex-col justify-around p-2 sm:p-4 md:p-6">
             <div className="flex flex-col md:flex-row flex-grow items-center justify-around gap-2 md:gap-4">
               {renderCharacter(scene.leftCharacter, "md:ml-4", "left")}
               <div className="flex-grow flex flex-col items-center justify-center my-2 md:my-0">
