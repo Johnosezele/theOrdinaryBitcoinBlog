@@ -63,7 +63,7 @@ const QuizResults: React.FC = () => {
   };
 
   return (
-    <div className="relative min-h-screen w-full">
+    <div className="relative min-h-screen w-full overflow-x-hidden">
       {/* Background with dark overlay - same as quiz questions */}
       <div 
         className="absolute inset-0" 
@@ -75,22 +75,22 @@ const QuizResults: React.FC = () => {
       ></div>
       <div className="absolute inset-0 bg-black opacity-60"></div>
       
-      {/* Content container */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen w-full p-8">
-        {/* Header */}
-        <h1 className="text-lg font-bold mb-16 self-start absolute top-8 left-8 text-white">
+      {/* Content container with improved mobile responsiveness */}
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen w-full p-4 sm:p-6 md:p-8 overflow-y-auto">
+        {/* Header with responsive positioning */}
+        <h1 className="text-base sm:text-lg font-bold mb-12 sm:mb-16 self-start absolute top-4 sm:top-6 md:top-8 left-4 sm:left-6 md:left-8 text-white">
           The Ordinary Bitcoin Blog
         </h1>
         
         {/* Animated confetti for perfect score */}
-      {showConfetti && <Confetti width={width} height={height} recycle={false} numberOfPieces={500} />}
+      {showConfetti && <Confetti width={width} height={height} recycle={false} numberOfPieces={width < 768 ? 200 : 500} />}
       
-      {/* Circular indicator with progress */}
-      <div className="relative mb-8">
+      {/* Circular indicator with progress - responsively sized */}
+      <div className="relative mb-6 sm:mb-8 mt-10 sm:mt-0">
         {/* Base circle with progress overlay */}
         <div className="relative">
-          {/* SVG container for circle */}
-          <svg className="w-40 h-40" viewBox="0 0 100 100">
+          {/* SVG container for circle - responsive sizing */}
+          <svg className="w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40" viewBox="0 0 100 100">
             {/* Conditional rendering based on score */}
             {(resultData.score || 0) === 100 ? (
               /* For 100% score - show solid gold circle */
@@ -137,30 +137,30 @@ const QuizResults: React.FC = () => {
             )}
           </svg>
           
-          {/* Score text */}
+          {/* Score text - responsive font size */}
           <div 
             className={`absolute inset-0 flex items-center justify-center
               ${(resultData.score || 0) === 100 ? 'shadow-[0_0_15px_5px_rgba(72,187,120,0.7)] rounded-full' : ''}`}
           >
-            <span className="text-3xl font-bold z-10 text-gray-800">{resultData.score}%</span>
+            <span className="text-xl sm:text-2xl md:text-3xl font-bold z-10 text-gray-800">{resultData.score}%</span>
           </div>
         </div>
       </div>
         
-        {/* Dynamic success message based on score */}
-        <h2 className="text-2xl font-bold mb-6 text-white">{getResultMessage()}</h2>
+        {/* Dynamic success message based on score - responsive text */}
+        <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-white text-center px-2">{getResultMessage()}</h2>
         
-        {/* Description */}
-        <p className="text-center text-gray-100 mb-16 max-w-md leading-relaxed">
+        {/* Description - better spacing on mobile */}
+        <p className="text-center text-gray-100 mb-8 sm:mb-12 md:mb-16 max-w-md leading-relaxed text-sm sm:text-base px-2">
           You answered {resultData.correctAnswers} out of {resultData.totalQuestions} questions correctly!
         </p>
         
-        {/* Action buttons */}
-        <div className="flex flex-wrap gap-4 justify-center">
+        {/* Action buttons - better mobile layout */}
+        <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center w-full max-w-md px-4 sm:px-0">
           {/* Share button (blurred out) */}
           <button
             onClick={handleShareOnSocials}
-            className="px-6 py-3 bg-white border border-gray-400 rounded text-gray-700 opacity-40 cursor-not-allowed"
+            className="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 bg-white border border-gray-400 rounded text-gray-700 opacity-40 cursor-not-allowed text-sm sm:text-base"
             disabled
           >
             Share on socials
@@ -169,7 +169,7 @@ const QuizResults: React.FC = () => {
           {/* Retry quiz button with similar styling to other gold buttons */}
           <button
             onClick={handleRetryQuiz}
-            className="px-6 py-3 bg-[#FFD700] hover:bg-amber-400 text-gray-800 font-bold rounded-xl shadow-xl transition-colors duration-150"
+            className="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 bg-[#FFD700] hover:bg-amber-400 text-gray-800 font-bold rounded-xl shadow-xl transition-colors duration-150 text-sm sm:text-base order-first sm:order-none mb-2 sm:mb-0"
             style={{ fontFamily: 'Quicksand, sans-serif' }}
           >
             Retry Quiz
@@ -178,7 +178,7 @@ const QuizResults: React.FC = () => {
           {/* Next story button */}
           <button
             onClick={handleNextStory}
-            className="px-6 py-3 bg-gray-600 text-white rounded-xl hover:bg-gray-700 transition-colors shadow-xl"
+            className="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 bg-gray-600 text-white rounded-xl hover:bg-gray-700 transition-colors shadow-xl text-sm sm:text-base"
           >
             Next story
           </button>

@@ -201,80 +201,80 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
         ></div>
         <div className="absolute inset-0 bg-black opacity-60"></div>
         
-        {/* Content container */}
-        <div className="relative z-10 flex flex-col items-center justify-center min-h-screen w-full p-5">
-          {/* Back button */}
+        {/* Content container with improved mobile/tablet responsiveness */}
+        <div className="relative z-10 flex flex-col items-center justify-center min-h-screen w-full p-4 sm:p-5 md:p-6 overflow-y-auto">
+          {/* Back button with adjusted position for mobile */}
           <div 
-            className="absolute top-8 left-8 cursor-pointer" 
+            className="absolute top-4 sm:top-6 md:top-8 left-4 sm:left-6 md:left-8 cursor-pointer" 
             onClick={() => navigate(`/story/${storyId}`)}
           >
-            <img src="/icons/arrow-left.svg" alt="Back" width="30" height="30" />
+            <img src="/icons/arrow-left.svg" alt="Back" width="24" height="24" className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" />
           </div>
           
-          {/* Character and speech bubble */}
-          <div className="flex items-center mb-6 w-full max-w-xl">
-            <div className="w-24 h-24 rounded-full overflow-hidden shrink-0 mr-2">
+          {/* Character and speech bubble with improved mobile layout */}
+          <div className="flex flex-col sm:flex-row items-center sm:items-start mb-4 sm:mb-6 w-full max-w-xl px-2 sm:px-0 mt-12 sm:mt-16 md:mt-8">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full overflow-hidden shrink-0 mr-0 sm:mr-2 mb-3 sm:mb-0">
                 <img src="/images/characters/carol_asking.png" alt="Carol" className="w-full h-full object-cover" />
             </div>
-            <div className="bg-gray-200 rounded-3xl p-4 flex-1 shadow-md">
-                <span className="text-lg font-medium">{currentQuestion ? currentQuestion.text : "Loading question..."}</span>
+            <div className="bg-gray-200 rounded-3xl p-3 sm:p-4 flex-1 shadow-md">
+                <span className="text-sm sm:text-base md:text-lg font-medium break-words">{currentQuestion ? currentQuestion.text : "Loading question..."}</span>
             </div>
           </div>
           
-          {/* Question card */}
-          <div className="bg-white rounded-3xl p-6 w-full max-w-lg shadow-md mb-8">
-            <div className="text-right mb-4 text-sm font-medium">
+          {/* Question card with better spacing for mobile */}
+          <div className="bg-white rounded-3xl p-4 sm:p-5 md:p-6 w-full max-w-lg shadow-md mb-6 sm:mb-8">
+            <div className="text-right mb-3 sm:mb-4 text-xs sm:text-sm font-medium">
               Question {currentQuestionNumber}/{questions.length || totalQuestions}
             </div>
             
-            {/* Answer options */}
-            <div className="space-y-4">
+            {/* Answer options with better text handling */}
+            <div className="space-y-3 sm:space-y-4">
               {currentQuestion?.options?.map((option: Option) => (
                 <div 
                   key={option.id}
-                  className="flex items-center justify-between p-4 rounded-full border border-gray-200 cursor-pointer hover:bg-gray-50"
+                  className="flex items-center justify-between p-3 sm:p-4 rounded-full border border-gray-200 cursor-pointer hover:bg-gray-50"
                   onClick={() => handleOptionSelect(option.id)}
                 >
-                  <span className="ml-2 text-base">{option.text}</span>
-                  <div className={`w-6 h-6 rounded-full border ${selectedOption === option.id ? 'border-gray-500' : 'border-gray-300'} flex items-center justify-center`}>
-                    {selectedOption === option.id && <div className="w-3 h-3 rounded-full bg-gray-500"></div>}
+                  <span className="ml-1 sm:ml-2 text-sm sm:text-base break-words pr-2 flex-1">{option.text}</span>
+                  <div className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full border ${selectedOption === option.id ? 'border-gray-500' : 'border-gray-300'} flex-shrink-0 flex items-center justify-center`}>
+                    {selectedOption === option.id && <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-gray-500"></div>}
                   </div>
                 </div>
               ))}
             </div>
           </div>
           
-          {/* Navigation arrows */}
-          <div className="absolute bottom-8 right-8 flex space-x-6">
+          {/* Navigation arrows with better positioning for mobile */}
+          <div className="fixed bottom-4 sm:bottom-6 md:bottom-8 right-4 sm:right-6 md:right-8 flex space-x-4 sm:space-x-6 z-20">
             {/* Hide left arrow on first question */}
             {currentQuestionNumber > 1 && (
               <div 
-                className="w-10 h-10 flex items-center justify-center cursor-pointer" 
+                className="w-10 h-10 flex items-center justify-center cursor-pointer bg-white bg-opacity-20 rounded-full p-2" 
                 onClick={goToPrevious}
               >
-                <img src="/icons/arrow-left.svg" alt="Previous" />
+                <img src="/icons/arrow-left.svg" alt="Previous" className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
             )}
             
             {/* Show right arrow on middle questions */}
             {currentQuestionNumber < (questions.length || totalQuestions) && (
               <div 
-                className="w-10 h-10 flex items-center justify-center cursor-pointer" 
+                className="w-10 h-10 flex items-center justify-center cursor-pointer bg-white bg-opacity-20 rounded-full p-2" 
                 onClick={goToNext}
               >
-                <img src="/icons/arrow-right.svg" alt="Next" />
+                <img src="/icons/arrow-right.svg" alt="Next" className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
             )}
           </div>
           
-          {/* Submit button on last question */}
+          {/* Submit button on last question - responsive positioning */}
           {currentQuestionNumber === (questions.length || totalQuestions) && (
-            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+            <div className="fixed bottom-4 sm:bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 z-20">
               <button
                 onClick={goToNext} 
                 className="bg-[#FFD700] hover:bg-amber-400 text-gray-800 font-bold rounded-xl shadow-xl
-                          py-3 px-6 sm:py-4 sm:px-8 
-                          text-base sm:text-lg md:text-xl 
+                          py-2 px-4 sm:py-3 sm:px-6 md:py-4 md:px-8 
+                          text-sm sm:text-base md:text-lg 
                           transition-colors duration-150"
                 style={{ fontFamily: 'Quicksand, sans-serif' }}
               >
