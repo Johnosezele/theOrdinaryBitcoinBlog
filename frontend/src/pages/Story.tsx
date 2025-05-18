@@ -334,11 +334,12 @@ const Story: React.FC = () => {
           <div className="absolute inset-0 bg-black opacity-60"></div>
         </div>
         
-        {/* Scrollable content container with both vertical and horizontal scrolling */}
-        <div className="relative z-10 flex flex-col justify-end h-full overflow-x-auto overflow-y-auto">
+        {/* Scrollable content container - uses flex-col and space-between to ensure button visibility */}
+        <div className="relative z-10 flex flex-col justify-between h-full overflow-x-auto overflow-y-auto">
           {/* Inner content with padding to ensure proper spacing when scrolling */}
-          <div className="p-4 sm:p-6 md:p-8 lg:p-12 text-white min-w-full">
-            <div className="mb-10 sm:mb-12 md:mb-16 max-w-full sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl"> 
+          <div className="p-4 sm:p-6 md:p-8 lg:p-12 text-white min-w-full flex flex-col h-full justify-between">
+            {/* Content Section - at the bottom of viewport by default */}
+            <div className="mt-auto max-w-full sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl"> 
               <h1
                 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 text-left"
                 style={{ fontFamily: 'Quicksand, sans-serif', fontWeight: 700 }} 
@@ -352,23 +353,24 @@ const Story: React.FC = () => {
                 {scene.subtitle}
               </p>
               <p
-                className="text-xs sm:text-sm opacity-90 text-left" 
+                className="text-xs sm:text-sm opacity-90 text-left mb-4" 
                 style={{ fontFamily: 'Quicksand, sans-serif' }}
               >
                 Duration: {scene.duration || '5 min'}
               </p>
-            </div>
-  
-            <div className="md:absolute bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 lg:bottom-12 lg:right-12">
-              <button
-                onClick={goToNextScene}
-                className="bg-[#F02B6C] hover:bg-pink-700 text-white rounded-md 
-                           py-2 px-4 sm:py-2 sm:px-5 md:py-3 md:px-6 
-                           text-sm sm:text-base transition-colors"
-                style={{ fontFamily: 'Quicksand, sans-serif', fontWeight: 700 }} 
-              >
-                {scene.ctaButton}
-              </button>
+            
+              {/* Button is part of the content flow on mobile - always visible */}
+              <div className="text-center sm:text-left mt-6 mb-6 sm:mb-0">
+                <button
+                  onClick={goToNextScene}
+                  className="bg-[#F02B6C] hover:bg-pink-700 text-white rounded-md 
+                             py-3 px-6 sm:py-3 sm:px-6 md:py-3 md:px-6 
+                             text-base transition-colors w-full sm:w-auto"
+                  style={{ fontFamily: 'Quicksand, sans-serif', fontWeight: 700 }} 
+                >
+                  {scene.ctaButton}
+                </button>
+              </div>
             </div>
           </div>
         </div>
