@@ -1,6 +1,6 @@
 
 # The Ordinary Bitcoin Blog![OBTCBlog](https://github.com/user-attachments/assets/d2a01c5f-b334-47b2-97ba-fb1da8381280)
-
+We are live on: https://ordinarybitcoinblog.vercel.app/
 
 **Making Bitcoin simple, social, and seriously fun.**
 
