@@ -252,7 +252,7 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
                 className="w-10 h-10 flex items-center justify-center cursor-pointer" 
                 onClick={goToPrevious}
               >
-                <img src="/icons/arrow-left.svg" alt="Previous" />
+                <img src="/icons/arrow-left.svg" alt="Previous" className="w-8 h-8 sm:w-8 sm:h-8" />
               </div>
             )}
             
@@ -262,7 +262,7 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
                 className="w-10 h-10 flex items-center justify-center cursor-pointer" 
                 onClick={goToNext}
               >
-                <img src="/icons/arrow-right.svg" alt="Next" />
+                <img src="/icons/arrow-right.svg" alt="Next" className="w-8 h-8 sm:w-8 sm:h-8" />
               </div>
             )}
           </div>

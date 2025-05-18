@@ -325,7 +325,8 @@ const Story: React.FC = () => {
 
   const renderIntroScene = (scene: Scene) => {
     return (
-      <div className="relative flex-1">
+      <div className="relative flex-1 overflow-hidden">
+        {/* Background with overlay - fixed in place */}
         <div 
           className="absolute inset-0 bg-cover bg-center" 
           style={{ backgroundImage:`url(/images/${scene.background}.png)` }}
@@ -333,38 +334,42 @@ const Story: React.FC = () => {
           <div className="absolute inset-0 bg-black opacity-60"></div>
         </div>
         
-        <div className="relative z-10 flex flex-col justify-end h-full p-4 sm:p-6 md:p-8 lg:p-12 text-white">
-          <div className="mb-10 sm:mb-12 md:mb-16 max-w-full sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl"> 
-            <h1
-              className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 text-left"
-              style={{ fontFamily: 'Quicksand, sans-serif', fontWeight: 700 }} 
-            >
-              {scene.title}
-            </h1>
-            <p
-              className="text-sm sm:text-base md:text-lg mb-3 sm:mb-4 text-left"
-              style={{ fontFamily: 'Quicksand, sans-serif' }}
-            >
-              {scene.subtitle}
-            </p>
-            <p
-              className="text-xs sm:text-sm opacity-90 text-left" 
-              style={{ fontFamily: 'Quicksand, sans-serif' }}
-            >
-              Duration: {scene.duration || '5 min'}
-            </p>
-          </div>
-
-          <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 lg:bottom-12 lg:right-12">
-            <button
-              onClick={goToNextScene}
-              className="bg-[#F02B6C] hover:bg-pink-700 text-white rounded-md 
-                         py-2 px-4 sm:py-2 sm:px-5 md:py-3 md:px-6 
-                         text-sm sm:text-base transition-colors"
-              style={{ fontFamily: 'Quicksand, sans-serif', fontWeight: 700 }} 
-            >
-              {scene.ctaButton}
-            </button>
+        {/* Scrollable content container with both vertical and horizontal scrolling */}
+        <div className="relative z-10 flex flex-col justify-end h-full overflow-x-auto overflow-y-auto">
+          {/* Inner content with padding to ensure proper spacing when scrolling */}
+          <div className="p-4 sm:p-6 md:p-8 lg:p-12 text-white min-w-full">
+            <div className="mb-10 sm:mb-12 md:mb-16 max-w-full sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl"> 
+              <h1
+                className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 text-left"
+                style={{ fontFamily: 'Quicksand, sans-serif', fontWeight: 700 }} 
+              >
+                {scene.title}
+              </h1>
+              <p
+                className="text-sm sm:text-base md:text-lg mb-3 sm:mb-4 text-left"
+                style={{ fontFamily: 'Quicksand, sans-serif' }}
+              >
+                {scene.subtitle}
+              </p>
+              <p
+                className="text-xs sm:text-sm opacity-90 text-left" 
+                style={{ fontFamily: 'Quicksand, sans-serif' }}
+              >
+                Duration: {scene.duration || '5 min'}
+              </p>
+            </div>
+  
+            <div className="md:absolute bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 lg:bottom-12 lg:right-12">
+              <button
+                onClick={goToNextScene}
+                className="bg-[#F02B6C] hover:bg-pink-700 text-white rounded-md 
+                           py-2 px-4 sm:py-2 sm:px-5 md:py-3 md:px-6 
+                           text-sm sm:text-base transition-colors"
+                style={{ fontFamily: 'Quicksand, sans-serif', fontWeight: 700 }} 
+              >
+                {scene.ctaButton}
+              </button>
+            </div>
           </div>
         </div>
       </div>
