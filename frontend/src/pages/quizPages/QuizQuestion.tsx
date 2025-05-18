@@ -249,20 +249,20 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
             {/* Hide left arrow on first question */}
             {currentQuestionNumber > 1 && (
               <div 
-                className="w-10 h-10 flex items-center justify-center cursor-pointer bg-white bg-opacity-20 rounded-full p-2" 
+                className="w-10 h-10 flex items-center justify-center cursor-pointer" 
                 onClick={goToPrevious}
               >
-                <img src="/icons/arrow-left.svg" alt="Previous" className="w-5 h-5 sm:w-6 sm:h-6" />
+                <img src="/icons/arrow-left.svg" alt="Previous" />
               </div>
             )}
             
             {/* Show right arrow on middle questions */}
             {currentQuestionNumber < (questions.length || totalQuestions) && (
               <div 
-                className="w-10 h-10 flex items-center justify-center cursor-pointer bg-white bg-opacity-20 rounded-full p-2" 
+                className="w-10 h-10 flex items-center justify-center cursor-pointer" 
                 onClick={goToNext}
               >
-                <img src="/icons/arrow-right.svg" alt="Next" className="w-5 h-5 sm:w-6 sm:h-6" />
+                <img src="/icons/arrow-right.svg" alt="Next" />
               </div>
             )}
           </div>
