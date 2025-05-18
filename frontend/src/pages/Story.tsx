@@ -141,14 +141,14 @@ const Story: React.FC = () => {
       firstDialogueSceneIndex: first,
       lastDialogueSceneIndex: last === -1 ? -1 : dialogueData.scenes.length - 1 - last,
     };
-  }, [dialogueData.scenes]);
+  }, []); // dialogueData.scenes is stable after initial load, so this is fine
 
   useEffect(() => {
     if (currentScene.type === 'dialogue') {
       // Preload upcoming scenes when current scene changes
       preloadUpcomingScenes(dialogueData.scenes as StoryScene[], currentSceneIndex, 3);
     }
-  }, [currentScene, currentSceneIndex, dialogueData.scenes]);
+  }, [currentScene, currentSceneIndex]); 
 
   useEffect(() => {
     if (dialogueData.scenes.length > 0 && lastDialogueSceneIndex !== -1 && currentSceneIndex === lastDialogueSceneIndex && currentScene.type === 'dialogue') {
@@ -325,56 +325,58 @@ const Story: React.FC = () => {
 
   const renderIntroScene = (scene: Scene) => {
     return (
-      <div className="relative flex-1">
-      {/* Background with overlay - fixed in place */}
-      <div 
-        className="fixed inset-0 bg-cover bg-center" 
-        style={{ backgroundImage:`url(/images/${scene.background}.png)` }}
-      >
-        <div className="absolute inset-0 bg-black opacity-60"></div>
-      </div>
-      
-      {/* Content container */}
-      <div className="relative z-10 min-h-full flex flex-col">
-        {/* Inner content with padding */}
-        <div className="p-4 sm:p-6 md:p-8 lg:p-12 text-white min-w-full flex flex-col flex-grow">
-            {/* Content Section - at the bottom of viewport by default */}
-            <div className="mt-auto max-w-full sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl"> 
-              <h1
-                className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 text-left"
-                style={{ fontFamily: 'Quicksand, sans-serif', fontWeight: 700 }} 
-              >
-                {scene.title}
-              </h1>
-              <p
-                className="text-sm sm:text-base md:text-lg mb-3 sm:mb-4 text-left"
-                style={{ fontFamily: 'Quicksand, sans-serif' }}
-              >
-                {scene.subtitle}
-              </p>
-              <p
-                className="text-xs sm:text-sm opacity-90 text-left mb-4" 
-                style={{ fontFamily: 'Quicksand, sans-serif' }}
-              >
-                Duration: {scene.duration || '5 min'}
-              </p>
-            
-              {/* Button is part of the content flow on mobile - always visible */}
-              <div className="text-center sm:text-left mt-6 mb-6 sm:mb-0">
-                <button
-                  onClick={goToNextScene}
-                  className="bg-[#F02B6C] hover:bg-pink-700 text-white rounded-md 
-                             py-3 px-6 sm:py-3 sm:px-6 md:py-3 md:px-6 
-                             text-base transition-colors w-full sm:w-auto"
+      // Changed: Added flex flex-col to make this a flex container for its direct child
+      <div className="relative flex-1 flex flex-col">
+        {/* Background with overlay - fixed in place */}
+        <div 
+          className="fixed inset-0 bg-cover bg-center" 
+          style={{ backgroundImage:`url(/images/${scene.background}.png)` }}
+        >
+          <div className="absolute inset-0 bg-black opacity-60"></div>
+        </div>
+        
+        {/* Content container */}
+        {/* Changed: Replaced min-h-full with flex-1 to expand within the parent flex container */}
+        <div className="relative z-10 flex-1 flex flex-col">
+          {/* Inner content with padding. flex-grow here makes it take available space in its parent */}
+          <div className="p-4 sm:p-6 md:p-8 lg:p-12 text-white min-w-full flex flex-col flex-grow">
+              {/* Content Section - mt-auto pushes this block to the bottom of its flex-grow parent */}
+              <div className="mt-auto max-w-full sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl"> 
+                <h1
+                  className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 text-left"
                   style={{ fontFamily: 'Quicksand, sans-serif', fontWeight: 700 }} 
                 >
-                  {scene.ctaButton}
-                </button>
+                  {scene.title}
+                </h1>
+                <p
+                  className="text-sm sm:text-base md:text-lg mb-3 sm:mb-4 text-left"
+                  style={{ fontFamily: 'Quicksand, sans-serif' }}
+                >
+                  {scene.subtitle}
+                </p>
+                <p
+                  className="text-xs sm:text-sm opacity-90 text-left mb-4" 
+                  style={{ fontFamily: 'Quicksand, sans-serif' }}
+                >
+                  Duration: {scene.duration || '5 min'}
+                </p>
+              
+                {/* Button is part of the content flow */}
+                <div className="text-center sm:text-left mt-6 mb-6 sm:mb-0">
+                  <button
+                    onClick={goToNextScene}
+                    className="bg-[#F02B6C] hover:bg-pink-700 text-white rounded-md 
+                               py-3 px-6 sm:py-3 sm:px-6 md:py-3 md:px-6 
+                               text-base transition-colors w-full sm:w-auto"
+                    style={{ fontFamily: 'Quicksand, sans-serif', fontWeight: 700 }} 
+                  >
+                    {scene.ctaButton}
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
     );
   };
 
@@ -390,45 +392,36 @@ const Story: React.FC = () => {
       const rightChar = scene.rightCharacter!;
       const hasVisualAid = !!scene.visualAid && visualAidMap[scene.visualAid] && (scene.type === 'dialogue');
 
-      // Determine the layout for the character container
-      // If there's a visual aid, keep them spread. If not, bring them closer.
       const characterContainerLayoutClass = hasVisualAid 
-        ? "justify-around" // Spread out if there's a visual aid
-        : "justify-center md:justify-evenly"; // Center on mobile, more evenly spaced on md+ but not full spread
+        ? "justify-around" 
+        : "justify-center md:justify-evenly"; 
+
+      const mainContentVerticalAlignClass = !hasVisualAid ? 'justify-center' : 'justify-between';
 
       return (
-        <div className="relative flex-1">
-        <div 
-          className="fixed inset-0 bg-cover bg-center" 
-          style={{ backgroundImage: `url(/images/${scene.background}.png)` }}
-        >
-          <div className="absolute inset-0 bg-black opacity-60"></div>
-        </div>
+        <div className="relative flex-1 flex flex-col">
+          <div 
+            className="fixed inset-0 bg-cover bg-center" 
+            style={{ backgroundImage: `url(/images/${scene.background}.png)` }}
+          >
+            <div className="absolute inset-0 bg-black opacity-60"></div>
+          </div>
 
-        <div className={`relative z-10 min-h-full flex flex-col p-2 sm:p-3 md:p-4 ${!hasVisualAid ? 'justify-center' : 'justify-between'}`}> 
-            {/* If no visual aid, main container tries to center its content vertically */}
-            
-            {/* Character Container: Apply dynamic layout class */}
+          <div className={`relative z-10 flex-1 flex flex-col p-2 sm:p-3 md:p-4 ${mainContentVerticalAlignClass}`}> 
             <div className={`flex flex-col md:flex-row ${characterContainerLayoutClass} items-start md:items-center w-full gap-2 md:gap-4 flex-shrink-0`}>
                 {renderCharacterWithBubble(leftChar, 'left')}
                 {renderCharacterWithBubble(rightChar, 'right')}
             </div>
 
-            {/* Visual Aid Container: Only takes space if visual aid is present */}
             {hasVisualAid && (
                 <div className="flex flex-grow justify-center items-center my-2 md:my-4 min-h-0"> 
                     {renderVisualAid(scene.visualAid)}
                 </div>
             )}
-            {/* If no visual aid, and we want characters more centered vertically, 
-                we might not need a flex-grow spacer here, or a smaller one. 
-                The parent 'justify-center' will handle it. */}
-            {!hasVisualAid && <div className="flex-grow-0 sm:flex-grow-[0.2] md:flex-grow-[0.3]"></div> /* Optional: small spacer to prevent characters sticking to top if screen is very tall */}
           </div>
         </div>
       );
     } else {
-      // Fallback to the original layout for other types of dialogue scenes
       return (
         <div 
           className="relative flex-1 bg-cover bg-center"
