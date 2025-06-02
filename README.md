@@ -26,9 +26,9 @@ Join the community: [**Discord Server →**](https://discord.gg/3C8Zhv8A)
 
 ---
 
-## Bitcoin++ Hackathon: Team Assembly!
+## Team Assembly!
 
-We're building this in **30 days** for the Bitcoin++ Hackathon and forming a team of passionate creatives and developers to bring it to life.
+We're forming a team of passionate creatives and developers to bring it to life.
 
 ### ✨ Designers 
 
