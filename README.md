@@ -6,7 +6,7 @@ We are live on: https://ordinarybitcoinblog.vercel.app/
 
 The **Ordinary Bitcoin Blog** transforms complex Bitcoin topics into friendly, visual, and interactive stories. Through playful conversations between cartoon friends Carol and Bob, each blog entry (called an **Issue**) breaks down key concepts in a way that's easy to understand, visually rich, and fun to share.
 
-> Like chatting with a friend, but about Bitcoin. And with cartoons. 
+> Like chatting with a friend, but about Bitcoin. And with cartoon characters of Bob and Carol. 
 
 ---
 
