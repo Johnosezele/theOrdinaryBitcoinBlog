@@ -22,7 +22,7 @@ Check out the **concept inspiration**:
 - [Grammarly Onboarding by Growth.Design](https://growth.design/case-studies/grammarly-onboarding-survey)
 - [Landing Page Vibes: Diana Lu](https://diana.lu/)
 
-Join the community: [**Discord Server →**](https://discord.gg/3C8Zhv8A)
+Join the Rabithole on discord: [**Discord Server →**](https://discord.gg/3C8Zhv8A)
 
 ---
 
