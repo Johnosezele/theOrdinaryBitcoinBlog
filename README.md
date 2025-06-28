@@ -30,7 +30,7 @@ Join the Rabithole on discord: [**Discord Server →**](https://discord.gg/3C8Zh
 
 We're forming a team of passionate creatives and developers to bring it to life.
 
-### ✨ Designers 
+### ✨ Designers (Pixel warriors)
 
 #### UX/UI Designers
 - Shape the user experience from start to finish.
