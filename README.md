@@ -44,7 +44,7 @@ We're forming a team of passionate creatives and developers to bring it to life.
 
 ---
 
-### 💻 Developers 
+### 💻 Developers (Rockstar devs)
 
 #### Frontend Developers
 - Build interactive components: quizzes, animations, and responsive design.
