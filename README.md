@@ -46,7 +46,7 @@ We're forming a team of passionate creatives and developers to bring it to life.
 
 ### 💻 Developers (Rockstar devs)
 
-#### Frontend Developers
+#### Frontend Developers (Pixel Perfect eunuchs)
 - Build interactive components: quizzes, animations, and responsive design.
 - Use modern frameworks like **React** or **Next.js**.
 - Collaborate closely with designers to bring mockups to life.
