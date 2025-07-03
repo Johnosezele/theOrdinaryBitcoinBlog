@@ -10,7 +10,7 @@ The **Ordinary Bitcoin Blog** transforms complex Bitcoin topics into friendly, v
 
 ---
 
-## What We're Buldng (building)
+## What We're Building 
 
 We're creating a **learning platform** that feels more like a comic strip meets Duolingo. Every "Issue" features:
 
