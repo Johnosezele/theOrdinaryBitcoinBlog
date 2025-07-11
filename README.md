@@ -2,7 +2,7 @@
 # The Ordinary Bitcoin Blog![OBTCBlog](https://github.com/user-attachments/assets/d2a01c5f-b334-47b2-97ba-fb1da8381280) (Rebranding to BitLog [Bitlog like Dialog with Bitcoin])
 We are live on: https://ordinarybitcoinblog.vercel.app/
 
-**Making Bitcoin simple, social, and seriously fun.**
+**Making Bitcoin simple, social, and fun.**
 
 The **Ordinary Bitcoin Blog** transforms complex Bitcoin topics into friendly, visual, and interactive stories. Through playful conversations between cartoon friends Carol and Bob, each blog entry (called an **Issue**)<Renamed to story> breaks down key concepts in a way that's easy to understand, visually rich, and fun to share.
 
