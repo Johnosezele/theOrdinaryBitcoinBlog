@@ -8,7 +8,7 @@ The **Ordinary Bitcoin Blog** transforms complex Bitcoin topics into friendly, v
 
 > Like chatting with a friend, but about Bitcoin. And with cartoon characters of Bob and Carol. 
 
----
+
 
 ## What We're Building 
 
