@@ -22,7 +22,7 @@ Check out the **concept inspiration**:
 - [Grammarly Onboarding by Growth.Design](https://growth.design/case-studies/grammarly-onboarding-survey)
 - [Landing Page Vibes: Diana Lu](https://diana.lu/)
 
-Join the Rabithole on pur discord: [**Discord Server →**](https://discord.gg/3C8Zhv8A)
+Join the Rabithole on our discord: [**Discord Server →**](https://discord.gg/3C8Zhv8A)
 
 ---
 
@@ -71,8 +71,8 @@ We're forming a team of passionate creatives and developers to bring it to life.
 
 ## Summary
 
-The **Ordinary Bitcoin Blog** isn’t just another crypto site—it’s a fresh, playful take on Bitcoin education. We’re blending **cartoon storytelling**, **interactive learning**, and **community vibes** into one platform that’s easy to learn, fun to explore, and rewarding to share.
+The **Ordinary Bitcoin Blog** isn’t just another crypto site it’s a fresh, playful take on Bitcoin education. We’re blending **cartoon storytelling**, **interactive learning**, and **community vibes** into one platform that’s easy to learn, fun to explore, and rewarding to share.
 
-Let's build it together! 🛠️✨  
+Let's build it together! 🛠️
 Jump in and say hi: [**Join our Discord**](https://discord.gg/3C8Zhv8A)
 
